@@ -468,6 +468,23 @@
                             </li>
                             <!-- End Student -->
 
+                               <!-- BEGIN Branch Intake -->
+                            <li class="nav-item">
+                                <a href="javascript:;" class="nav-link nav-toggle">
+                                    <i class="icon-layers"></i>
+                                    <span class="title">Branch Intake</span>
+                                    <span class="arrow"></span>
+                                </a>
+                                <ul class="sub-menu" style="display: none;">
+                                    <li class="nav-item  ">
+                                        <a href='<%=ResolveClientUrl("~/AdminPanel/BranchIntake/BR_BranchIntake/BR_BranchIntakeList.aspx") %>' class="nav-link ">
+                                            <span class="title">Branch Intake</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <!-- End Branch Intake -->
+
                         </ul>
                         <!-- END SIDEBAR MENU -->
                         <!-- END SIDEBAR MENU -->

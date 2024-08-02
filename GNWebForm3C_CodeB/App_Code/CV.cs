@@ -143,6 +143,7 @@ namespace GNForm3C
         public static string DefaultDateFormat = "dd-MM-yyyy";
         public static string DefaultTimeFormat = "hh:mm tt";
         public static string DefaultDateFormatForGrid = "{0:dd-MM-yyyy}";
+        public static string DefaultDateSQLFormatForGrid = "{0:yyyy-MM-dd}";
         public static string DataFormatWithSortMonthandYear = "{0:MMM - yyyy}";
         public static string DefaultDayFromDateFormatForGrid = "{0:dddd}";
         public static string DefaultDateFormatForGridWithDayName = "{0:dd-MM-yyyy dddd}";

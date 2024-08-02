@@ -175,7 +175,7 @@
                                                     <th class="text-right">
                                                         <asp:Label ID="lbhAmount" runat="server" Text="Amount"></asp:Label>
                                                     </th>
-                                                    <th class="text-center">
+                                                    <th class="text-right">
                                                         <asp:Label ID="lbhIncomeDate" runat="server" Text="Income Date"></asp:Label>
                                                     </th>
                                                     <th>
@@ -206,7 +206,7 @@
                                                             <td class="text-right">
                                                                 <%#Eval("Amount",GNForm3C.CV.DefaultCurrencyFormatWithDecimalPoint) %>
                                                             </td>
-                                                            <td class="text-center">
+                                                            <td class="text-right">
                                                                 <%#Eval("IncomeDate", GNForm3C.CV.DefaultDateFormatForGrid) %>
                                                             </td>
                                                             <td>

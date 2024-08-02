@@ -169,18 +169,17 @@
                                                                         <%#Container.ItemIndex+1 %>
                                                                     </td>
                                                                     <td>
-                                                                        
-                                                                            <div class="input-group date date-picker" data-date-format="yyyy-mm-dd">
-                                                                                <span class="input-group-btn">
-                                                                                    <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
-                                                                                </span>
-                                                                                <asp:TextBox ID="dtpIncomeDate" CssClass="form-control" Value='<%#Eval("IncomeDate") %>' runat="server" placeholder="Income Date"></asp:TextBox>
-                                                                            </div>
+                                                                        <div class="input-group date date-picker" data-date-format="yyyy-mm-dd">
+                                                                            <span class="input-group-btn">
+                                                                                <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+                                                                            </span>
+                                                                            <asp:TextBox ID="dtpIncomeDate" CssClass="form-control" Value='<%#Eval("IncomeDate", GNForm3C.CV.DefaultDateSQLFormatForGrid) %>' runat="server" placeholder="Income Date"></asp:TextBox>
+                                                                        </div>
                                                                         <asp:HiddenField ID="hdIncomeID" runat="server" Value='<%#Eval("IncomeID") %>' />
                                                                     </td>
                                                                     <td>
                                                                         <asp:TextBox ID="txtAmount" CssClass="form-control" onkeypress="return IsPositiveInteger(event)" runat="server" Text='<%#Eval("Amount") %>' PlaceHolder="Enter Amount"></asp:TextBox>
-                                                                        
+
                                                                     </td>
                                                                     <td>
                                                                         <asp:TextBox ID="txtNote" CssClass="form-control" runat="server" Text='<%#Eval("Note") %>' PlaceHolder="Enter Note"></asp:TextBox>
