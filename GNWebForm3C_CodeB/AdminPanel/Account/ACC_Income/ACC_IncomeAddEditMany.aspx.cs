@@ -67,7 +67,6 @@ public partial class AdminPanel_Account_ACC_Income_ACC_IncomeAddEditMany : Syste
     #region 13.0 Fill DropDownList
     private void FillDropDownList()
     {
-
         CommonFillMethods.FillDropDownListHospitalID(ddlHospitalID);
         CommonFillMethods.FillDropDownListFinYearID(ddlFinYearID);
         CommonFillMethods.FillSingleDropDownListIncomeTypeID(ddlIncomeTypeID);
@@ -144,6 +143,36 @@ public partial class AdminPanel_Account_ACC_Income_ACC_IncomeAddEditMany : Syste
 
     #endregion 14.0 Show Button Event
 
+    protected void rpData_ItemDataBound(object sender, RepeaterItemEventArgs e)
+    {
+        if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+        {
+            DropDownList ddlUser = e.Item.FindControl("ddlUser") as DropDownList;
+
+            if (ddlUser != null)
+            {
+                SEC_UserBAL balSEC_User = new SEC_UserBAL();
+                ddlUser.DataSource = balSEC_User.SelectComboBox();
+                ddlUser.DataValueField = "UserID";
+                ddlUser.DataTextField = "UserName";
+                ddlUser.DataBind();
+                ddlUser.Items.Insert(0, new ListItem("Select User", "-99"));
+
+                DataRowView drv = e.Item.DataItem as DataRowView;
+
+                if (drv != null)
+                {
+                    string selectedUserID = drv["UserID"].ToString();
+
+                    if (!string.IsNullOrEmpty(selectedUserID))
+                    {
+                        ddlUser.SelectedValue = selectedUserID;
+                    }
+                }
+            }
+        }
+    }
+
     #region 15.0 Save Button Event
     protected void btnSave_Click(object sender, EventArgs e)
     {
@@ -173,6 +202,7 @@ public partial class AdminPanel_Account_ACC_Income_ACC_IncomeAddEditMany : Syste
                     HiddenField Hdfiled = (HiddenField)items.FindControl("hdIncomeID");
                     TextBox txtAmount = (TextBox)items.FindControl("txtAmount");
                     TextBox txtNote = (TextBox)items.FindControl("txtNote");
+                    DropDownList ddlUser = (DropDownList)items.FindControl("ddlUser");
                     CheckBox chkIsSelected = (CheckBox)items.FindControl("chkIsSelected");
 
 
@@ -187,7 +217,7 @@ public partial class AdminPanel_Account_ACC_Income_ACC_IncomeAddEditMany : Syste
                         entACC_Income.Amount = Convert.ToDecimal(txtAmount.Text.Trim());
                         entACC_Income.Note = txtNote.Text.Trim();
                         entACC_Income.IncomeDate = Convert.ToDateTime(dtpIncomeDate.Text);
-                        entACC_Income.UserID = Convert.ToInt32(Session["UserID"]);
+                        entACC_Income.UserID = Convert.ToInt32(ddlUser.SelectedValue);
                         entACC_Income.Created = DateTime.Now;
                         entACC_Income.Modified = DateTime.Now;
                     }
@@ -307,7 +337,7 @@ public partial class AdminPanel_Account_ACC_Income_ACC_IncomeAddEditMany : Syste
         dt.Columns.Add("Amount");
         dt.Columns.Add("Note");
         dt.Columns.Add("IncomeID");
-
+        dt.Columns.Add("User");
 
         foreach (RepeaterItem rp in rpData.Items)
         {
@@ -315,12 +345,21 @@ public partial class AdminPanel_Account_ACC_Income_ACC_IncomeAddEditMany : Syste
             TextBox txtAmount = (TextBox)rp.FindControl("txtAmount");
             TextBox txtNote = (TextBox)rp.FindControl("txtNote");
             HiddenField hdIncomeID = (HiddenField)rp.FindControl("hdIncomeID");
+            DropDownList ddlUser = (DropDownList)rp.FindControl("ddlUser");
 
             DataRow dr = dt.NewRow();
             dr["IncomeDate"] = dtpIncomeDate.Text.Trim();
             dr["Amount"] = txtAmount.Text.Trim();
             dr["Note"] = txtNote.Text.Trim();
             dr["IncomeID"] = hdIncomeID.Value.ToString();
+            if (ddlUser != null && ddlUser.SelectedIndex > 0) // Check if a valid user is selected
+            {
+                dr["User"] = ddlUser.SelectedValue;
+            }
+            else
+            {
+                dr["User"] = DBNull.Value; // Or handle no selection case appropriately
+            }
 
             dt.Rows.Add(dr);
         }

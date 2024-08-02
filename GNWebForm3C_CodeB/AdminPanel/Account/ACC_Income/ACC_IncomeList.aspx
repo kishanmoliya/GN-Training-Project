@@ -91,7 +91,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <div class="input-group date date-picker" data-date-format="dd-mm-yyyy">
+                                        <div class="input-group date date-picker" data-date-format="yyyy-mm-dd">
                                             <span class="input-group-btn">
                                                 <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
                                             </span>
