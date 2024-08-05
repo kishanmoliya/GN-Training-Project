@@ -49,9 +49,7 @@ public partial class AdminPanel_Account_ACC_Income_ACC_IncomeAddEditMany : Syste
             #region 11.4 Set Control Default Value
 
             lblFormHeader.Text = CV.PageHeaderMany + " Income";
-            upr.DisplayAfter = CV.UpdateProgressDisplayAfter;
-
-
+            //upr.DisplayAfter = CV.UpdateProgressDisplayAfter;
             #endregion 11.4 Set Control Default Value
         }
     }
@@ -151,12 +149,7 @@ public partial class AdminPanel_Account_ACC_Income_ACC_IncomeAddEditMany : Syste
 
             if (ddlUser != null)
             {
-                SEC_UserBAL balSEC_User = new SEC_UserBAL();
-                ddlUser.DataSource = balSEC_User.SelectComboBox();
-                ddlUser.DataValueField = "UserID";
-                ddlUser.DataTextField = "UserName";
-                ddlUser.DataBind();
-                ddlUser.Items.Insert(0, new ListItem("Select User", "-99"));
+                CommonFillMethods.FillDropDownListUserID(ddlUser);
 
                 DataRowView drv = e.Item.DataItem as DataRowView;
 
@@ -204,7 +197,6 @@ public partial class AdminPanel_Account_ACC_Income_ACC_IncomeAddEditMany : Syste
                     TextBox txtNote = (TextBox)items.FindControl("txtNote");
                     DropDownList ddlUser = (DropDownList)items.FindControl("ddlUser");
                     CheckBox chkIsSelected = (CheckBox)items.FindControl("chkIsSelected");
-
 
                     #endregion FindControl
 
@@ -337,7 +329,7 @@ public partial class AdminPanel_Account_ACC_Income_ACC_IncomeAddEditMany : Syste
         dt.Columns.Add("Amount");
         dt.Columns.Add("Note");
         dt.Columns.Add("IncomeID");
-        dt.Columns.Add("User");
+        dt.Columns.Add("UserID");
 
         foreach (RepeaterItem rp in rpData.Items)
         {
@@ -352,13 +344,14 @@ public partial class AdminPanel_Account_ACC_Income_ACC_IncomeAddEditMany : Syste
             dr["Amount"] = txtAmount.Text.Trim();
             dr["Note"] = txtNote.Text.Trim();
             dr["IncomeID"] = hdIncomeID.Value.ToString();
+
             if (ddlUser != null && ddlUser.SelectedIndex > 0) // Check if a valid user is selected
             {
-                dr["User"] = ddlUser.SelectedValue;
+                dr["UserID"] = ddlUser.SelectedValue;
             }
             else
             {
-                dr["User"] = DBNull.Value; // Or handle no selection case appropriately
+                dr["UserID"] = DBNull.Value; // Or handle no selection case appropriately
             }
 
             dt.Rows.Add(dr);
@@ -366,7 +359,7 @@ public partial class AdminPanel_Account_ACC_Income_ACC_IncomeAddEditMany : Syste
         int count = 0;
         foreach (DataRow dr in dt.Rows)
         {
-            if (dr["dtpIncomeDate"].ToString() != String.Empty)
+            if (dr["IncomeDate"].ToString() != "")
                 count++;
         }
         if (count == dt.Rows.Count)

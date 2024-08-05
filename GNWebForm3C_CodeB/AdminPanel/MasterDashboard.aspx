@@ -99,20 +99,20 @@
                         <div class="form-body">
                             <div class="row">
                                 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                                    <a class="dashboard-stat dashboard-stat-v2 blue" href="Account/ACC_Income/ACC_IncomeList.aspx">
-                                        <div class="visual">
-                                            <i class="fa fa-comments"></i>
+                                   <asp:LinkButton ID="lnkIncomeCount" runat="server" OnClick="lnkIncomeCount_Click" CssClass="dashboard-stat dashboard-stat-v2 blue">
+                                    <div class="visual">
+                                        <i class="fa fa-comments"></i>
+                                    </div>
+                                    <div class="details">
+                                        <div class="number">
+                                            <asp:Label runat="server" ID="lblIncomeCount" Text="100"></asp:Label>
                                         </div>
-                                        <div class="details">
-                                            <div class="number">
-                                                <asp:Label runat="server" ID="lblIncomeCount"></asp:Label>
-                                            </div>
-                                            <div class="desc">Incomes </div>
-                                        </div>
-                                    </a>
+                                        <div class="desc">Incomes</div>
+                                    </div>
+                                    </asp:LinkButton>
                                 </div>
                                 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                                    <a class="dashboard-stat dashboard-stat-v2 red" href="Account/ACC_Expense/ACC_ExpenseList.aspx">
+                                    <asp:LinkButton ID="lnkExpCount" class="dashboard-stat dashboard-stat-v2 red" runat="server" OnClick="lnkExpenseCount_Click">
                                         <div class="visual">
                                             <i class="fa fa-list"></i>
                                         </div>
@@ -122,10 +122,10 @@
                                             </div>
                                             <div class="desc">Expenses</div>
                                         </div>
-                                    </a>
+                                    </asp:LinkButton>
                                 </div>
                                 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                                    <a class="dashboard-stat dashboard-stat-v2 green" href="Master/MST_SubTreatment/MST_SubTreatmentList.aspx">
+                                    <asp:LinkButton ID="lnkSubTreatmentCount" class="dashboard-stat dashboard-stat-v2 green" runat="server" OnClick="lnkSubTreatmentCount_Click">
                                         <div class="visual">
                                             <i class="fa fa-list"></i>
                                         </div>
@@ -135,7 +135,7 @@
                                             </div>
                                             <div class="desc">SubTreatment</div>
                                         </div>
-                                    </a>
+                                    </asp:LinkButton>
                                 </div>
 
                             </div>
@@ -216,7 +216,7 @@
                                     <th class="text-center">
                                         <asp:Label ID="lblPatientCount" runat="server" Text="Patient Count"></asp:Label>
                                     </th>
-                                    <th class="text-center">
+                                    <th class="text-right">
                                         <asp:Label ID="lblIncomeAmount" runat="server" Text="Income Amount"></asp:Label>
                                     </th>
                                 </tr>
@@ -237,7 +237,7 @@
                                             <td class="text-center">
                                                 <%#Eval("PatientCount") %>
                                             </td>
-                                            <td class="text-center">
+                                            <td class="text-right">
                                                 <%#Eval("IncomeAmount",GNForm3C.CV.DefaultCurrencyFormatWithDecimalPoint) %>
                                             </td>
                                         </tr>

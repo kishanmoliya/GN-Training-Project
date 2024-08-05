@@ -42,7 +42,7 @@
                                             </label>
                                             <div class="col-md-5">
                                                 <asp:TextBox ID="txtStudentName" CssClass="form-control" runat="server" PlaceHolder="Enter Student Name"></asp:TextBox>
-                                                <asp:RequiredFieldValidator ID="rfvStudentName" SetFocusOnError="True" Display="Dynamic" runat="server" ControlToValidate="txtStudentName" ErrorMessage="Enter Student Name"></asp:RequiredFieldValidator>
+                                                <%--<asp:RequiredFieldValidator ID="rfvStudentName" SetFocusOnError="True" Display="Dynamic" runat="server" ControlToValidate="txtStudentName" ErrorMessage="Enter Student Name"></asp:RequiredFieldValidator>--%>
                                             </div>
                                         </div>
 
@@ -54,7 +54,7 @@
                                             <div class="col-md-5">
                                                 <asp:TextBox ID="txtEnrollmentNo" CssClass="form-control" runat="server" onkeypress="return IsPositiveInteger(event)" PlaceHolder="Enter EnrollmentNo"></asp:TextBox>
                                                 <asp:CompareValidator ID="cvEnrollmentNo" runat="server" ControlToValidate="txtEnrollmentNo" ErrorMessage="Enter Valid EnrollmentNo" SetFocusOnError="True" Operator="DataTypeCheck" Display="Dynamic" Type="Double"></asp:CompareValidator>
-                                                <asp:RequiredFieldValidator ID="rfvEnrollmentNo" SetFocusOnError="True" Display="Dynamic" runat="server" ControlToValidate="txtEnrollmentNo" ErrorMessage="Enter EnrollmentNo"></asp:RequiredFieldValidator>
+                                                <%--<asp:RequiredFieldValidator ID="rfvEnrollmentNo" SetFocusOnError="True" Display="Dynamic" runat="server" ControlToValidate="txtEnrollmentNo" ErrorMessage="Enter EnrollmentNo"></asp:RequiredFieldValidator>--%>
                                             </div>
                                         </div>
 
@@ -65,7 +65,7 @@
                                             <div class="col-md-5">
                                                 <asp:TextBox ID="txtRollNo" CssClass="form-control" runat="server" onkeypress="return IsPositiveInteger(event)" PlaceHolder="Enter RollNo"></asp:TextBox>
                                                 <asp:CompareValidator ID="cvRollNo" runat="server" ControlToValidate="txtRollNo" ErrorMessage="Enter Valid RollNo" SetFocusOnError="True" Operator="DataTypeCheck" Display="Dynamic" Type="Integer"></asp:CompareValidator>
-                                                <asp:RequiredFieldValidator ID="rfvRollNo" SetFocusOnError="True" Display="Dynamic" runat="server" ControlToValidate="txtRollNo" ErrorMessage="Enter RollNo"></asp:RequiredFieldValidator>
+                                                <%--<asp:RequiredFieldValidator ID="rfvRollNo" SetFocusOnError="True" Display="Dynamic" runat="server" ControlToValidate="txtRollNo" ErrorMessage="Enter RollNo"></asp:RequiredFieldValidator>--%>
                                             </div>
                                         </div>
 
@@ -76,7 +76,7 @@
                                             </label>
                                             <div class="col-md-5">
                                                 <asp:DropDownList ID="ddlCurrentSem" CssClass="form-control select2me" runat="server"></asp:DropDownList>
-                                                <asp:RequiredFieldValidator ID="rfvCurrentSem" SetFocusOnError="True" runat="server" Display="Dynamic" ControlToValidate="ddlCurrentSem" ErrorMessage="Select Current Semester" InitialValue="-99"></asp:RequiredFieldValidator>
+                                                <%--<asp:RequiredFieldValidator ID="rfvCurrentSem" SetFocusOnError="True" runat="server" Display="Dynamic" ControlToValidate="ddlCurrentSem" ErrorMessage="Select Current Semester" InitialValue="-99"></asp:RequiredFieldValidator>--%>
                                             </div>
                                         </div>
 
@@ -86,7 +86,7 @@
                                             </label>
                                             <div class="col-md-5">
                                                 <asp:TextBox ID="txtEmailInstitute" CssClass="form-control" runat="server" PlaceHolder="Enter Institute Email"></asp:TextBox>
-                                                <asp:RequiredFieldValidator ID="rfvEmailInstitute" SetFocusOnError="True" Display="Dynamic" runat="server" ControlToValidate="txtEmailInstitute" ErrorMessage="Enter Institute Email"></asp:RequiredFieldValidator>
+                                                <%--<asp:RequiredFieldValidator ID="rfvEmailInstitute" SetFocusOnError="True" Display="Dynamic" runat="server" ControlToValidate="txtEmailInstitute" ErrorMessage="Enter Institute Email"></asp:RequiredFieldValidator>--%>
                                             </div>
                                         </div>
 
@@ -97,7 +97,7 @@
                                             </label>
                                             <div class="col-md-5">
                                                 <asp:TextBox ID="txtEmailPersonal" CssClass="form-control" runat="server" PlaceHolder="Enter Personal Email"></asp:TextBox>
-                                                <asp:RequiredFieldValidator ID="rfvEmailPersonal" SetFocusOnError="True" Display="Dynamic" runat="server" ControlToValidate="txtEmailPersonal" ErrorMessage="Enter Personal Email"></asp:RequiredFieldValidator>
+                                                <%--<asp:RequiredFieldValidator ID="rfvEmailPersonal" SetFocusOnError="True" Display="Dynamic" runat="server" ControlToValidate="txtEmailPersonal" ErrorMessage="Enter Personal Email"></asp:RequiredFieldValidator>--%>
                                             </div>
                                         </div>
 
@@ -113,7 +113,7 @@
                                                         <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
                                                     </span>
                                                 </div>
-                                                <asp:RequiredFieldValidator ID="rfvBirthDate" runat="server" ControlToValidate="dtpBirthDate" ErrorMessage="Enter Birth Date" Display="Dynamic" Type="Date"></asp:RequiredFieldValidator>
+                                                <%--<asp:RequiredFieldValidator ID="rfvBirthDate" runat="server" ControlToValidate="dtpBirthDate" ErrorMessage="Enter Birth Date" Display="Dynamic" Type="Date"></asp:RequiredFieldValidator>--%>
                                             </div>
                                         </div>
 
@@ -124,7 +124,7 @@
                                             </label>
                                             <div class="col-md-5">
                                                 <asp:TextBox ID="txtContactNo" CssClass="form-control" runat="server" PlaceHolder="Enter Contact No."></asp:TextBox>
-                                                <asp:RequiredFieldValidator ID="rfvContactNo" SetFocusOnError="True" Display="Dynamic" runat="server" ControlToValidate="txtContactNo" ErrorMessage="Enter Contact No."></asp:RequiredFieldValidator>
+                                                <%--<asp:RequiredFieldValidator ID="rfvContactNo" SetFocusOnError="True" Display="Dynamic" runat="server" ControlToValidate="txtContactNo" ErrorMessage="Enter Contact No."></asp:RequiredFieldValidator>--%>
                                             </div>
                                         </div>
 
@@ -135,7 +135,7 @@
                                             </label>
                                             <div class="col-md-5">
                                                 <asp:DropDownList ID="ddlGender" CssClass="form-control select2me" runat="server"></asp:DropDownList>
-                                                <asp:RequiredFieldValidator ID="rfvGender" SetFocusOnError="True" runat="server" Display="Dynamic" ControlToValidate="ddlGender" ErrorMessage="Select Gender" InitialValue="-99"></asp:RequiredFieldValidator>
+                                                <%--<asp:RequiredFieldValidator ID="rfvGender" SetFocusOnError="True" runat="server" Display="Dynamic" ControlToValidate="ddlGender" ErrorMessage="Select Gender" InitialValue="-99"></asp:RequiredFieldValidator>--%>
                                             </div>
                                         </div>
 
@@ -157,14 +157,14 @@
     </div>
     <!-- END SAMPLE FORM PORTLET-->
      <%-- Loading  --%>
-    <asp:UpdateProgress ID="upr" runat="server">
+   <%-- <asp:UpdateProgress ID="upr" runat="server">
         <ProgressTemplate>
             <div class="divWaiting">
                 <asp:Label ID="lblWait" runat="server" Text="Please wait... " />
                 <asp:Image ID="imgWait" runat="server" SkinID="UpdatePanelLoding" />
             </div>
         </ProgressTemplate>
-    </asp:UpdateProgress>
+    </asp:UpdateProgress>--%>
     <%-- END Loading  --%>
 </asp:Content>
 <asp:Content ID="cntScripts" ContentPlaceHolderID="cphScripts" runat="Server">

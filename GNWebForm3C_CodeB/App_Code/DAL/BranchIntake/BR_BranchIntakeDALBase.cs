@@ -40,63 +40,31 @@ namespace GNForm3C.DAL
             // TODO: Add constructor logic here
             //
         }
-
-        #region Select Operation
-
-        public DataTable SelectPage()
+        #region Delete BranchIntake Data
+        public Boolean DeleteBranchIntakeData(string branch)
         {
             try
             {
+                // Initialize the SqlDatabase object with the connection string
                 SqlDatabase sqlDB = new SqlDatabase(myConnectionString);
-                DbCommand dbCMD = sqlDB.GetStoredProcCommand("PR_BR_BranchIntake_SelectPage");
 
-                DataTable dtBR_BranchIntake = new DataTable("PR_BR_BranchIntake_SelectPage");
+                // Create a command object with the stored procedure name
+                DbCommand dbCMD = sqlDB.GetStoredProcCommand("PR_MST_BranchIntake_Delete");
 
+                // Add the branch parameter to the command
+                sqlDB.AddInParameter(dbCMD, "@Branch", SqlDbType.NVarChar, branch);
+
+                // Initialize the helper class for database operations
                 DataBaseHelper DBH = new DataBaseHelper();
-                DBH.LoadDataTable(sqlDB, dbCMD, dtBR_BranchIntake);
 
-
-                return dtBR_BranchIntake ;
-            }
-            catch (SqlException sqlex)
-            {
-                Message = SQLDataExceptionMessage(sqlex);
-                if (SQLDataExceptionHandler(sqlex))
-                    throw;
-                return null;
-            }
-            catch (Exception ex)
-            {
-                Message = ExceptionMessage(ex);
-                if (ExceptionHandler(ex))
-                    throw;
-                return null;
-            }
-        }
-
-        #endregion Select Operation
-
-
-        #region UpdateOperation
-
-        public Boolean Update(String Branch, int Intake, int Year)
-        {
-            try
-            {
-                SqlDatabase sqlDB = new SqlDatabase(myConnectionString);
-                DbCommand dbCMD = sqlDB.GetStoredProcCommand("PR_BR_BranchIntake_Update");
-
-                sqlDB.AddInParameter(dbCMD, "@Intake", SqlDbType.Int, Intake);
-                sqlDB.AddInParameter(dbCMD, "@Year", SqlDbType.Int, Year);
-                sqlDB.AddInParameter(dbCMD, "@Branch", SqlDbType.NVarChar, Branch);
-               
-                DataBaseHelper DBH = new DataBaseHelper();
+                // Execute the command
                 DBH.ExecuteNonQuery(sqlDB, dbCMD);
 
                 return true;
             }
             catch (SqlException sqlex)
             {
+                // Handle SQL exceptions
                 Message = SQLDataExceptionMessage(sqlex);
                 if (SQLDataExceptionHandler(sqlex))
                     throw;
@@ -104,6 +72,7 @@ namespace GNForm3C.DAL
             }
             catch (Exception ex)
             {
+                // Handle general exceptions
                 Message = ExceptionMessage(ex);
                 if (ExceptionHandler(ex))
                     throw;
@@ -111,7 +80,59 @@ namespace GNForm3C.DAL
             }
         }
 
-        #endregion UpdateOperation
+        #endregion Delete BranchIntake Data
 
+        public DataTable GetBranchIntakeData()
+        {
+            try
+            {
+                SqlDatabase sqlDB = new SqlDatabase(myConnectionString);
+                DbCommand dbCMD = sqlDB.GetStoredProcCommand("PR_MST_BranchIntake_SelectAll");
+                DataSet ds = sqlDB.ExecuteDataSet(dbCMD);
+                DataTable dt = ds.Tables[0];
+                return dt;
+            }
+            catch (SqlException sqlex)
+            {
+                Message = SQLDataExceptionMessage(sqlex);
+                if (SQLDataExceptionHandler(sqlex))
+                    throw;
+                return null;
+            }
+            catch (Exception ex)
+            {
+                Message = ExceptionMessage(ex);
+                if (ExceptionHandler(ex))
+                    throw;
+                return null;
+            }
+        }
+
+        public void SaveBranchIntakeData(string branch, int year, int intake)
+        {
+            try
+            {
+                SqlDatabase sqlDB = new SqlDatabase(myConnectionString);
+                DbCommand dbCMD = sqlDB.GetStoredProcCommand("PR_MST_BranchIntake_InsertUpdate");
+
+                sqlDB.AddInParameter(dbCMD, "@Branch", DbType.String, branch);
+                sqlDB.AddInParameter(dbCMD, "@Year", DbType.Int32, year);
+                sqlDB.AddInParameter(dbCMD, "@Intake", DbType.Int32, intake);
+
+                sqlDB.ExecuteNonQuery(dbCMD);
+            }
+            catch (SqlException sqlex)
+            {
+                Message = SQLDataExceptionMessage(sqlex);
+                if (SQLDataExceptionHandler(sqlex))
+                    throw;
+            }
+            catch (Exception ex)
+            {
+                Message = ExceptionMessage(ex);
+                if (ExceptionHandler(ex))
+                    throw;
+            }
+        }
     }
 }

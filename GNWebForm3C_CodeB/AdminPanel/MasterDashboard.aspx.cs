@@ -227,4 +227,23 @@ public partial class AdminPanel_MasterDashboard : System.Web.UI.Page
         }
     }
     #endregion
+
+    protected void lnkIncomeCount_Click(object sender, EventArgs e)
+    {
+        Session["HospitalID"] = ddlHospitalID.SelectedIndex;
+        Response.Redirect("Account/ACC_Income/ACC_IncomeList.aspx");
+    }
+
+    protected void lnkExpenseCount_Click(object sender, EventArgs e)
+    {
+        Session["HospitalID"] = ddlHospitalID.SelectedIndex;
+        Response.Redirect("Account/ACC_Expense/ACC_ExpenseList.aspx");
+    }
+
+    protected void lnkSubTreatmentCount_Click(object sender, EventArgs e)
+    {
+        Session["HospitalID"] = ddlHospitalID.SelectedIndex;
+        Response.Redirect("Master/MST_SubTreatment/MST_SubTreatmentList.aspx");
+    }
+
 }

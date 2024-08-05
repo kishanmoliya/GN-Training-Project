@@ -1738,13 +1738,24 @@ namespace GNForm3C
             return Convert.ToInt32(DateTime.Parse(HourFormat).Hour) * 60 + Convert.ToInt32(DateTime.Parse(HourFormat).Minute);
         }
 
-    
+
 
         #endregion Common
 
-      
 
-        
+        #region Column of DataTable
+        public static List<String> ColumnOfDataTable(DataTable dt)
+        {
+            var columnNames = new List<string>();
+            foreach (DataColumn column in dt.Columns)
+            {
+                columnNames.Add(column.ColumnName);
+            }
+
+            return columnNames;
+        }
+        #endregion Column of DataTable
+
 
 
         #region Get CSS Class

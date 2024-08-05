@@ -123,9 +123,17 @@ public partial class AdminPanel_MST_SubTreatment_MST_SubTreatmentList : System.W
 			Rate = Convert.ToDecimal(txtRate.Text.Trim());
 
 		if (ddlHospitalID.SelectedIndex > 0)
+        {
 			HospitalID = Convert.ToInt32(ddlHospitalID.SelectedValue);
+        }
+        else if (Session["HospitalID"] != null)
+        {
+            HospitalID = Convert.ToInt32(Session["HospitalID"]);
+            ddlHospitalID.SelectedValue = HospitalID.ToString();
+            Session.Remove("HospitalID");
+        }
 
-		if (txtDefaultUnit.Text.Trim() != String.Empty)
+        if (txtDefaultUnit.Text.Trim() != String.Empty)
 			DefaultUnit = txtDefaultUnit.Text.Trim();
 
 

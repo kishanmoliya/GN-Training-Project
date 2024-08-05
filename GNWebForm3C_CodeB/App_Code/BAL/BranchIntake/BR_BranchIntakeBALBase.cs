@@ -44,30 +44,43 @@ namespace GNForm3C.BAL
             //
         }
 
-        #region Select Operation
-        public DataTable SelectPage()
+        #region Select BranchIntake Data
+        public DataTable GetBranchIntakeData()
         {
             BR_BranchIntakeDAL dalBR_BranchIntake = new BR_BranchIntakeDAL();
-            return dalBR_BranchIntake.SelectPage();
+
+            return dalBR_BranchIntake.GetBranchIntakeData();
         }
-        #endregion Select Operation
 
-        #region UpdateOperation
 
-        public Boolean Update(String Branch, int Intake, int Year)
+        #endregion Select BranchIntake Data
+
+        #region Insert/Update Intake DATA
+
+        public void SaveBranchIntakeData(string branch, Dictionary<int, int> yearIntakeData)
+        {
+            BR_BranchIntakeDAL dalMST_BranchIntake = new BR_BranchIntakeDAL();
+
+            foreach (var entry in yearIntakeData)
+            {
+                int year = entry.Key;
+                int intake = entry.Value;
+
+                dalMST_BranchIntake.SaveBranchIntakeData(branch, year, intake);
+            }
+        }
+
+
+        #endregion Insert/Update Intake DATA
+
+        #region Delete BranchIntake Data
+        public void DeleteBranchIntakeData(string branch)
         {
             BR_BranchIntakeDAL dalBR_BranchIntake = new BR_BranchIntakeDAL();
-            if (dalBR_BranchIntake.Update(Branch, Intake, Year))
-            {
-                return true;
-            }
-            else
-            {
-                this.Message = dalBR_BranchIntake.Message;
-                return false;
-            }
+
+            dalBR_BranchIntake.DeleteBranchIntakeData(branch);
         }
 
-        #endregion UpdateOperation
+        #endregion Delete BranchIntake Data
     }
 }

@@ -211,17 +211,6 @@
             </asp:UpdatePanel>
         </ContentTemplate>
     </asp:UpdatePanel>
-
-    <%-- Loading  --%>
-    <asp:UpdateProgress ID="upr" runat="server">
-        <ProgressTemplate>
-            <div class="divWaiting">
-                <asp:Label ID="lblWait" runat="server" Text="Please wait... " />
-                <asp:Image ID="imgWait" runat="server" SkinID="UpdatePanelLoding" />
-            </div>
-        </ProgressTemplate>
-    </asp:UpdateProgress>
-    <%-- END Loading  --%>
 </asp:Content>
 <asp:Content ID="Content5" ContentPlaceHolderID="cphScripts" runat="Server">
 </asp:Content>
