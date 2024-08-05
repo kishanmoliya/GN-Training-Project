@@ -35,7 +35,7 @@
     <%-- List --%>
     <asp:UpdatePanel ID="upList" runat="server" UpdateMode="Conditional">
         <ContentTemplate>
-            <div class="row">
+            <div class="row" id="messageContainer" runat="server">
                 <div class="col-md-12">
                     <ucMessage:ShowMessage ID="ucMessage" runat="server" ViewStateMode="Disabled" />
                 </div>
@@ -126,4 +126,14 @@
 </asp:Content>
 
 <asp:Content ID="Content5" ContentPlaceHolderID="cphScripts" runat="Server">
+  <script type="text/javascript">
+    function hideMessage() {
+        setTimeout(function() {
+            var messageContainer = document.getElementById('<%=messageContainer.ClientID %>');
+            if (messageContainer) {
+                messageContainer.style.display = 'none';
+            }
+        }, 3000);
+    }
+</script>
 </asp:Content>

@@ -57,20 +57,19 @@ namespace GNForm3C.BAL
 
         #region Insert/Update Intake DATA
 
-        public void SaveBranchIntakeData(string branch, Dictionary<int, int> yearIntakeData)
+        public Boolean SaveBranchIntakeData(DataTable branchIntakeTable)
         {
-            BR_BranchIntakeDAL dalMST_BranchIntake = new BR_BranchIntakeDAL();
-
-            foreach (var entry in yearIntakeData)
+            BR_BranchIntakeDAL dalBR_BranchIntake = new BR_BranchIntakeDAL();
+            if (dalBR_BranchIntake.SaveBranchIntakeData(branchIntakeTable))
             {
-                int year = entry.Key;
-                int intake = entry.Value;
-
-                dalMST_BranchIntake.SaveBranchIntakeData(branch, year, intake);
+                return true;
+            }
+            else
+            {
+                Message = dalBR_BranchIntake.Message;
+                return false;
             }
         }
-
-
         #endregion Insert/Update Intake DATA
 
         #region Delete BranchIntake Data

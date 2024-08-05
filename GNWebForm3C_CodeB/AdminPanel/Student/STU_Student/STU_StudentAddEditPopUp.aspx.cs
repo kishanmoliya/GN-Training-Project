@@ -185,7 +185,6 @@ public partial class AdminPanel_Student_STU_Student_STU_StudentAddEditPopUp : Sy
 
                 #endregion 15.2 Gather Data 
 
-
                 #region 15.3 Insert,Update,Copy 
 
                 if (Request.QueryString["StudentID"] != null && Request.QueryString["Copy"] == null)
@@ -193,12 +192,11 @@ public partial class AdminPanel_Student_STU_Student_STU_StudentAddEditPopUp : Sy
                     entSTU_StudentDetails.StudentID = CommonFunctions.DecryptBase64Int32(Request.QueryString["StudentID"]);
                     if (balSTU_StudentDetails.Update(entSTU_StudentDetails))
                     {
-                        ClientScript.RegisterStartupScript(this.GetType(), "closeModal", "closemyModal();", true);
                         Response.Redirect("STU_StudentList.aspx");
                     }
                     else
                     {
-                        //ucMessage.ShowError(balSTU_StudentDetails.Message);
+                        ucMessage.ShowError(balSTU_StudentDetails.Message);
                     }
                 }
                 else
@@ -214,7 +212,6 @@ public partial class AdminPanel_Student_STU_Student_STU_StudentAddEditPopUp : Sy
                 }
 
                 #endregion 15.3 Insert,Update,Copy
-
             }
             catch (Exception ex)
             {

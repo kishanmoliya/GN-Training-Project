@@ -24,7 +24,8 @@ public partial class _Default : System.Web.UI.Page
         {
             Session.Clear();
             this.Page.Title = "Login - " + CV.DefaultCompanyName;
-           // imgLogo.ImageUrl = CV.DefaultLoginLogoPath;
+           // imgLogo.ImageUrl = CV.DefaultLoginLogoPath;]
+           lbtnLogin.Focus();
         }
 
         #region Check Login Restricted
@@ -60,8 +61,6 @@ public partial class _Default : System.Web.UI.Page
             #endregion Check Login Restricted
 
             #region Store Data in Session
-
-
             SEC_UserBAL balSEC_UserBAL = new SEC_UserBAL();
             DataTable dtSEC_UserBAL = balSEC_UserBAL.SelectByUserNameAndPassword(txtUsername.Text.Trim(), txtPassword.Text.ToString());
             if (dtSEC_UserBAL != null && dtSEC_UserBAL.Rows.Count > 0)
@@ -103,8 +102,6 @@ public partial class _Default : System.Web.UI.Page
             }
 
             #endregion Store Data in Session
-
-
         }
     }
 
