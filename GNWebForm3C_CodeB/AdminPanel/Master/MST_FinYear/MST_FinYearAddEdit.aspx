@@ -71,7 +71,7 @@ Title="FinYear AddEdit"%>
 		<asp:Label ID="lblFromDate_XXXXX" runat="server" Text="From Date"></asp:Label>
 	</label>
 	<div class="col-md-5">
-		<div class="input-group input-medium date date-picker" data-date-format='<%=GNForm3C.CV.DefaultHTMLDateFormat.ToString()%>'>
+		<div class="input-group input-medium date date-picker" data-date-format='<%=GNForm3C.CV.DefaultSQLDateFormat.ToString()%>'>
 			<asp:TextBox ID="dtpFromDate" CssClass="form-control" runat="server" placeholder="From Date"></asp:TextBox>
                         <span class="input-group-btn">
                                 <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
@@ -86,7 +86,7 @@ Title="FinYear AddEdit"%>
 		<asp:Label ID="lblToDate_XXXXX" runat="server" Text="To Date"></asp:Label>
 	</label>
 	<div class="col-md-5">
-		<div class="input-group input-medium date date-picker" data-date-format='<%=GNForm3C.CV.DefaultHTMLDateFormat.ToString()%>'>
+		<div class="input-group input-medium date date-picker" data-date-format='<%=GNForm3C.CV.DefaultSQLDateFormat.ToString()%>'>
 			<asp:TextBox ID="dtpToDate" CssClass="form-control" runat="server" placeholder="To Date"></asp:TextBox>
                         <span class="input-group-btn">
                                 <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>

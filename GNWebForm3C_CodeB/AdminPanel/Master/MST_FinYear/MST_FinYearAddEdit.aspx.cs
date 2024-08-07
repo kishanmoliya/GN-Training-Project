@@ -101,10 +101,10 @@ public partial class AdminPanel_Master_MST_FinYear_MST_FinYearAddEdit : System.W
 				txtFinYearName.Text = entMST_FinYear.FinYearName.Value.ToString();
 
 			if (!entMST_FinYear.FromDate.IsNull)
-				dtpFromDate.Text = entMST_FinYear.FromDate.Value.ToString(CV.DefaultDateFormat);
+				dtpFromDate.Text = entMST_FinYear.FromDate.Value.ToString(CV.DefaultSQLDateFormat);
 
 			if (!entMST_FinYear.ToDate.IsNull)
-				dtpToDate.Text = entMST_FinYear.ToDate.Value.ToString(CV.DefaultDateFormat);
+				dtpToDate.Text = entMST_FinYear.ToDate.Value.ToString(CV.DefaultSQLDateFormat);
 
 			if (!entMST_FinYear.Remarks.IsNull)
 				txtRemarks.Text = entMST_FinYear.Remarks.Value.ToString();

@@ -2,7 +2,7 @@
 
 <asp:Content ID="cnthead" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
-<asp:Content ID="cntPageContent" style="display: none"  ContentPlaceHolderID="cphPageContent" runat="Server">
+<asp:Content ID="cntPageContent" style="display: none" ContentPlaceHolderID="cphPageContent" runat="Server">
     <!-- BEGIN SAMPLE FORM PORTLET-->
     <div class="portlet light">
         <div class="portlet-title">
@@ -142,6 +142,11 @@
                                         <div class="form-actions">
                                             <div class="row">
                                                 <div class="col-md-offset-3 col-md-5">
+                                                    <asp:HyperLink ID="hlAddEditPopUp" SkinID="View"
+                                                        NavigateUrl="~/AdminPanel/Student/STU_Student/STU_StudentAddEditPopUp.aspx"
+                                                        data-target="#view" data-toggle="modal" runat="server" style="display: none;">
+                                                        Add/Edit
+                                                    </asp:HyperLink>
                                                     <asp:Button ID="btnSave" runat="server" SkinID="btnSave" OnClick="btnSave_Click" />
                                                     <asp:HyperLink ID="hlCancel" runat="server" SkinID="hlCancel" NavigateUrl="~/AdminPanel/Student/STU_Student/STU_StudentList.aspx"></asp:HyperLink>
                                                 </div>
@@ -156,8 +161,8 @@
         </div>
     </div>
     <!-- END SAMPLE FORM PORTLET-->
-     <%-- Loading  --%>
-   <%-- <asp:UpdateProgress ID="upr" runat="server">
+    <%-- Loading  --%>
+    <%-- <asp:UpdateProgress ID="upr" runat="server">
         <ProgressTemplate>
             <div class="divWaiting">
                 <asp:Label ID="lblWait" runat="server" Text="Please wait... " />
@@ -176,5 +181,13 @@
             }
         });
     </script>
+    <script type="text/javascript">
+        function clickAddEditHyperLink() {
+            var link = document.getElementById('<%= hlAddEditPopUp.ClientID %>');
+            if (link) {
+                link.click();
+            }
+        }
+</script>
 </asp:Content>
 

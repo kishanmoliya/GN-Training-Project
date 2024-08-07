@@ -7,6 +7,9 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using AjaxControlToolkit;
+using Org.BouncyCastle.Asn1.X509;
+using System.Activities.Expressions;
 
 public partial class AdminPanel_Student_STU_Student_STU_StudentAddEditPopUp : System.Web.UI.Page
 {
@@ -205,17 +208,25 @@ public partial class AdminPanel_Student_STU_Student_STU_StudentAddEditPopUp : Sy
                     {
                         if (balSTU_StudentDetails.Insert(entSTU_StudentDetails))
                         {
-                            ucMessage.ShowSuccess(CommonMessage.RecordSaved());
+                            ScriptManager.RegisterStartupScript(this, GetType(), "clickAddEditHyperLink", "clickAddEditHyperLink();", true);
+                            //   < asp:HyperLink ID = "hlAddEditPopUp" SkinID = "View" NavigateUrl = "~/AdminPanel/Student/STU_Student/STU_StudentAddEditPopUp.aspx" data - target = "#view" data - toggle = "modal" runat = "server" ></ asp:HyperLink >
+                            //   ucMessage.ShowSuccess(CommonMessage.RecordSaved());
                             ClearControls();
                         }
                     }
+                }
+                if (ErrorMsg != String.Empty)
+                {
+                    ErrorMsg = CommonMessage.ErrorPleaseCorrectFollowing() + ErrorMsg;
+                         ucMessage.ShowError(ErrorMsg);
+                    return;
                 }
 
                 #endregion 15.3 Insert,Update,Copy
             }
             catch (Exception ex)
             {
-                //ucMessage.ShowError(ex.Message);
+                ucMessage.ShowError(ex.Message);
             }
         }
     }
