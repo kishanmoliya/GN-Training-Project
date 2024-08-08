@@ -75,8 +75,6 @@ public partial class AdminPanel_Account_ACC_GNTransaction_ACC_GNTransactionAddEd
     #endregion 11.0 Page Load Event
 
     #region 12.0 FillLabels 
-
-
     private void FillLabels(String FormName)
     {
     }
@@ -90,6 +88,11 @@ public partial class AdminPanel_Account_ACC_GNTransaction_ACC_GNTransactionAddEd
         CommonFillMethods.FillDropDownListHospitalID(ddlHospitalID);
         CommonFillMethods.FillDropDownListFinYearID(ddlFinYearID);
         CommonFillMethods.FillDropDownListReceiptTypeID(ddlReceiptTypeID);
+        CommonFillMethods.FillDropDownListPatientID(ddlPatientID);
+    }
+
+    public void FillDropDownPatientList(object sender, EventArgs e)
+    {
         CommonFillMethods.FillDropDownListPatientID(ddlPatientID);
     }
 
@@ -136,14 +139,8 @@ public partial class AdminPanel_Account_ACC_GNTransaction_ACC_GNTransactionAddEd
             if (!entACC_GNTransaction.NetAmount.IsNull)
                 txtNetAmount.Text = entACC_GNTransaction.NetAmount.Value.ToString();
 
-            //if (!entACC_GNTransaction.NoOfDays.IsNull)
-            //	txtNoOfDays.Text = entACC_GNTransaction.NoOfDays.Value.ToString();
-
             if (!entACC_GNTransaction.Quantity.IsNull)
                 txtQuantity.Text = entACC_GNTransaction.Quantity.Value.ToString();
-
-            //if (!entACC_GNTransaction.Rate.IsNull)
-            //    txtRate.Text = entACC_GNTransaction.Rate.Value.ToString();
 
             if (!entACC_GNTransaction.Remarks.IsNull)
                 txtRemarks.Text = entACC_GNTransaction.Remarks.Value.ToString();
@@ -156,7 +153,6 @@ public partial class AdminPanel_Account_ACC_GNTransaction_ACC_GNTransactionAddEd
 
             if (!entACC_GNTransaction.ReceiptTypeID.IsNull)
                 ddlReceiptTypeID.SelectedValue = entACC_GNTransaction.ReceiptTypeID.Value.ToString();
-
         }
     }
 
@@ -200,9 +196,6 @@ public partial class AdminPanel_Account_ACC_GNTransaction_ACC_GNTransactionAddEd
                 #endregion 15.1 Validate Fields
 
                 #region 15.2 Gather Data 
-
-
-
                 if (ddlPatientID.SelectedIndex > 0)
                     entACC_GNTransaction.PatientID = Convert.ToInt32(ddlPatientID.SelectedValue);
 
@@ -233,14 +226,8 @@ public partial class AdminPanel_Account_ACC_GNTransaction_ACC_GNTransactionAddEd
                 if (txtNetAmount.Text.Trim() != String.Empty)
                     entACC_GNTransaction.NetAmount = Convert.ToDecimal(txtNetAmount.Text.Trim());
 
-                //if (txtNoOfDays.Text.Trim() != String.Empty)
-                //	entACC_GNTransaction.NoOfDays = Convert.ToInt32(txtNoOfDays.Text.Trim());
-
                 if (txtQuantity.Text.Trim() != String.Empty)
                     entACC_GNTransaction.Quantity = Convert.ToInt32(txtQuantity.Text.Trim());
-
-                //if (txtRate.Text.Trim() != String.Empty)
-                //    entACC_GNTransaction.Rate = Convert.ToDecimal(txtRate.Text.Trim());
 
                 if (txtRemarks.Text.Trim() != String.Empty)
                     entACC_GNTransaction.Remarks = txtRemarks.Text.Trim();
@@ -326,10 +313,6 @@ public partial class AdminPanel_Account_ACC_GNTransaction_ACC_GNTransactionAddEd
 
     #endregion 16.0 Clear Controls 
 
-
-
-
-
     #region FillTreatmentCombobox   
     protected void FillTreatmentCombobox(object sender, EventArgs e)
     {
@@ -348,8 +331,6 @@ public partial class AdminPanel_Account_ACC_GNTransaction_ACC_GNTransactionAddEd
     }
 
     #endregion
-
-
 
     public class SavePatientResponse
     {
@@ -398,9 +379,4 @@ public partial class AdminPanel_Account_ACC_GNTransaction_ACC_GNTransactionAddEd
         JavaScriptSerializer js = new JavaScriptSerializer();
         return js.Serialize(response);
     }
-
-    //public static void FillPatientDropDownList()
-    //{
-    //    CommonFillMethods.FillDropDownListPatientID(this.ddlPatientID);
-    //}
 }

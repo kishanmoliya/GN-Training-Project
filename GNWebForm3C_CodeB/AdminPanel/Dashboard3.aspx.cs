@@ -42,7 +42,6 @@ public partial class AdminPanel_Dashboard3 : System.Web.UI.Page
 
             #endregion 11.2 Set Default Value 
 
-
             #region 11.3 Set Help Text
             ucHelp.ShowHelp("Help Text will be shown here");
             #endregion 12.3 Set Help Text
@@ -94,20 +93,7 @@ public partial class AdminPanel_Dashboard3 : System.Web.UI.Page
             lIncomeCount.Text = string.Format(GNForm3C.CV.DefaultCurrencyFormatWithDecimalPoint, Convert.ToDecimal(dtCount.Rows[0]["IncomeCount"].ToString()));
             lExpenseCount.Text = string.Format(GNForm3C.CV.DefaultCurrencyFormatWithDecimalPoint, Convert.ToDecimal(dtCount.Rows[0]["ExpenseCount"].ToString()));
             lDifferenceCount.Text = string.Format(GNForm3C.CV.DefaultCurrencyFormatWithDecimalPoint, Convert.ToDecimal(dtCount.Rows[0]["DifferenceCount"].ToString()));
-
-
         }
-
-    }
-    protected void displayChange(object sender, EventArgs e)
-    {
-
-    }
-    protected void btnShow_Click(object sender, EventArgs e)
-    {
-
-
-
     }
     #endregion 12.0 Search
 
@@ -135,16 +121,14 @@ public partial class AdminPanel_Dashboard3 : System.Web.UI.Page
             //upList.Visible = false;
             //label.Visible = true;
         }
-
-
     }
 
     #endregion 13.1 BindCategoryWiseIncomeTotalList
+
     #region 13.2 BindExpense
 
     private void BindCategoryWiseExpenseTotalList(Repeater rp, SqlInt32 FinYearID)
     {
-
         MST_DSB2BAL balMST_DSB2BAL = new MST_DSB2BAL();
 
         DataTable dtCategoryWiseExpenseTotalList = balMST_DSB2BAL.CategoryWiseExpenseTotalList(FinYearID);
@@ -160,19 +144,15 @@ public partial class AdminPanel_Dashboard3 : System.Web.UI.Page
         }
         else
         {
-
             //upList.Visible = false;
             //label.Visible = true;
         }
-
-
     }
     #endregion 13.2 BindExpense
 
     #region 13.3 BindHospitalWisePatientCountList
     private void BindHospitalWisePatientCountList(Repeater rp, SqlInt32 FinYearID)
     {
-
         MST_DSB2BAL balMST_DSB2BAL = new MST_DSB2BAL();
 
         DataTable dtHospitalWisePatientCountList = balMST_DSB2BAL.HospitalWisePatientCountList(FinYearID);
@@ -191,15 +171,13 @@ public partial class AdminPanel_Dashboard3 : System.Web.UI.Page
             //upList.Visible = false;
             //label.Visible = true;
         }
-
-
     }
     #endregion 13.3 BindHospitalWisePatientCountList
+
     #region 13.4 BindAccountTranscationList
 
     private void BindAccountTranscationList(Repeater rp, SqlInt32 FinYearID)
     {
-
         MST_DSB2BAL balMST_DSB2BAL = new MST_DSB2BAL();
 
         DataTable dtAccountTranscationList = balMST_DSB2BAL.AccountTranscationList(FinYearID);
@@ -233,11 +211,4 @@ public partial class AdminPanel_Dashboard3 : System.Web.UI.Page
     #endregion 14.1 Fill DropDownList
 
     #endregion 14.0 DropDownList
-
-    public void rpData_OnItemDataBound(object sender, EventArgs e)
-    {
-        SqlInt32 FinYearID = SqlInt32.Null;
-
-
-    }
 }

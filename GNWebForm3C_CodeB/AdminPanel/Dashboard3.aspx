@@ -28,8 +28,7 @@
     <%-- Dashboard --%>
     <asp:UpdatePanel ID="Dashboard" runat="server" UpdateMode="Conditional" Visible="true" ChildrenAsTriggers="false">
         <ContentTemplate>
-
-            <asp:Repeater ID="rpFinYear" runat="server" OnItemDataBound="rpData_OnItemDataBound">
+            <asp:Repeater ID="rpFinYear" runat="server">
                 <ItemTemplate>
                     <asp:HiddenField ID="hdFinyearID" Value='<%# Eval("FinYearID") %>' runat="server" />
 
@@ -72,10 +71,7 @@
                                                                         <div class="form-body">
                                                                             <div class="row">
                                                                                 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-
                                                                                     <a class="dashboard-stat dashboard-stat-v2 blue" href='<%= "Account/ACC_Income/ACC_IncomeList.aspx?HospitalID="+ GNForm3C.CommonFunctions.EncryptBase64("")%>'>
-
-                                                                                        <%--<a class="dashboard-stat dashboard-stat-v2 blue" href='<%# "~/AdminPanel/Account/ACC_Income/ACC_IncomeList.aspx?HospitalID=" + GNForm3C.CommonFunctions.EncryptBase64("") %>'>--%>
                                                                                         <div class="visual">
                                                                                             <i class="fa fa-comments"></i>
                                                                                         </div>
