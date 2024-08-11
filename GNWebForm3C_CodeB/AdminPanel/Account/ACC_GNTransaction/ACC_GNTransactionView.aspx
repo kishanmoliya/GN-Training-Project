@@ -25,14 +25,6 @@
 				<asp:Label ID="lblPatient" runat="server"></asp:Label>
 				</td>
 			</tr>
-<%--			<tr>
-				<td class="TDDarkView">
-				<asp:Label ID="lblTreatment_XXXXX" Text="Treatment" runat="server"></asp:Label>
-				</td>
-				<td>
-				<asp:Label ID="lblTreatment" runat="server"></asp:Label>
-				</td>
-			</tr>--%>
 			<tr>
 				<td class="TDDarkView">
 				<asp:Label ID="lblAmount_XXXXX" Text="Amount" runat="server"></asp:Label>
@@ -41,14 +33,6 @@
 				<asp:Label ID="lblAmount" runat="server"></asp:Label>
 				</td>
 			</tr>
-<%--			<tr>
-				<td class="TDDarkView">
-				<asp:Label ID="lblSerialNo_XXXXX" Text="Serial No" runat="server"></asp:Label>
-				</td>
-				<td>
-				<asp:Label ID="lblSerialNo" runat="server"></asp:Label>
-				</td>
-			</tr>--%>
 			<tr>
 				<td class="TDDarkView">
 				<asp:Label ID="lblReferenceDoctor_XXXXX" Text="Reference Doctor" runat="server"></asp:Label>

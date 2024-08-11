@@ -56,16 +56,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <%--	<div class="col-md-4">
-									<div class="form-group">
-										<div class="input-group">
-											<span class="input-group-addon">
-												<i class="fa fa-search"></i>
-											</span>
-									       	<asp:DropDownList ID="ddlTreatmentID" CssClass="form-control select2me" runat="server"></asp:DropDownList>
-										</div>
-									</div>
-								</div>--%>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <div class="input-group">
@@ -89,16 +79,6 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <%--	<div class="col-md-4">
-									<div class="form-group">
-										<div class="input-group">
-											<span class="input-group-addon">
-												<i class="fa fa-search"></i>
-											</span>
-											<asp:TextBox ID="txtSerialNo" CssClass="form-control" runat="server"  PlaceHolder="Enter Serial No"></asp:TextBox>
-										</div>
-									</div>
-								</div>--%>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <div class="input-group">
@@ -205,7 +185,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <div class="input-group">
@@ -216,11 +195,7 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
-                            <%--<div class="row">
-							
-							</div>--%>
                         </div>
                         <div class="form-actions">
                             <div class="row">

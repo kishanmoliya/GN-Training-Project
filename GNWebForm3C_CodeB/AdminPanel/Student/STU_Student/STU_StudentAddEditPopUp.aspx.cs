@@ -209,8 +209,6 @@ public partial class AdminPanel_Student_STU_Student_STU_StudentAddEditPopUp : Sy
                         if (balSTU_StudentDetails.Insert(entSTU_StudentDetails))
                         {
                             ScriptManager.RegisterStartupScript(this, GetType(), "clickAddEditHyperLink", "clickAddEditHyperLink();", true);
-                            //   < asp:HyperLink ID = "hlAddEditPopUp" SkinID = "View" NavigateUrl = "~/AdminPanel/Student/STU_Student/STU_StudentAddEditPopUp.aspx" data - target = "#view" data - toggle = "modal" runat = "server" ></ asp:HyperLink >
-                            //   ucMessage.ShowSuccess(CommonMessage.RecordSaved());
                             ClearControls();
                         }
                     }

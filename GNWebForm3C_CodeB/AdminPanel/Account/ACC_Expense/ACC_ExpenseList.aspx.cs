@@ -128,11 +128,11 @@ public partial class AdminPanel_ACC_Expense_ACC_ExpenseList : System.Web.UI.Page
         if (ddlHospitalID.SelectedIndex > 0)
         {
             HospitalID = Convert.ToInt32(ddlHospitalID.SelectedValue);
-        } else if (Session["HospitalID"] != null)
+        }
+        else if (Request.QueryString["HospitalID"] != null)
         {
-            HospitalID = Convert.ToInt32(Session["HospitalID"]);
+            HospitalID = Convert.ToInt32(GNForm3C.CommonFunctions.DecryptBase64(Request.QueryString["HospitalID"]));
             ddlHospitalID.SelectedValue = HospitalID.ToString();
-            Session.Remove("HospitalID");
         }
 
         if (ddlFinYearID.SelectedIndex > 0)

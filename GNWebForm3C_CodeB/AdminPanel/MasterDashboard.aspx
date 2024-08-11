@@ -99,43 +99,43 @@
                         <div class="form-body">
                             <div class="row">
                                 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                                   <asp:LinkButton ID="lnkIncomeCount" runat="server" OnClick="lnkIncomeCount_Click" CssClass="dashboard-stat dashboard-stat-v2 blue">
-                                    <div class="visual">
-                                        <i class="fa fa-comments"></i>
-                                    </div>
-                                    <div class="details">
-                                        <div class="number">
-                                            <asp:Label runat="server" ID="lblIncomeCount" Text="100"></asp:Label>
-                                        </div>
-                                        <div class="desc">Incomes</div>
-                                    </div>
-                                    </asp:LinkButton>
+                                     <a class="dashboard-stat dashboard-stat-v2 green" href="<%= "Account/ACC_Income/ACC_IncomeList.aspx?HospitalID="+ GNForm3C.CommonFunctions.EncryptBase64(ddlHospitalID.SelectedValue.ToString()) %>">
+                                            <div class="visual">
+                                                <i class="fa fa-comments"></i>
+                                            </div>
+                                            <div class="details">
+                                                <div class="number">
+                                                    <asp:Label runat="server" ID="lblIncomeCount"></asp:Label>
+                                                </div>
+                                                <div class="desc">Total Incomes</div>
+                                            </div>
+                                        </a>
                                 </div>
                                 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                                    <asp:LinkButton ID="lnkExpCount" class="dashboard-stat dashboard-stat-v2 red" runat="server" OnClick="lnkExpenseCount_Click">
-                                        <div class="visual">
-                                            <i class="fa fa-list"></i>
-                                        </div>
-                                        <div class="details">
-                                            <div class="number">
-                                                <asp:Label runat="server" ID="lblExpenseCount"></asp:Label>
+                                   <a class="dashboard-stat dashboard-stat-v2 red" href="<%= "Account/ACC_Expense/ACC_ExpenseList.aspx?HospitalID="+ GNForm3C.CommonFunctions.EncryptBase64(ddlHospitalID.SelectedValue.ToString()) %>">
+                                            <div class="visual">
+                                                <i class="fa fa-comments"></i>
                                             </div>
-                                            <div class="desc">Expenses</div>
-                                        </div>
-                                    </asp:LinkButton>
+                                            <div class="details">
+                                                <div class="number">
+                                                    <asp:Label runat="server" ID="lblExpenseCount"></asp:Label>
+                                                </div>
+                                                <div class="desc">Total Expense</div>
+                                            </div>
+                                        </a>
                                 </div>
                                 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                                    <asp:LinkButton ID="lnkSubTreatmentCount" class="dashboard-stat dashboard-stat-v2 green" runat="server" OnClick="lnkSubTreatmentCount_Click">
-                                        <div class="visual">
-                                            <i class="fa fa-list"></i>
-                                        </div>
-                                        <div class="details">
-                                            <div class="number">
-                                                <asp:Label runat="server" ID="lblSubTreatmentCount"></asp:Label>
+                                    <a class="dashboard-stat dashboard-stat-v2 blue" href="<%= "Master/MST_SubTreatment/MST_SubTreatmentList.aspx?HospitalID="+ GNForm3C.CommonFunctions.EncryptBase64(ddlHospitalID.SelectedValue.ToString()) %>">
+                                            <div class="visual">
+                                                <i class="fa fa-comments"></i>
                                             </div>
-                                            <div class="desc">SubTreatment</div>
-                                        </div>
-                                    </asp:LinkButton>
+                                            <div class="details">
+                                                <div class="number">
+                                                    <asp:Label runat="server" ID="lblSubTreatmentCount"></asp:Label>
+                                                </div>
+                                                <div class="desc">Subtreatment</div>
+                                            </div>
+                                        </a>
                                 </div>
 
                             </div>

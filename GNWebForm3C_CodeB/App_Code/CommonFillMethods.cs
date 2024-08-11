@@ -212,5 +212,16 @@ namespace GNForm3C
             ddl.DataBind();
             ddl.Items.Insert(0, new ListItem("Select Treatment", "-99"));
         }
+
+        public static void FillDropDownListNewPatientID(DropDownList ddl,int PatientID, String PatientName)
+        {
+            ACC_GNTransactionBAL balMST_Patient = new ACC_GNTransactionBAL();
+            ddl.DataSource = balMST_Patient.SelectComboBox();
+            ddl.DataValueField = "PatientID";
+            ddl.DataTextField = "Patient";
+            ddl.SelectedValue = PatientID.ToString();
+            ddl.DataBind();
+            ddl.Items.Insert(0, new ListItem("Select Patient", "-99"));
+        }
     }
 }

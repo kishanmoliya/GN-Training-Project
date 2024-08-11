@@ -82,7 +82,6 @@ public partial class AdminPanel_Account_ACC_GNTransaction_ACC_GNTransactionAddEd
     #endregion 12.0 FillLabels 
 
     #region 13.0 Fill DropDownList 
-
     private void FillDropDownList()
     {
         CommonFillMethods.FillDropDownListHospitalID(ddlHospitalID);
@@ -93,6 +92,9 @@ public partial class AdminPanel_Account_ACC_GNTransaction_ACC_GNTransactionAddEd
 
     public void FillDropDownPatientList(object sender, EventArgs e)
     {
+        ACC_GNPatientENT ent = new ACC_GNPatientENT();
+      //  int PatientID = Convert.ToInt32(ent.PatientID);
+       // String PatientName = Convert.ToString(ent.PatientName);
         CommonFillMethods.FillDropDownListPatientID(ddlPatientID);
     }
 
@@ -332,6 +334,7 @@ public partial class AdminPanel_Account_ACC_GNTransaction_ACC_GNTransactionAddEd
 
     #endregion
 
+    #region Save new Patient
     public class SavePatientResponse
     {
         public bool Success { get; set; }
@@ -339,7 +342,6 @@ public partial class AdminPanel_Account_ACC_GNTransaction_ACC_GNTransactionAddEd
         public int PatientID { get; set; }
         public string PatientName { get; set; }
     }
-
 
     [WebMethod]
     public static string SaveNewPatient(string PatientName, int Age, DateTime DOB, string MobileNo, string PrimaryDesc)
@@ -379,4 +381,5 @@ public partial class AdminPanel_Account_ACC_GNTransaction_ACC_GNTransactionAddEd
         JavaScriptSerializer js = new JavaScriptSerializer();
         return js.Serialize(response);
     }
+    #endregion Save new Patient
 }

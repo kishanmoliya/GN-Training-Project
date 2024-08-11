@@ -47,14 +47,8 @@ public partial class AdminPanel_Account_ACC_GNTransaction_ACC_GNTransactionView 
                     if (!dr["Patient"].Equals(DBNull.Value))
                         lblPatient.Text = Convert.ToString(dr["Patient"]);
 
-                    /*       if (!dr["Treatment"].Equals(DBNull.Value))
-                               lblTreatment.Text = Convert.ToString(dr["Treatment"]);*/
-
                     if (!dr["Amount"].Equals(DBNull.Value))
                         lblAmount.Text = Convert.ToString(dr["Amount"]);
-
-                    /*                if (!dr["SerialNo"].Equals(DBNull.Value))
-                                        lblSerialNo.Text = Convert.ToString(dr["SerialNo"]);*/
 
                     if (!dr["ReferenceDoctor"].Equals(DBNull.Value))
                         lblReferenceDoctor.Text = Convert.ToString(dr["ReferenceDoctor"]);

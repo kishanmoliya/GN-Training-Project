@@ -128,7 +128,7 @@
                                            <asp:Button ID="btnSavePatient" runat="server" CssClass="btn btn-primary" Text="Save" OnClientClick ="saveNewPatient(); return true;" OnClick="FillDropDownPatientList" />
                                         </div>
                                     </div>
-                                </div>
+                                </div>  
                             </asp:Panel>
                             <!--End Add New Patient -->
 
@@ -331,14 +331,12 @@
                 return;
             }
 
-            // Collect data from the form
             var patientName = $('#<%= txtPatientName.ClientID %>').val();
             var age = $('#<%= txtAge.ClientID %>').val();
             var dob = $('#<%= dtpDOB.ClientID %>').val();
             var mobileNo = $('#<%= txtMobileNo.ClientID %>').val();
             var primaryDesc = $('#<%= txtPrimaryDesc.ClientID %>').val();
 
-            // Perform an AJAX request to save the patient data
             $.ajax({
                 type: "POST",
                 url: "ACC_GNTransactionAddEdit.aspx/SaveNewPatient",
@@ -350,8 +348,6 @@
                     var result = JSON.parse(response.d);
 
                     if (true) {
-
-                        // Clear the form fields
                         $('#<%= txtPatientName.ClientID %>').val('');
                         $('#<%= txtAge.ClientID %>').val('');
                         $('#<%= dtpDOB.ClientID %>').val('');
@@ -364,9 +360,9 @@
 
                             var ddlPatientID = $("#<%= ddlPatientID.ClientID %>");
 
-                            // Add the new patient to the dropdown
                             ddlPatientID.append($("<option></option>").val(result.PatientID).html(result.PatientName));
-                            alert("New Patient added successfully !");
+                            ddlPatientID.val(result.PatientID);
+
 
                         } else {
                             console.error("Unexpected response format:", result);
