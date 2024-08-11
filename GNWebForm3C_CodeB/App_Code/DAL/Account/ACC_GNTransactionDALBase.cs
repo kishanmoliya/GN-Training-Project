@@ -54,10 +54,10 @@ namespace GNForm3C.DAL
                 sqlDB.AddInParameter(dbCMD, "@Count", SqlDbType.Int, entACC_GNTransaction.Count);
                 sqlDB.AddInParameter(dbCMD, "@ReceiptNo", SqlDbType.Int, entACC_GNTransaction.ReceiptNo);
                 sqlDB.AddInParameter(dbCMD, "@Date", SqlDbType.DateTime, entACC_GNTransaction.Date);
-            //    sqlDB.AddInParameter(dbCMD, "@DateOfAdmission", SqlDbType.DateTime, entACC_GNTransaction.DateOfAdmission);
-            //    sqlDB.AddInParameter(dbCMD, "@DateOfDischarge", SqlDbType.DateTime, entACC_GNTransaction.DateOfDischarge);
+                //    sqlDB.AddInParameter(dbCMD, "@DateOfAdmission", SqlDbType.DateTime, entACC_GNTransaction.DateOfAdmission);
+                //    sqlDB.AddInParameter(dbCMD, "@DateOfDischarge", SqlDbType.DateTime, entACC_GNTransaction.DateOfDischarge);
                 sqlDB.AddInParameter(dbCMD, "@Deposite", SqlDbType.Decimal, entACC_GNTransaction.Deposite);
-              sqlDB.AddInParameter(dbCMD, "@Quantity", SqlDbType.Int, entACC_GNTransaction.Quantity);
+                sqlDB.AddInParameter(dbCMD, "@Quantity", SqlDbType.Int, entACC_GNTransaction.Quantity);
                 sqlDB.AddInParameter(dbCMD, "@NoOfDays", SqlDbType.Int, entACC_GNTransaction.NoOfDays);
                 sqlDB.AddInParameter(dbCMD, "@Remarks", SqlDbType.NVarChar, entACC_GNTransaction.Remarks);
                 sqlDB.AddInParameter(dbCMD, "@HospitalID", SqlDbType.Int, entACC_GNTransaction.HospitalID);
@@ -89,6 +89,54 @@ namespace GNForm3C.DAL
                 return false;
             }
         }
+
+        public SqlInt32 InsertPatient(ACC_GNPatientENTBase entACC_Patient)
+        {
+            SqlInt32 PatientID = -1;
+
+            try
+            {
+                SqlDatabase sqlDB = new SqlDatabase(myConnectionString);
+                DbCommand dbCMD = sqlDB.GetStoredProcCommand("PR_MST_GNPatient_Insert");
+
+                sqlDB.AddOutParameter(dbCMD, "@PatientID", SqlDbType.Int, 4);
+                sqlDB.AddInParameter(dbCMD, "@PatientName", SqlDbType.NVarChar, entACC_Patient.PatientName);
+                sqlDB.AddInParameter(dbCMD, "@Age", SqlDbType.Int, entACC_Patient.Age);
+                sqlDB.AddInParameter(dbCMD, "@MobileNo", SqlDbType.NVarChar, entACC_Patient.MobileNo);
+                sqlDB.AddInParameter(dbCMD, "@DOB", SqlDbType.DateTime, entACC_Patient.DOB);
+                sqlDB.AddInParameter(dbCMD, "@PrimaryDesc", SqlDbType.NVarChar, entACC_Patient.PrimaryDesc);
+                sqlDB.AddInParameter(dbCMD, "@UserID", SqlDbType.Int, entACC_Patient.UserID);
+                sqlDB.AddInParameter(dbCMD, "@Created", SqlDbType.DateTime, entACC_Patient.Created);
+                sqlDB.AddInParameter(dbCMD, "@Modified", SqlDbType.DateTime, entACC_Patient.Modified);
+
+                DataBaseHelper DBH = new DataBaseHelper();
+                DBH.ExecuteNonQuery(sqlDB, dbCMD);
+
+                if (!(dbCMD.Parameters["@PatientID"].Value).Equals(DBNull.Value))
+                {
+                    entACC_Patient.PatientID = (SqlInt32)Convert.ToInt32(dbCMD.Parameters["@PatientID"].Value);
+                    PatientID = entACC_Patient.PatientID;
+                }
+
+                return PatientID;
+            }
+            catch (SqlException sqlex)
+            {
+                Message = SQLDataExceptionMessage(sqlex);
+                if (SQLDataExceptionHandler(sqlex))
+                    throw;
+                return PatientID;
+            }
+            catch (Exception ex)
+            {
+                Message = ExceptionMessage(ex);
+                if (ExceptionHandler(ex))
+                    throw;
+                return PatientID;
+            }
+        }
+
+
 
         #endregion InsertOperation
 
@@ -471,7 +519,7 @@ namespace GNForm3C.DAL
         }
         #endregion UpdateDischargeAndTotalDays
 
-        //public Boolean InsertPatient(ACC_GNPatientENT entMST_Patient)
+        //public Boolean InsertPatient(ACC_GNPatientENT entACC_Patient)
         //{
         //    try
         //    {
@@ -479,19 +527,19 @@ namespace GNForm3C.DAL
         //        DbCommand dbCMD = sqlDB.GetStoredProcCommand("PR_MST_GNPatient_Insert");
 
         //        sqlDB.AddOutParameter(dbCMD, "@PatientID", SqlDbType.Int, 4);
-        //        sqlDB.AddInParameter(dbCMD, "@PatientName", SqlDbType.NVarChar, entMST_Patient.PatientName);
-        //        sqlDB.AddInParameter(dbCMD, "@Age", SqlDbType.Int, entMST_Patient.Age);
-        //        sqlDB.AddInParameter(dbCMD, "@MobileNo", SqlDbType.NVarChar, entMST_Patient.MobileNo);
-        //        sqlDB.AddInParameter(dbCMD, "@DOB", SqlDbType.DateTime, entMST_Patient.DOB);
-        //        sqlDB.AddInParameter(dbCMD, "@PrimaryDesc", SqlDbType.NVarChar, entMST_Patient.PrimaryDesc);
-        //        sqlDB.AddInParameter(dbCMD, "@UserID", SqlDbType.Int, entMST_Patient.UserID);
-        //        sqlDB.AddInParameter(dbCMD, "@Created", SqlDbType.DateTime, entMST_Patient.Created);
-        //        sqlDB.AddInParameter(dbCMD, "@Modified", SqlDbType.DateTime, entMST_Patient.Modified);
+        //        sqlDB.AddInParameter(dbCMD, "@PatientName", SqlDbType.NVarChar, entACC_Patient.PatientName);
+        //        sqlDB.AddInParameter(dbCMD, "@Age", SqlDbType.Int, entACC_Patient.Age);
+        //        sqlDB.AddInParameter(dbCMD, "@MobileNo", SqlDbType.NVarChar, entACC_Patient.MobileNo);
+        //        sqlDB.AddInParameter(dbCMD, "@DOB", SqlDbType.DateTime, entACC_Patient.DOB);
+        //        sqlDB.AddInParameter(dbCMD, "@PrimaryDesc", SqlDbType.NVarChar, entACC_Patient.PrimaryDesc);
+        //        sqlDB.AddInParameter(dbCMD, "@UserID", SqlDbType.Int, entACC_Patient.UserID);
+        //        sqlDB.AddInParameter(dbCMD, "@Created", SqlDbType.DateTime, entACC_Patient.Created);
+        //        sqlDB.AddInParameter(dbCMD, "@Modified", SqlDbType.DateTime, entACC_Patient.Modified);
 
         //        DataBaseHelper DBH = new DataBaseHelper();
         //        DBH.ExecuteNonQuery(sqlDB, dbCMD);
 
-        //        entMST_Patient.PatientID = (SqlInt32)Convert.ToInt32(dbCMD.Parameters["@PatientID"].Value);
+        //        entACC_Patient.PatientID = (SqlInt32)Convert.ToInt32(dbCMD.Parameters["@PatientID"].Value);
 
         //        return true;
         //    }
@@ -510,66 +558,5 @@ namespace GNForm3C.DAL
         //        return false;
         //    }
         //}
-
-        #region Insert
-        public ACC_GNPatientENT Insert(ACC_GNPatientENT entMST_Patient)
-        {
-            try
-            {
-                SqlDatabase sqlDB = new SqlDatabase(myConnectionString);
-                DbCommand dbCMD = sqlDB.GetStoredProcCommand("PR_MST_GNPatient_Insert");
-
-                sqlDB.AddOutParameter(dbCMD, "@PatientID", SqlDbType.Int, 4);
-                sqlDB.AddInParameter(dbCMD, "@PatientName", SqlDbType.NVarChar, entMST_Patient.PatientName);
-                sqlDB.AddInParameter(dbCMD, "@Age", SqlDbType.Int, entMST_Patient.Age);
-                sqlDB.AddInParameter(dbCMD, "@DOB", SqlDbType.DateTime, entMST_Patient.DOB);
-                sqlDB.AddInParameter(dbCMD, "@MobileNo", SqlDbType.NVarChar, entMST_Patient.MobileNo);
-                sqlDB.AddInParameter(dbCMD, "@PrimaryDesc", SqlDbType.NVarChar, entMST_Patient.PrimaryDesc);
-                sqlDB.AddInParameter(dbCMD, "@UserID", SqlDbType.Int, entMST_Patient.UserID);
-                sqlDB.AddInParameter(dbCMD, "@Created", SqlDbType.DateTime, entMST_Patient.Created);
-                sqlDB.AddInParameter(dbCMD, "@Modified", SqlDbType.DateTime, entMST_Patient.Modified);
-
-                DataBaseHelper DBH = new DataBaseHelper();
-                using (IDataReader dr = DBH.ExecuteReader(sqlDB, dbCMD))
-                {
-                    if (dr.Read())
-                    {
-                        ACC_GNPatientENT entMST_PatientDetails = new ACC_GNPatientENT
-                        {
-                            PatientID = dr.GetInt32(dr.GetOrdinal("PatientID")),
-                            PatientName = dr.GetString(dr.GetOrdinal("PatientName")),
-                            Age = dr.GetInt32(dr.GetOrdinal("Age")),
-                            DOB = dr.GetDateTime(dr.GetOrdinal("DOB")),
-                            MobileNo = dr.GetString(dr.GetOrdinal("MobileNo")),
-                            PrimaryDesc = dr.GetString(dr.GetOrdinal("PrimaryDesc")),
-                            UserID = dr.GetInt32(dr.GetOrdinal("UserID")),
-                            Created = dr.GetDateTime(dr.GetOrdinal("Created")),
-                            Modified = dr.GetDateTime(dr.GetOrdinal("Modified"))
-                        };
-
-                        return entMST_PatientDetails;
-                    }
-                    else
-                    {
-                        return null;
-                    }
-                }
-            }
-            catch (SqlException sqlex)
-            {
-                Message = SQLDataExceptionMessage(sqlex);
-                if (SQLDataExceptionHandler(sqlex))
-                    throw;
-                return null;
-            }
-            catch (Exception ex)
-            {
-                Message = ExceptionMessage(ex);
-                if (ExceptionHandler(ex))
-                    throw;
-                return null;
-            }
-        }
-        #endregion
     }
 }

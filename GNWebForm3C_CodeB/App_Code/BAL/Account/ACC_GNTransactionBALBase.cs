@@ -58,6 +58,23 @@ namespace GNForm3C.BAL
             }
         }
 
+        public SqlInt32 InsertPatient(ACC_GNPatientENT entACC_Patient)
+        {
+            ACC_GNTransactionDAL dalACC_GNTransaction = new ACC_GNTransactionDAL();
+            SqlInt32 PatientID = dalACC_GNTransaction.InsertPatient(entACC_Patient);
+
+            if (PatientID > 0)
+            {
+                return PatientID;
+            }
+            else
+            {
+                this.Message = dalACC_GNTransaction.Message;
+                return PatientID;
+            }
+        }
+
+
         #endregion InsertOperation
 
         #region UpdateOperation
@@ -139,28 +156,5 @@ namespace GNForm3C.BAL
                 return false;
             }
         }
-
-        //public Boolean InsertPatient(ACC_GNPatientENT entMST_Patient)
-        //{
-        //    ACC_GNTransactionDAL dalACC_GNTransaction = new ACC_GNTransactionDAL();
-        //    if (dalACC_GNTransaction.InsertPatient(entMST_Patient))
-        //    {
-        //        return true;
-        //    }
-        //    else
-        //    {
-        //        this.Message = dalACC_GNTransaction.Message;
-        //        return false;
-        //    }
-        //}
-
-        #region Insert
-        public ACC_GNPatientENT Insert(ACC_GNPatientENT entACC_Patient)
-        {
-            ACC_GNTransactionDAL dalACC_Treatment = new ACC_GNTransactionDAL();
-            return dalACC_Treatment.Insert(entACC_Patient);
-        }
-
-        #endregion
     }
 }
