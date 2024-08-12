@@ -47,11 +47,10 @@ public partial class AdminPanel_Account_ACC_GNTransaction_ACC_GNTranscationList 
             upr.DisplayAfter = CV.UpdateProgressDisplayAfter;
 
             #endregion 12.2 Set Default Value
+
             if (Request.QueryString["HospitalID"] != null)
             {
-
                 ddlHospitalID.SelectedValue = CommonFunctions.DecryptBase64Int32(Request.QueryString["HospitalID"]).ToString();
-
             }
             Search(1);
 

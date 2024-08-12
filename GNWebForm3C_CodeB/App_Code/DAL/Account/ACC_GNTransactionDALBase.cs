@@ -90,54 +90,6 @@ namespace GNForm3C.DAL
             }
         }
 
-        public SqlInt32 InsertPatient(ACC_GNPatientENTBase entACC_Patient)
-        {
-            SqlInt32 PatientID = -1;
-
-            try
-            {
-                SqlDatabase sqlDB = new SqlDatabase(myConnectionString);
-                DbCommand dbCMD = sqlDB.GetStoredProcCommand("PR_MST_GNPatient_Insert");
-
-                sqlDB.AddOutParameter(dbCMD, "@PatientID", SqlDbType.Int, 4);
-                sqlDB.AddInParameter(dbCMD, "@PatientName", SqlDbType.NVarChar, entACC_Patient.PatientName);
-                sqlDB.AddInParameter(dbCMD, "@Age", SqlDbType.Int, entACC_Patient.Age);
-                sqlDB.AddInParameter(dbCMD, "@MobileNo", SqlDbType.NVarChar, entACC_Patient.MobileNo);
-                sqlDB.AddInParameter(dbCMD, "@DOB", SqlDbType.DateTime, entACC_Patient.DOB);
-                sqlDB.AddInParameter(dbCMD, "@PrimaryDesc", SqlDbType.NVarChar, entACC_Patient.PrimaryDesc);
-                sqlDB.AddInParameter(dbCMD, "@UserID", SqlDbType.Int, entACC_Patient.UserID);
-                sqlDB.AddInParameter(dbCMD, "@Created", SqlDbType.DateTime, entACC_Patient.Created);
-                sqlDB.AddInParameter(dbCMD, "@Modified", SqlDbType.DateTime, entACC_Patient.Modified);
-
-                DataBaseHelper DBH = new DataBaseHelper();
-                DBH.ExecuteNonQuery(sqlDB, dbCMD);
-
-                if (!(dbCMD.Parameters["@PatientID"].Value).Equals(DBNull.Value))
-                {
-                    entACC_Patient.PatientID = (SqlInt32)Convert.ToInt32(dbCMD.Parameters["@PatientID"].Value);
-                    PatientID = entACC_Patient.PatientID;
-                }
-
-                return PatientID;
-            }
-            catch (SqlException sqlex)
-            {
-                Message = SQLDataExceptionMessage(sqlex);
-                if (SQLDataExceptionHandler(sqlex))
-                    throw;
-                return PatientID;
-            }
-            catch (Exception ex)
-            {
-                Message = ExceptionMessage(ex);
-                if (ExceptionHandler(ex))
-                    throw;
-                return PatientID;
-            }
-        }
-
-
-
         #endregion InsertOperation
 
         #region UpdateOperation
@@ -519,44 +471,5 @@ namespace GNForm3C.DAL
         }
         #endregion UpdateDischargeAndTotalDays
 
-        //public Boolean InsertPatient(ACC_GNPatientENT entACC_Patient)
-        //{
-        //    try
-        //    {
-        //        SqlDatabase sqlDB = new SqlDatabase(myConnectionString);
-        //        DbCommand dbCMD = sqlDB.GetStoredProcCommand("PR_MST_GNPatient_Insert");
-
-        //        sqlDB.AddOutParameter(dbCMD, "@PatientID", SqlDbType.Int, 4);
-        //        sqlDB.AddInParameter(dbCMD, "@PatientName", SqlDbType.NVarChar, entACC_Patient.PatientName);
-        //        sqlDB.AddInParameter(dbCMD, "@Age", SqlDbType.Int, entACC_Patient.Age);
-        //        sqlDB.AddInParameter(dbCMD, "@MobileNo", SqlDbType.NVarChar, entACC_Patient.MobileNo);
-        //        sqlDB.AddInParameter(dbCMD, "@DOB", SqlDbType.DateTime, entACC_Patient.DOB);
-        //        sqlDB.AddInParameter(dbCMD, "@PrimaryDesc", SqlDbType.NVarChar, entACC_Patient.PrimaryDesc);
-        //        sqlDB.AddInParameter(dbCMD, "@UserID", SqlDbType.Int, entACC_Patient.UserID);
-        //        sqlDB.AddInParameter(dbCMD, "@Created", SqlDbType.DateTime, entACC_Patient.Created);
-        //        sqlDB.AddInParameter(dbCMD, "@Modified", SqlDbType.DateTime, entACC_Patient.Modified);
-
-        //        DataBaseHelper DBH = new DataBaseHelper();
-        //        DBH.ExecuteNonQuery(sqlDB, dbCMD);
-
-        //        entACC_Patient.PatientID = (SqlInt32)Convert.ToInt32(dbCMD.Parameters["@PatientID"].Value);
-
-        //        return true;
-        //    }
-        //    catch (SqlException sqlex)
-        //    {
-        //        Message = SQLDataExceptionMessage(sqlex);
-        //        if (SQLDataExceptionHandler(sqlex))
-        //            throw;
-        //        return false;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Message = ExceptionMessage(ex);
-        //        if (ExceptionHandler(ex))
-        //            throw;
-        //        return false;
-        //    }
-        //}
     }
 }

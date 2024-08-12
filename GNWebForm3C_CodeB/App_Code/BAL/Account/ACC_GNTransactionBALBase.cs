@@ -58,23 +58,6 @@ namespace GNForm3C.BAL
             }
         }
 
-        public SqlInt32 InsertPatient(ACC_GNPatientENT entACC_Patient)
-        {
-            ACC_GNTransactionDAL dalACC_GNTransaction = new ACC_GNTransactionDAL();
-            SqlInt32 PatientID = dalACC_GNTransaction.InsertPatient(entACC_Patient);
-
-            if (PatientID > 0)
-            {
-                return PatientID;
-            }
-            else
-            {
-                this.Message = dalACC_GNTransaction.Message;
-                return PatientID;
-            }
-        }
-
-
         #endregion InsertOperation
 
         #region UpdateOperation

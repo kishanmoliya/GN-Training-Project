@@ -15,8 +15,7 @@ public partial class UserControl_ucHelp : System.Web.UI.UserControl
             if (!CV.IsShowHelp)
             {
                 HelpDiv.Attributes.Add("style", "display: none");
-            }
-           
+            }  
         }
     }
     public void ShowHelp(String HelpText)
@@ -25,5 +24,4 @@ public partial class UserControl_ucHelp : System.Web.UI.UserControl
         mvwSysMessage.SetActiveView(vwHelp);
         mvwSysMessage.Visible = true;
     }
-
 }
