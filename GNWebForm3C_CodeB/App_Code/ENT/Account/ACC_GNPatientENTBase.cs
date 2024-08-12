@@ -92,6 +92,19 @@ namespace GNForm3C.ENT
             }
         }
 
+        protected SqlString _PatientPhotoPath;
+        public SqlString PatientPhotoPath
+        {
+            get
+            {
+                return _PatientPhotoPath;
+            }
+            set
+            {
+                _PatientPhotoPath = value;
+            }
+        }
+
         protected SqlInt32 _UserID;
         public SqlInt32 UserID
         {
@@ -162,6 +175,9 @@ namespace GNForm3C.ENT
 
             if (!PrimaryDesc.IsNull)
                 MST_PatientENT_String += "| PrimaryDesc = " + PrimaryDesc.Value;
+
+            if (!PatientPhotoPath.IsNull)
+                MST_PatientENT_String += "| PatienPhotoPath = " + PatientPhotoPath.Value;
 
             if (!UserID.IsNull)
                 MST_PatientENT_String += "| UserID = " + UserID.Value.ToString();

@@ -33,17 +33,16 @@
     <asp:UpdatePanel ID="upACC_GNTransaction" runat="server" EnableViewState="true" UpdateMode="Conditional" ChildrenAsTriggers="false">
         <ContentTemplate>
             <div class="row">
-                <div class='<%# ddlPatientID.SelectedIndex > 0 ? "col-md-8" : "col-md-12" %>'>
+                <div class='<%= ddlPatientID.SelectedIndex > 0 ? "col-md-8" : "col-md-12" %>'>
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-12" id="messageContainer" runat="server">
                             <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
                                 <ContentTemplate>
                                     <ucMessage:ShowMessage ID="ucMessage" runat="server" />
                                     <asp:ValidationSummary ID="ValidationSummary1" SkinID="VS" runat="server" />
                                 </ContentTemplate>
                                 <Triggers>
-                                    <asp:AsyncPostBackTrigger ControlID="btnSavePatient" EventName="Click" />
-                                    <asp:AsyncPostBackTrigger ControlID="ddlPatientID" EventName="" />
+                                    <asp:PostBackTrigger ControlID="btnSavePatient"/>
                                 </Triggers>
                             </asp:UpdatePanel>
                         </div>
@@ -95,7 +94,7 @@
                                                 </div>
                                             </ContentTemplate>
                                             <Triggers>
-                                                <asp:AsyncPostBackTrigger ControlID="btnSavePatient" EventName="Click" />
+                                                <asp:PostBackTrigger ControlID="btnSavePatient"/>
                                             </Triggers>
                                         </asp:UpdatePanel>
                                         <div class="col-md-2">
@@ -144,29 +143,48 @@
                                                         <div class="col-md-5">
                                                             <asp:TextBox ValidationGroup="vgPatient" ID="txtMobileNo" runat="server" CssClass="form-control" onkeypress="return IsPositiveInteger(event)" placeholder="Enter Mobile No"></asp:TextBox>
                                                             <asp:RequiredFieldValidator ValidationGroup="vgPatient" ID="RequiredFieldValidator1" SetFocusOnError="True" Display="Dynamic" runat="server" ControlToValidate="txtMobileNo" ErrorMessage="Enter MobileNo"></asp:RequiredFieldValidator>
-
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
                                                         <label class="col-md-3 control-label" for="txtPrimaryDesc">Primary Description</label>
                                                         <div class="col-md-5">
-
                                                             <asp:TextBox ValidationGroup="vgPatient" ID="txtPrimaryDesc" runat="server" TextMode="MultiLine" Rows="4" CssClass="form-control" placeholder="Enter Primary Description"></asp:TextBox>
                                                             <asp:RequiredFieldValidator ValidationGroup="vgPatient" ID="rfvPrimaryDesc" SetFocusOnError="True" Display="Dynamic" runat="server" ControlToValidate="txtPrimaryDesc" ErrorMessage="Enter Primary Description"></asp:RequiredFieldValidator>
-
                                                         </div>
                                                     </div>
+
+                                                    <div class="form-group row">
+                                                        <label class="col-md-3 control-label" for="txtPrimaryDesc">Patient Image</label>
+                                                        <div class="col-md-5">
+                                                            <div class="fileinput fileinput-new" data-provides="fileinput">
+                                                                <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
+                                                                    <asp:Image ValidationGroup="vgPatient" runat="server" ImageUrl="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp; text=no+image" AlternateText="Patient Image" />
+                                                                </div>
+                                                                <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"></div>
+                                                                <div>
+                                                                    <span class="btn default btn-file">
+                                                                        <span class="fileinput-new">Select image </span>
+                                                                        <span class="fileinput-exists">Change </span>
+                                                                        <asp:FileUpload ID="fuPatientPhotoPath" runat="server" ValidationGroup="vgPatient" />
+                                                                    </span>
+                                                                    <br />
+                                                                    <a href="javascript:;" class="btn red fileinput-exists" data-dismiss="fileinput">Remove </a>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
                                                     <div class="form-group row">
                                                         <div class="col-md-offset-3 col-md-9">
                                                             <asp:Button ValidationGroup="vgPatient" ID="btnSavePatient" OnClick="btnSavePatient_Click" runat="server" CssClass="btn btn-primary" Text="Save" EnableViewState="false" AutoPostBack="true" />
-
                                                         </div>
                                                     </div>
+
                                                 </div>
                                             </ContentTemplate>
                                         </asp:UpdatePanel>
                                     </asp:Panel>
-
 
                                     <div class="form-group">
                                         <label class="col-md-3 control-label">
@@ -326,7 +344,7 @@
         <Triggers>
             <asp:AsyncPostBackTrigger ControlID="btnSave" EventName="Click" />
             <asp:AsyncPostBackTrigger ControlID="ddlPatientID" />
-            <asp:AsyncPostBackTrigger ControlID="btnSavePatient" EventName="Click" />
+            <asp:PostBackTrigger ControlID="btnSavePatient"/>
         </Triggers>
     </asp:UpdatePanel>
     <%-- Loading  --%>
@@ -341,11 +359,19 @@
     <%-- END Loading  --%>
 </asp:Content>
 
-
 <asp:Content ID="cntScripts" ContentPlaceHolderID="cphScripts" runat="Server">
     <script> 
         function toggleAddPatientForm() {
             $('#pnlAddPatient').collapse('toggle');
+        }
+
+        function hideMessage() {
+            setTimeout(function () {
+                var messageContainer = document.getElementById('<%=messageContainer.ClientID %>');
+                if (messageContainer) {
+                    messageContainer.style.display = 'none';
+                }
+            }, 3000);
         }
     </script>
 </asp:Content>

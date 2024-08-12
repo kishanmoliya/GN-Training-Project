@@ -1,6 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="ucPatient.ascx.cs" Inherits="UserControl_ucPatient" %>
 
-<%--<asp:Image ID="imhPatient" runat="server" CssClass="img-responsive" AlternateText="Patient Image" EnableViewState="false" ImageUrl="~/Default/Images/profile_user.jpg" />--%>
 <asp:MultiView ID="mvwPatient" runat="server" Visible="false" EnableViewState="false">
     <asp:View ID="vwPatient" runat="server">
         <div class="row">
@@ -18,7 +17,7 @@
                             <div class="col-md-12">
                                 <ul class="nav">
                                     <li class="text-center margin-bottom-10 margin-top-10">
-                                        <asp:Image ID="imhPatient" runat="server" Height="180" CssClass=" img-circle imgStudentPhoto" AlternateText="Patient Image" EnableViewState="false" ImageUrl="~/Default/Images/profile_user.jpg" />
+                                        <asp:Image ID="imhPatient" runat="server" Height="180" CssClass=" img-circle imgStudentPhoto" AlternateText="Patient Image" EnableViewState="false" ImageUrl="~/Default/Images/defaultImg.jpg" />
 
                                     </li>
                                 </ul>
@@ -41,35 +40,6 @@
                                                     </small>
                                                 </td>
                                             </tr>
-
-                                            <%--      <tr id="ctl00_cphPageContent_ucStudentInfoCompact_trCourseName" class="text-center">
-                                        <td class="text-center sbold" colspan="2">
-                                            <span id="ctl00_cphPageContent_ucStudentInfoCompact_lblCourseName" title="" class="font-dark" data-html="true" data-toggle="tooltip" data-placement="top" data-container="body" data-trigger="hover" data-original-title="Program">BTech - CSE</span>
-                                        </td>
-                                    </tr>
-
-
-                                    <tr class="text-center">
-                                        <td class="text-center sbold" colspan="2">
-                                            <span id="ctl00_cphPageContent_ucStudentInfoCompact_lblEnrollmentNo" title="" class="font-grey-gallery font-md bold" data-html="true" data-toggle="tooltip" data-placement="top" data-container="body" data-trigger="hover" data-original-title="Enrollment No.">21010101134<br>
-                                            </span>
-                                            <span id="ctl00_cphPageContent_ucStudentInfoCompact_lblCurrentSemester" title="" class="font-blue-dark" data-html="true" data-toggle="tooltip" data-placement="top" data-container="body" data-trigger="hover" data-original-title="Current Semester">Semester - 7</span>
-                                            <span id="ctl00_cphPageContent_ucStudentInfoCompact_lblABCID" title="" class="font-blue-dark bold" data-html="true" data-toggle="tooltip" data-placement="top" data-container="body" data-trigger="hover" data-original-title="Academic Bank Credit No.(ABCID)">
-                                                <br>
-                                                371076861949</span>
-                                        </td>
-                                    </tr>
-                                    <tr id="ctl00_cphPageContent_ucStudentInfoCompact_trCurrentDivision" class="text-center">
-                                        <td class="text-center sbold" colspan="2">
-                                            <span id="ctl00_cphPageContent_ucStudentInfoCompact_lblCurrentDivision" title="" class="font-blue-dark" data-html="true" data-toggle="tooltip" data-placement="top" data-container="body" data-trigger="hover" data-original-title="Current Division">CSE-7A</span>
-                                            <br>
-                                            <span id="ctl00_cphPageContent_ucStudentInfoCompact_lblCurrentLabBatchNo" title="" class="font-blue-dark" data-html="true" data-toggle="tooltip" data-placement="top" data-container="body" data-trigger="hover" data-original-title="Current Batch">Batch No. 6</span>
-                                            <br>
-                                            <span id="ctl00_cphPageContent_ucStudentInfoCompact_lblCurrentRollNo" title="" class="font-blue-dark" data-html="true" data-toggle="tooltip" data-placement="top" data-container="body" data-trigger="hover" data-original-title="Roll No.">Roll No. 217</span>
-                                        </td>
-                                    </tr>--%>
-
-
 
                                             <tr>
                                                 <th class="gn-view-label-header text-right text-nowrap">Patient Name :</th>

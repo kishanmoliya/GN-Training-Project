@@ -10,6 +10,7 @@ using System.Web.UI.WebControls;
 using System.Data.SqlTypes;
 using System.Web.Services;
 using System.Web.Script.Serialization;
+using System.IO;
 
 public partial class AdminPanel_Account_ACC_GNTransaction_ACC_GNTransactionAddEdit : System.Web.UI.Page
 {
@@ -321,8 +322,11 @@ public partial class AdminPanel_Account_ACC_GNTransaction_ACC_GNTransactionAddEd
         {
             try
             {
-                MST_PatientBAL balACC_GNTransaction = new MST_PatientBAL();
-                ACC_GNPatientENT entMST_Patient = new ACC_GNPatientENT();
+                ACC_GNTransactionBAL balACC_GNTransaction = new ACC_GNTransactionBAL();
+                ACC_GNPatientENT entACC_Patient = new ACC_GNPatientENT();
+                MST_PatientBAL balMST_Patient = new MST_PatientBAL();
+
+
 
                 #region 15.1 Validate Fields 
 
@@ -335,6 +339,8 @@ public partial class AdminPanel_Account_ACC_GNTransaction_ACC_GNTransactionAddEd
                     ErrorMsg += " - " + CommonMessage.ErrorRequiredField("Mobile No");
                 if (dtpDOB.Text.Trim() == String.Empty)
                     ErrorMsg += " - " + CommonMessage.ErrorRequiredField("DOB");
+                if (!this.fuPatientPhotoPath.HasFile)
+                    ErrorMsg += " - " + CommonMessage.ErrorRequiredField("Upload Image");
 
                 if (ErrorMsg != String.Empty)
                 {
@@ -349,26 +355,38 @@ public partial class AdminPanel_Account_ACC_GNTransaction_ACC_GNTransactionAddEd
 
 
                 if (txtPatientName.Text.Trim() != String.Empty)
-                    entMST_Patient.PatientName = txtPatientName.Text.Trim();
+                    entACC_Patient.PatientName = txtPatientName.Text.Trim();
 
                 if (txtMobileNo.Text.Trim() != String.Empty)
-                    entMST_Patient.MobileNo = txtMobileNo.Text.Trim();
+                    entACC_Patient.MobileNo = txtMobileNo.Text.Trim();
 
                 if (txtAge.Text.Trim() != String.Empty)
-                    entMST_Patient.Age = Convert.ToInt32(txtAge.Text.Trim());
+                    entACC_Patient.Age = Convert.ToInt32(txtAge.Text.Trim());
 
                 if (dtpDOB.Text.Trim() != String.Empty)
-                    entMST_Patient.DOB = Convert.ToDateTime(dtpDOB.Text.Trim());
+                    entACC_Patient.DOB = Convert.ToDateTime(dtpDOB.Text.Trim());
 
                 if (txtPrimaryDesc.Text.Trim() != String.Empty)
-                    entMST_Patient.PrimaryDesc = txtPrimaryDesc.Text.Trim();
+                    entACC_Patient.PrimaryDesc = txtPrimaryDesc.Text.Trim();
+
+                if (fuPatientPhotoPath.HasFile)
+                {
+                    string PhotoPath = "~/Default/Images/Patient/";
+                    string AbsoutePath = Server.MapPath(PhotoPath);
+                    if (!Directory.Exists(AbsoutePath))
+                        Directory.CreateDirectory(AbsoutePath);
+                    fuPatientPhotoPath.SaveAs(AbsoutePath + fuPatientPhotoPath.FileName.ToString().Trim());
 
 
-                entMST_Patient.UserID = Convert.ToInt32(Session["UserID"]);
+                    entACC_Patient.PatientPhotoPath = PhotoPath + fuPatientPhotoPath.FileName.ToString().Trim();
+                }
 
-                entMST_Patient.Created = DateTime.Now;
 
-                entMST_Patient.Modified = DateTime.Now;
+                entACC_Patient.UserID = Convert.ToInt32(Session["UserID"]);
+
+                entACC_Patient.Created = DateTime.Now;
+
+                entACC_Patient.Modified = DateTime.Now;
 
 
                 #endregion 15.2 Gather Data 
@@ -378,8 +396,8 @@ public partial class AdminPanel_Account_ACC_GNTransaction_ACC_GNTransactionAddEd
 
                 if (Request.QueryString["PatientID"] != null && Request.QueryString["Copy"] == null)
                 {
-                    //entMST_Patient.PatientID = CommonFunctions.DecryptBase64Int32(Request.QueryString["PatientID"]);
-                    //if (balACC_GNTransaction.Update(entMST_Patient))
+                    //entACC_Patient.PatientID = CommonFunctions.DecryptBase64Int32(Request.QueryString["PatientID"]);
+                    //if (balACC_GNTransaction.Update(entACC_Patient))
                     //{
                     //    Response.Redirect("ACC_GNTransactionList.aspx");
                     //}
@@ -392,18 +410,17 @@ public partial class AdminPanel_Account_ACC_GNTransaction_ACC_GNTransactionAddEd
                 {
                     if (Request.QueryString["PatientID"] == null || Request.QueryString["Copy"] != null)
                     {
-                        SqlInt32 InsertedPatientID = balACC_GNTransaction.InsertPatient(entMST_Patient);
+                        SqlInt32 InsertedPatientID = balMST_Patient.InsertPatient(entACC_Patient);
 
                         if (InsertedPatientID > 0)
                         {
                             ucMessage.ShowSuccess(CommonMessage.RecordSaved("Patient"));
+                            ScriptManager.RegisterStartupScript(this, GetType(), "hideMessage", "hideMessage();", true);
                             ClearPatientControls();
 
                             CommonFillMethods.FillDropDownListPatientID(ddlPatientID);
                             ddlPatientID.SelectedValue = InsertedPatientID.ToString();
                             ucPatient.ShowPatient(Convert.ToInt32(InsertedPatientID.ToString()));
-
-
 
 
                         }
