@@ -42,9 +42,9 @@ public class RPT_ACC_IncomeListDALBase : DataBaseConfig
         try
         {
             SqlDatabase sqlDB = new SqlDatabase(myConnectionString);
-            DbCommand dbCMD = sqlDB.GetStoredProcCommand("PP_ACC_Income_ByFinyear");
+            DbCommand dbCMD = sqlDB.GetStoredProcCommand("PR_ACC_Income_ByFinyear");
 
-            DataTable dtACC_Income = new DataTable("PP_ACC_Income_ByFinyear");
+            DataTable dtACC_Income = new DataTable("PR_ACC_Income_ByFinyear");
 
             DataBaseHelper DBH = new DataBaseHelper();
             DBH.LoadDataTable(sqlDB, dbCMD, dtACC_Income);

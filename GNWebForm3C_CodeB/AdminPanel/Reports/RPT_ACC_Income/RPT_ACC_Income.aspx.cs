@@ -10,79 +10,72 @@ using System.Web.UI.WebControls;
 
 public partial class AdminPanel_Reports_RPT_ACC_Income_RPT_ACC_Income : System.Web.UI.Page
 {
-    #region Private Variables
-    private DataTable dt = new DataTable();
-    private ds_ACC_Income objdsACC_Income = new ds_ACC_Income();
-
-    #endregion Private Variables
-
-    #region Page Load Event
+    #region private variable 
+    DataTable dtACC_Income = new DataTable();
+    private ds_ACC_Income objAcc_income = new ds_ACC_Income();
+    #endregion private variable 
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (!IsPostBack)
+        if (!Page.IsPostBack)
         {
             ShowReport();
         }
     }
-    #endregion Page Load Event
-
-    #region Show Report
+    #region ShowReport
     protected void ShowReport()
     {
-        try
-        {
-            RPT_ACC_IncomeListBAL rptIncome = new RPT_ACC_IncomeListBAL();
-            DataTable dt = rptIncome.Report_ACC_Income_ByFinYear();
-            
+        RPT_ACC_IncomeListBAL balACC_Income = new RPT_ACC_IncomeListBAL();
+        DataTable dt = balACC_Income.Report_ACC_Income_ByFinYear();
+        dtACC_Income = dt.Copy();
+        FillDataSet();
 
-            FillDataSet();
-        }
-        catch (Exception ex)
-        {
-            Response.Write(ex.Message.ToString());
-        }
     }
-    #endregion Show Report
+    #endregion ShowReport
 
     #region FillDataSet
     protected void FillDataSet()
     {
-        foreach (DataRow dr in dt.Rows)
+        foreach (DataRow dr in dtACC_Income.Rows)
         {
-            ds_ACC_Income.dt_ACC_IncomeRow drACC_Income = objdsACC_Income.dt_ACC_Income.Newdt_ACC_IncomeRow();
-
+            ds_ACC_Income.dt_ACC_IncomeRow drACC_Income = objAcc_income.dt_ACC_Income.Newdt_ACC_IncomeRow();
+         
+            if (!dr["FinYearName"].Equals(System.DBNull.Value))
+            {
+                drACC_Income.FinYear = Convert.ToString(dr["FinYearName"]);
+            }
             if (!dr["Hospital"].Equals(System.DBNull.Value))
+            {
                 drACC_Income.Hospital = Convert.ToString(dr["Hospital"]);
-
-            if (!dr["FinYear"].Equals(System.DBNull.Value))
-                drACC_Income.FinYear = Convert.ToString(dr["FinYear"]);
-
+            }
             if (!dr["IncomeType"].Equals(System.DBNull.Value))
+            {
                 drACC_Income.IncomeType = Convert.ToString(dr["IncomeType"]);
-
+            }
             if (!dr["Amount"].Equals(System.DBNull.Value))
+            {
                 drACC_Income.Amount = Convert.ToDecimal(dr["Amount"]);
-
+            }
             if (!dr["IncomeDate"].Equals(System.DBNull.Value))
-                drACC_Income.IncomeDate = Convert.ToDateTime(dr["IncomeDate"]);
+            {
+                drACC_Income.IncomeDate = Convert.ToDateTime(dr["IncomeDate"]).ToString("dd-mm-yyyy");
+            }
 
-            objdsACC_Income.dt_ACC_Income.Rows.Add(drACC_Income);
+            objAcc_income.dt_ACC_Income.Rows.Add(drACC_Income);
+
         }
-
-        SetReportParamater();
-        this.rvIncome.LocalReport.DataSources.Clear();
-        this.rvIncome.LocalReport.DataSources.Add(new ReportDataSource("dtACC_Income", (DataTable)objdsACC_Income.dt_ACC_Income));
-        this.rvIncome.LocalReport.Refresh();
+        SetReportParameters();
+        this.rvIncomeReport.LocalReport.DataSources.Clear();
+        this.rvIncomeReport.LocalReport.DataSources.Add(new ReportDataSource("dt_ACC_Income", (DataTable)objAcc_income.dt_ACC_Income));
+        this.rvIncomeReport.LocalReport.Refresh();
     }
-    #endregion
-
-    #region Set Report Parameters
-    protected void SetReportParamater()
+    #endregion FillDataSet
+    #region SetReportParameters
+    private void SetReportParameters()
     {
-        String ReportTitle = "Income List";
-        ReportParameter rptReportTitle = new ReportParameter("ReportTitle", ReportTitle);
-        this.rvIncome.LocalReport.SetParameters(new ReportParameter[] { rptReportTitle });
+        String ReportTitle = "Income Report";
 
+        ReportParameter rptReportTitle = new ReportParameter("ReportTitle", ReportTitle);
+        this.rvIncomeReport.LocalReport.SetParameters(new ReportParameter[] { rptReportTitle });
     }
-    #endregion Set Report Parameters
+    #endregion SetReportParameters
 }

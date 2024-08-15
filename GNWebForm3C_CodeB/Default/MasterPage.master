@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
-     <meta http-equiv="X-UA-Compatible" content="IE=edge" /> 
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
 
@@ -72,11 +72,10 @@
     </style>
 
 
-  <%--  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
+    <%--  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>--%>
-
 </head>
 <!-- END HEAD -->
 
@@ -297,7 +296,7 @@
                                         </a>
                                     </li>
 
-                                     <li class="nav-item start ">
+                                    <li class="nav-item start ">
                                         <a href='<%=ResolveClientUrl("~/AdminPanel/Dashboard3.aspx") %>' class="kt-menu__link ">
                                             <i class="kt-menu__link-icon flaticon2-architecture-and-city"></i>
                                             <span class="kt-menu__link-text">Dashboard 3</span>
@@ -310,23 +309,6 @@
                             <li class="heading">
                                 <h3 class="uppercase">Features</h3>
                             </li>
-
-                              <!-- BEGIN Reports -->
-                            <li class="nav-item">
-                                <a href="javascript:;" class="nav-link nav-toggle">
-                                    <i class="icon-layers"></i>
-                                    <span class="title">Reports</span>
-                                    <span class="arrow"></span>
-                                </a>
-                                <ul class="sub-menu" style="display: none;">
-                                    <li class="nav-item  ">
-                                        <a href='<%=ResolveClientUrl("~/AdminPanel/Reports/RPT_ACC_Income/RPT_ACC_Income.aspx") %>' class="nav-link ">
-                                            <span class="title">Reports</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <!-- End Reports -->
 
                             <!-- BEGIN Master -->
                             <li class="nav-item">
@@ -383,7 +365,7 @@
                                     <span class="arrow"></span>
                                 </a>
                                 <ul class="sub-menu" style="display: none;">
-                                     <li class="nav-item  ">
+                                    <li class="nav-item  ">
                                         <a href='<%=ResolveClientUrl("~/AdminPanel/Account/ACC_Expense/ACC_ExpenseList.aspx") %>' class="nav-link ">
                                             <span class="title">Account Expense</span>
                                         </a>
@@ -410,7 +392,7 @@
                                         </a>
                                     </li>
 
-                                      <li class="nav-item  ">
+                                    <li class="nav-item  ">
                                         <a href='<%=ResolveClientUrl("~/AdminPanel/Account/ACC_GNTransaction/ACC_GNTransactionList.aspx") %>' class="nav-link ">
                                             <span class="title">Account GNTransaction</span>
                                         </a>
@@ -499,7 +481,7 @@
                             </li>
                             <!-- End Student -->
 
-                               <!-- BEGIN Branch Intake -->
+                            <!-- BEGIN Branch Intake -->
                             <li class="nav-item">
                                 <a href="javascript:;" class="nav-link nav-toggle">
                                     <i class="icon-layers"></i>
@@ -515,6 +497,28 @@
                                 </ul>
                             </li>
                             <!-- End Branch Intake -->
+
+                            <!-- BEGIN Reports -->
+                            <li class="nav-item">
+                                <a href="javascript:;" class="nav-link nav-toggle">
+                                    <i class="icon-layers"></i>
+                                    <span class="title">Reports</span>
+                                    <span class="arrow"></span>
+                                </a>
+                                <ul class="sub-menu" style="display: none;">
+                                    <li class="nav-item  ">
+                                        <a href='<%=ResolveClientUrl("~/AdminPanel/Reports/RPT_ACC_Income/RPT_ACC_Income.aspx") %>' class="nav-link ">
+                                            <span class="title">Income</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item  ">
+                                        <a href='<%=ResolveClientUrl("~/AdminPanel/Reports/RPT_ACC_Expense/RPT_ACC_Expense.aspx") %>' class="nav-link ">
+                                            <span class="title">Expense</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <!-- End Reports -->
 
                         </ul>
                         <!-- END SIDEBAR MENU -->
