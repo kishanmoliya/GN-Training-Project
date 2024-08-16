@@ -80,13 +80,13 @@
     </asp:UpdatePanel>
     <%-- End Search --%>
 
-
-     <rsweb:ReportViewer ID="rvExpenseReport" Class="col-md-12" runat="server" Width="100%" Hight="50px">
+     
+     <rsweb:ReportViewer ID="rvExpenseReport" Class="col-md-12" runat="server" Width="100%" Hight="50px" Visible="false">
         <LocalReport ReportPath="E:\GN-Training-Project\GNWebForm3C_CodeB\App_Code\RPT_DataTable\RPT_ACC_ExpenseReport.rdlc"></LocalReport>
     </rsweb:ReportViewer>
 
     <%-- List --%>
-    <asp:UpdatePanel ID="upList" runat="server" UpdateMode="Conditional">
+    <asp:UpdatePanel ID="upList" runat="server" class="col-md-12" UpdateMode="Conditional">
         <ContentTemplate>
             <div class="row">
                 <div class="col-md-12">
@@ -105,6 +105,23 @@
                                 <label class="control-label pull-right">
                                     <asp:Label ID="lblRecordInfoTop" Text="No entries found" CssClass="pull-right" runat="server"></asp:Label>
                                 </label>
+                            </div>
+                             <div class="tools">
+                                <div>
+                                    <div class="btn-group" runat="server" id="Div_ExportOption" visible="true">
+                                        <button class="btn dropdown-toggle" data-toggle="dropdown">
+                                            Export <i class="fa fa-angle-down"></i>
+                                        </button>
+                                        <ul class="dropdown-menu pull-right">
+                                            <li>
+                                                <asp:LinkButton ID="lbtnExportPDF" runat="server" CommandArgument="PDF" OnClick="lbtnExport_Click">PDF</asp:LinkButton>
+                                            </li>
+                                            <li>
+                                                <asp:LinkButton ID="lbtnExportExcel" runat="server" CommandArgument="Excel" OnClick="lbtnExport_Click">Excel</asp:LinkButton>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="portlet-body">
@@ -194,6 +211,9 @@
         <Triggers>
             <asp:AsyncPostBackTrigger ControlID="btnSearch" EventName="Click" />
             <asp:AsyncPostBackTrigger ControlID="btnClear" EventName="Click" />
+            
+            <asp:PostBackTrigger ControlID="lbtnExportExcel" />
+            <asp:PostBackTrigger ControlID="lbtnExportPDF" />
         </Triggers>
     </asp:UpdatePanel>
     <%-- END List --%>

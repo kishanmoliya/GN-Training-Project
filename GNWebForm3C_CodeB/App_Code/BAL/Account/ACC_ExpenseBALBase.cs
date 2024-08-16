@@ -137,6 +137,12 @@ namespace GNForm3C.BAL
             ACC_ExpenseDAL dalACC_Expense = new ACC_ExpenseDAL();
             return dalACC_Expense.HospitalWiseExpenseList(FromDate, ToDate);
         }
+
+        public DataTable SelectHospitalWiseExpenseList(SqlDateTime FromDate, SqlDateTime ToDate, SqlInt32 HospitalID)
+        {
+            ACC_ExpenseDAL dalACC_Expense = new ACC_ExpenseDAL();
+            return dalACC_Expense.SelectHospitalWiseExpenseList(FromDate, ToDate, HospitalID);
+        }
         #endregion Reports
     }
 }

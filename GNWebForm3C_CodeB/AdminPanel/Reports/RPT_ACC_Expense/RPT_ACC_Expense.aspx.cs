@@ -29,6 +29,73 @@ public partial class AdminPanel_Reports_RPT_ACC_Expense_RPT_ACC_Expense : System
         }
     }
 
+    #region 19.0 Export Data
+
+    #region 19.1 Excel Export Button Click Event
+
+    protected void lbtnExport_Click(object sender, EventArgs e)
+    {
+        LinkButton lbtn = (LinkButton)(sender);
+        String ExportType = lbtn.CommandArgument.ToString();
+        #region Parameters
+
+        SqlDateTime FromDate = SqlDateTime.Null;
+        SqlDateTime ToDate = SqlDateTime.Null;
+
+        #endregion Parameters
+
+        #region Gather Data
+
+        if (dtpFromDate.Text.Trim() != String.Empty)
+            FromDate = Convert.ToDateTime(dtpFromDate.Text);
+
+        if (dtpFromDate.Text.Trim() != String.Empty)
+            ToDate = Convert.ToDateTime(dtpToDate.Text);
+
+        #endregion Gather Data
+
+        ACC_ExpenseBAL balACC_Expense = new ACC_ExpenseBAL();
+
+        dtACC_Expense = balACC_Expense.HospitalWiseExpenseList(FromDate, ToDate);
+        if (dtACC_Expense != null && dtACC_Expense.Rows.Count > 0)
+        {
+            ExportReport(ExportType);
+        }
+    }
+
+    private void ExportReport(string format)
+    {
+        try
+        {
+            string mimeType, encoding, extension;
+            Microsoft.Reporting.WebForms.Warning[] warnings;
+            string[] streamIds;
+
+            byte[] bytes = rvExpenseReport.LocalReport.Render(format,
+                                                        null,
+                                                        out mimeType,
+                                                        out encoding,
+                                                        out extension,
+                                                        out streamIds,
+                                                        out warnings);
+
+            Response.Clear();
+            Response.ContentType = mimeType;
+            Response.AddHeader("Content-Disposition", "attachment; filename=report." + extension);
+            Response.BinaryWrite(bytes);
+            Response.End();
+
+        }
+        catch (Exception ex)
+        {
+            ucMessage.ShowError(format + " is Not Correct Format");
+        }
+
+    }
+
+    #endregion 19.1 Excel Export Button Click Event
+
+    #endregion 19.0 Export Data
 
     #region 23.0 SetDefaultDateTime
     private void SetDefaultDateTime()
@@ -43,29 +110,6 @@ public partial class AdminPanel_Reports_RPT_ACC_Expense_RPT_ACC_Expense : System
     #region ShowReport
     protected void ShowReport()
     {
-        #region Parameters
-        SqlDateTime FromDate = SqlDateTime.Null;
-        SqlDateTime ToDate = SqlDateTime.Null;
-
-        #endregion Parameters
-
-        #region Gather Data
-
-        #region NavigateLogic
-
-        if (dtpFromDate.Text.Trim() != String.Empty)
-            FromDate = Convert.ToDateTime(dtpFromDate.Text.Trim());
-
-        if (dtpToDate.Text.Trim() != String.Empty)
-            ToDate = SqlDateTime.Parse(dtpToDate.Text.Trim());
-        #endregion NavigateLogic
-
-
-        #endregion Gather Data
-
-        ACC_ExpenseBAL balACC_Expense = new ACC_ExpenseBAL();
-        DataTable dt = balACC_Expense.HospitalWiseExpenseList(FromDate, ToDate);
-        dtACC_Expense = dt.Copy();
         FillDataSet();
     }
     #endregion ShowReport
@@ -79,7 +123,7 @@ public partial class AdminPanel_Reports_RPT_ACC_Expense_RPT_ACC_Expense : System
 
             if (!dr["ExpenseDate"].Equals(System.DBNull.Value))
             {
-                drACC_Expense.ExpenseDate = Convert.ToDateTime(dr["ExpenseDate"]).ToString("dd-mm-yyyy");
+                drACC_Expense.ExpenseDate = Convert.ToDateTime(dr["ExpenseDate"]);
             }
             if (!dr["ExpenseType"].Equals(System.DBNull.Value))
             {
@@ -130,7 +174,6 @@ public partial class AdminPanel_Reports_RPT_ACC_Expense_RPT_ACC_Expense : System
 
     #endregion 15.1 Button Search Click Event
 
-
     protected void Search()
     {
         #region Parameters
@@ -150,33 +193,43 @@ public partial class AdminPanel_Reports_RPT_ACC_Expense_RPT_ACC_Expense : System
             ToDate = SqlDateTime.Parse(dtpToDate.Text.Trim());
         #endregion NavigateLogic
 
-
         #endregion Gather Data
 
-        ACC_ExpenseBAL balACC_Expense = new ACC_ExpenseBAL();
-
-        DataTable dt = balACC_Expense.HospitalWiseExpenseList(FromDate, ToDate);
-
-        if (dt != null && dt.Rows.Count > 0)
+        if(FromDate < ToDate)
         {
-            Div_SearchResult.Visible = true;
-            //Div_ExportOption.Visible = true;
-            rpData.DataSource = dt;
-            rpData.DataBind();
+            ACC_ExpenseBAL balACC_Expense = new ACC_ExpenseBAL();
 
-            ShowReport();
+            dtACC_Expense = balACC_Expense.HospitalWiseExpenseList(FromDate, ToDate);
+            if (dtACC_Expense != null && dtACC_Expense.Rows.Count > 0)
+            {
+                Div_SearchResult.Visible = true;
+                //Div_ExportOption.Visible = true;
+                rpData.DataSource = dtACC_Expense;
+                rpData.DataBind();
+                ShowReport();
 
-            lblRecordInfoBottom.Text = String.Empty;
-            lblRecordInfoTop.Text = String.Empty;
+                lblRecordInfoBottom.Text = String.Empty;
+                lblRecordInfoTop.Text = String.Empty;
+            }
+            else
+            {
+                rpData.DataSource = null;
+                rpData.DataBind();
+                lblRecordInfoBottom.Text = CommonMessage.NoRecordFound();
+                lblRecordInfoTop.Text = CommonMessage.NoRecordFound();
+
+                ucMessage.ShowError(CommonMessage.NoRecordFound());
+            }
         }
         else
         {
+            Div_SearchResult.Visible = false;
+            lbtnExportExcel.Visible = false;
+
             rpData.DataSource = null;
             rpData.DataBind();
-            lblRecordInfoBottom.Text = CommonMessage.NoRecordFound();
-            lblRecordInfoTop.Text = CommonMessage.NoRecordFound();
 
-            ucMessage.ShowError(CommonMessage.NoRecordFound());
+            ucMessage.ShowError(CommonMessage.FromDate_LessThan_ToDate());
         }
     }
 
