@@ -102,7 +102,7 @@ namespace GNForm3C.DAL
                 DbCommand dbCMD = sqlDB.GetStoredProcCommand("PR_ACC_GNTransaction_Update");
 
                 sqlDB.AddInParameter(dbCMD, "@TransactionID", SqlDbType.Int, entACC_GNTransaction.TransactionID);
-                sqlDB.AddInParameter(dbCMD, "@PatientID", SqlDbType.NVarChar, entACC_GNTransaction.PatientID);
+                sqlDB.AddInParameter(dbCMD, "@PatientID", SqlDbType.Int, entACC_GNTransaction.PatientID);
                 sqlDB.AddInParameter(dbCMD, "@Amount", SqlDbType.Decimal, entACC_GNTransaction.Amount);
                 sqlDB.AddInParameter(dbCMD, "@ReferenceDoctor", SqlDbType.NVarChar, entACC_GNTransaction.ReferenceDoctor);
                 sqlDB.AddInParameter(dbCMD, "@Count", SqlDbType.Int, entACC_GNTransaction.Count);
@@ -471,5 +471,38 @@ namespace GNForm3C.DAL
         }
         #endregion UpdateDischargeAndTotalDays
 
+        #region Reports
+        public DataTable PatientReceiptByGNTransactionID(SqlInt32 TransactionID)
+        {
+            try
+            {
+                SqlDatabase sqlDB = new SqlDatabase(myConnectionString);
+                DbCommand dbCMD = sqlDB.GetStoredProcCommand("PP_ACC_GNTransaction_PatientReceipt");
+
+                sqlDB.AddInParameter(dbCMD, "@TransactionID", SqlDbType.Int, TransactionID);
+
+                DataTable dtACC_GNTransaction = new DataTable("PP_ACC_GNTransaction_PatientReceipt");
+
+                DataBaseHelper DBH = new DataBaseHelper();
+                DBH.LoadDataTable(sqlDB, dbCMD, dtACC_GNTransaction);
+
+                return dtACC_GNTransaction;
+            }
+            catch (SqlException sqlex)
+            {
+                Message = SQLDataExceptionMessage(sqlex);
+                if (SQLDataExceptionHandler(sqlex))
+                    throw;
+                return null;
+            }
+            catch (Exception ex)
+            {
+                Message = ExceptionMessage(ex);
+                if (ExceptionHandler(ex))
+                    throw;
+                return null;
+            }
+        }
+        #endregion
     }
 }

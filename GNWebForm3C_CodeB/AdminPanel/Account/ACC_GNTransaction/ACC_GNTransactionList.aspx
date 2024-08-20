@@ -262,12 +262,11 @@
                                                 <tr class="TRDark">
                                                     <th>
                                                         <asp:HyperLink ID="hlViewTransactionID" NavigateUrl='<%# "~/AdminPanel/Account/ACC_GNTransaction/ACC_GNTransactionView.aspx?TransactionID=" + GNForm3C.CommonFunctions.EncryptBase64(Eval("TransactionID").ToString()) %>' data-target="#viewiFrameReg" CssClass="modalButton" data-toggle="modal" runat="server"><%#Eval("Patient") %></asp:HyperLink>
+                                                        <asp:Label ID="lbhPatient" runat="server" Text="Patient"></asp:Label>
                                                     </th>
                                                     <th>
                                                         <asp:Label ID="lbhAmount" runat="server" Text="Amount"></asp:Label>
                                                     </th>
-                                                    <%-- <th><asp:Label ID="lbhSerialNo" runat="server" Text="Serial No"></asp:Label>
-                                                    </th>--%>
                                                     <th>
                                                         <asp:Label ID="lbhReferenceDoctor" runat="server" Text="Reference Doctor"></asp:Label>
                                                     </th>
@@ -361,6 +360,13 @@
                                                             <td class="text-nowrap text-center">
                                                                 <asp:HyperLink ID="hlView" SkinID="View" NavigateUrl='<%# "~/AdminPanel/Account/ACC_GNTransaction/ACC_GNTransactionView.aspx?TransactionID=" + GNForm3C.CommonFunctions.EncryptBase64(Eval("TransactionID").ToString()) %>' data-target="#viewiFrameReg" CssClass="modalButton" data-toggle="modal" runat="server"></asp:HyperLink>
                                                                 <%--<asp:HyperLink ID="hlEdit" SkinID="Edit" NavigateUrl='<%# "~/AdminPanel/Account/ACC_GNTransaction/ACC_GNTransactionAddEdit.aspx?TransactionID=" + GNForm3C.CommonFunctions.EncryptBase64(Eval("TransactionID").ToString()) %>' runat="server"></asp:HyperLink>--%>
+                                                                <asp:HyperLink
+                                                                    SkinID="Edit"
+                                                                    ID="hlEdit"
+                                                                    runat="server"
+                                                                    NavigateUrl='<%# "~/AdminPanel/Account/ACC_GNTransaction/ACC_GNTransactionAddEdit.aspx?TransactionID=" + GNForm3C.CommonFunctions.EncryptBase64(Eval("TransactionID").ToString()) + "&HospitalID=" + GNForm3C.CommonFunctions.EncryptBase64(Eval("HospitalID").ToString()) + "&FinYearID=" + GNForm3C.CommonFunctions.EncryptBase64(Eval("FinYearID").ToString()) + "&PatientID=" + GNForm3C.CommonFunctions.EncryptBase64(Eval("PatientID").ToString()) %>'>
+                                                                </asp:HyperLink>
+
                                                                 <asp:LinkButton ID="hlDischarge" runat="server"
                                                                     SkinID="Delete"
                                                                     OnClientClick="javascript:return confirm('Are you sure you want to Discharge?');"
@@ -368,12 +374,11 @@
                                                                     CommandArgument='<%# Eval("TransactionID") %>'
                                                                     Enabled='<%# Eval("DateOfDischarge") == DBNull.Value ? true : false %>'>
                                                                 </asp:LinkButton>
-                                                                <%--<asp:LinkButton ID="lbtnDelete" runat="server"
-                                                                    SkinID="Delete"
-                                                                    OnClientClick="javascript:return confirm('Are you sure you want to delete record ? ');"
-                                                                    CommandName="DeleteRecord"
-                                                                    CommandArgument='<%#Eval("TransactionID") %>'>
-                                                                </asp:LinkButton>--%>
+                                                                <asp:HyperLink
+                                                                    runat="server"
+                                                                    ID="hlprint"
+                                                                    SkinID="hlprint"
+                                                                    NavigateUrl='<%# "~/AdminPanel/Reports/RPT_ACC_GNTransaction/RPT_ACC_GNTransaction.aspx?TransactionID=" +   GNForm3C.CommonFunctions.EncryptBase64(Eval("TransactionID").ToString()) + "&ReportType=" + GNForm3C.CommonFunctions.EncryptBase64("PDF") %>'></asp:HyperLink>
                                                             </td>
                                                         </tr>
                                                         <%-- END Table Rows --%>

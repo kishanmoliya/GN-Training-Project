@@ -19,7 +19,6 @@ public partial class AdminPanel_Reports_RPT_ACC_Expense_RPT_HospitalWiseDateWise
     private DataTable dtACC_Expense = new DataTable("dtACC_Expense");
     private ds_ACC_Expense objdsACC_Expense = new ds_ACC_Expense();
 
-
     #endregion 11.0 Variables
 
     #region 12.0 Page Load event
@@ -375,6 +374,4 @@ public partial class AdminPanel_Reports_RPT_ACC_Expense_RPT_HospitalWiseDateWise
     #endregion 21.4 SetReportParameter
 
     #endregion 21.0 reports
-
-
 }

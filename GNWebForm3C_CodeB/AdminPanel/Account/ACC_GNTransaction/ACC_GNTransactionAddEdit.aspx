@@ -129,7 +129,7 @@
                                                     <div class="form-group row">
                                                         <label class="col-md-3 control-label" for="dtpDOB">Date of Birth</label>
                                                         <div class="col-md-5">
-                                                            <div class="input-group input-medium date date-picker" data-date-format='<%=GNForm3C.CV.DefaultHTMLDateFormat.ToString()%>'>
+                                                            <div class="input-group input-medium date date-picker" data-date-format='<%=GNForm3C.CV.DefaultSQLDateFormat.ToString()%>'>
                                                                 <asp:TextBox ValidationGroup="vgPatient" ID="dtpDOB" CssClass="form-control" runat="server" placeholder="Date"></asp:TextBox>
                                                                 <span class="input-group-btn">
                                                                     <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
@@ -233,7 +233,7 @@
                                             <asp:Label ID="lblDate_XXXXX" runat="server" Text="Date"></asp:Label>
                                         </label>
                                         <div class="col-md-5">
-                                            <div class="input-group input-medium date date-picker" data-date-format='<%=GNForm3C.CV.DefaultHTMLDateFormat.ToString()%>'>
+                                            <div class="input-group input-medium date date-picker" data-date-format='<%=GNForm3C.CV.DefaultSQLDateFormat.ToString()%>'>
                                                 <asp:TextBox ValidationGroup="vgTransaction" ID="dtpDate" CssClass="form-control" runat="server" placeholder="Date" ReadOnly="true"></asp:TextBox>
                                                 <span class="input-group-btn">
                                                     <button class="btn default" type="button" disabled><i class="fa fa-calendar"></i></button>
@@ -247,7 +247,7 @@
                                             <asp:Label ID="lblDateOfAdmission_XXXXX" runat="server" Text="Date Of Admission"></asp:Label>
                                         </label>
                                         <div class="col-md-5">
-                                            <div class="input-group input-medium date date-picker" data-date-format='<%=GNForm3C.CV.DefaultHTMLDateFormat.ToString()%>'>
+                                            <div class="input-group input-medium date date-picker" data-date-format='<%=GNForm3C.CV.DefaultSQLDateFormat.ToString()%>'>
                                                 <asp:TextBox ValidationGroup="vgTransaction" ID="dtpDateOfAdmission" CssClass="form-control" runat="server" placeholder="Date Of Admission" ReadOnly="true"></asp:TextBox>
                                                 <span class="input-group-btn">
                                                     <button class="btn default" type="button" disabled><i class="fa fa-calendar"></i></button>
@@ -260,7 +260,7 @@
                                             <asp:Label ID="lblDateOfDischarge_XXXXX" runat="server" Text="Date Of Discharge"></asp:Label>
                                         </label>
                                         <div class="col-md-5">
-                                            <div class="input-group input-medium date date-picker" data-date-format='<%=GNForm3C.CV.DefaultHTMLDateFormat.ToString()%>'>
+                                            <div class="input-group input-medium date date-picker" data-date-format='<%=GNForm3C.CV.DefaultSQLDateFormat.ToString()%>'>
                                                 <asp:TextBox ValidationGroup="vgTransaction" ID="dtpDateOfDischarge" CssClass="form-control" runat="server" placeholder="Date Of Discharge"></asp:TextBox>
                                                 <span class="input-group-btn">
                                                     <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>

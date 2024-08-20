@@ -139,5 +139,13 @@ namespace GNForm3C.BAL
                 return false;
             }
         }
+
+        #region Report
+        public DataTable PatientReceiptByGNTransactionID(SqlInt32 TransactionID)
+        {
+            ACC_GNTransactionDAL dalACC_GNTransaction = new ACC_GNTransactionDAL();
+            return dalACC_GNTransaction.PatientReceiptByGNTransactionID(TransactionID);
+        }
+        #endregion  
     }
 }

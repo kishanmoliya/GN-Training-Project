@@ -24,8 +24,6 @@ public partial class AdminPanel_Account_ACC_GNTransaction_ACC_GNTransactionAddEd
 
     protected void Page_Load(object sender, EventArgs e)
     {
-
-
         #region 11.1 Check User Login 
 
         if (Session["UserID"] == null)
@@ -51,8 +49,8 @@ public partial class AdminPanel_Account_ACC_GNTransaction_ACC_GNTransactionAddEd
 
             lblFormHeader.Text = CV.PageHeaderAdd + " Transaction";
             upr.DisplayAfter = CV.UpdateProgressDisplayAfter;
-            dtpDate.Text = DateTime.Now.ToString("dd-MM-yyyy");
-            dtpDateOfAdmission.Text = DateTime.Now.ToString("dd-MM-yyyy");
+            dtpDate.Text = DateTime.Now.ToString("yyyy-MM-dd");
+            dtpDateOfAdmission.Text = DateTime.Now.ToString("yyyy-MM-dd");
             ddlPatientID.Focus();
 
             #endregion 11.4 Set Control Default Value 
@@ -68,15 +66,12 @@ public partial class AdminPanel_Account_ACC_GNTransaction_ACC_GNTransactionAddEd
             ucHelp.ShowHelp("Help Text will be shown here");
 
             #endregion 11.6 Set Help Text 
-
         }
-
     }
 
     #endregion 11.0 Page Load Event
 
     #region 12.0 FillLabels 
-
 
     private void FillLabels(String FormName)
     {
@@ -104,65 +99,82 @@ public partial class AdminPanel_Account_ACC_GNTransaction_ACC_GNTransactionAddEd
 
     private void FillControls()
     {
-        if (Request.QueryString["TransactionID"] != null)
+        //if (Request.QueryString["TransactionID"] != null)
+        //{
+        //    lblFormHeader.Text = CV.PageHeaderEdit + " Transaction";
+        //    ACC_GNTransactionBAL balACC_GNTransaction = new ACC_GNTransactionBAL();
+        //    ACC_GNTransactionENT entACC_GNTransaction = new ACC_GNTransactionENT();
+        //    entACC_GNTransaction = balACC_GNTransaction.SelectPK(CommonFunctions.DecryptBase64Int32(Request.QueryString["TransactionID"]));
+
+        //    if (!entACC_GNTransaction.PatientID.IsNull)
+        //        ddlPatientID.Text = entACC_GNTransaction.PatientID.Value.ToString();
+
+        //    if (!entACC_GNTransaction.TreatmentID.IsNull)
+        //        ddlTreatmentID.SelectedValue = entACC_GNTransaction.TreatmentID.Value.ToString();
+
+        //    if (!entACC_GNTransaction.Amount.IsNull)
+        //        txtAmount.Text = entACC_GNTransaction.Amount.Value.ToString();
+
+        //    if (!entACC_GNTransaction.ReferenceDoctor.IsNull)
+        //        txtReferenceDoctor.Text = entACC_GNTransaction.ReferenceDoctor.Value.ToString();
+
+        //    if (!entACC_GNTransaction.Count.IsNull)
+        //        txtCount.Text = entACC_GNTransaction.Count.Value.ToString();
+
+        //    if (!entACC_GNTransaction.Date.IsNull)
+        //        dtpDate.Text = entACC_GNTransaction.Date.Value.ToString(CV.DefaultDateFormat);
+
+        //    if (!entACC_GNTransaction.DateOfAdmission.IsNull)
+        //        dtpDateOfAdmission.Text = entACC_GNTransaction.DateOfAdmission.Value.ToString(CV.DefaultDateFormat);
+
+        //    if (!entACC_GNTransaction.DateOfDischarge.IsNull)
+        //        dtpDateOfDischarge.Text = entACC_GNTransaction.DateOfDischarge.Value.ToString(CV.DefaultDateFormat);
+
+        //    if (!entACC_GNTransaction.Deposite.IsNull)
+        //        txtDeposite.Text = entACC_GNTransaction.Deposite.Value.ToString();
+
+        //    if (!entACC_GNTransaction.NetAmount.IsNull)
+        //        txtNetAmount.Text = entACC_GNTransaction.NetAmount.Value.ToString();
+
+        //    //if (!entACC_GNTransaction.NoOfDays.IsNull)
+        //    //	txtNoOfDays.Text = entACC_GNTransaction.NoOfDays.Value.ToString();
+
+        //    if (!entACC_GNTransaction.Quantity.IsNull)
+        //        txtQuantity.Text = entACC_GNTransaction.Quantity.Value.ToString();
+
+        //    //if (!entACC_GNTransaction.Rate.IsNull)
+        //    //    txtRate.Text = entACC_GNTransaction.Rate.Value.ToString();
+
+        //    if (!entACC_GNTransaction.Remarks.IsNull)
+        //        txtRemarks.Text = entACC_GNTransaction.Remarks.Value.ToString();
+
+        //    if (!entACC_GNTransaction.HospitalID.IsNull)
+        //        ddlHospitalID.SelectedValue = entACC_GNTransaction.HospitalID.Value.ToString();
+
+        //    if (!entACC_GNTransaction.FinYearID.IsNull)
+        //        ddlFinYearID.SelectedValue = entACC_GNTransaction.FinYearID.Value.ToString();
+
+        //    if (!entACC_GNTransaction.ReceiptTypeID.IsNull)
+        //        ddlReceiptTypeID.SelectedValue = entACC_GNTransaction.ReceiptTypeID.Value.ToString();
+
+        //}
+
+        if (Request.QueryString["FinYearID"] != null)
         {
-            lblFormHeader.Text = CV.PageHeaderEdit + " Transaction";
-            ACC_GNTransactionBAL balACC_GNTransaction = new ACC_GNTransactionBAL();
-            ACC_GNTransactionENT entACC_GNTransaction = new ACC_GNTransactionENT();
-            entACC_GNTransaction = balACC_GNTransaction.SelectPK(CommonFunctions.DecryptBase64Int32(Request.QueryString["TransactionID"]));
-
-            if (!entACC_GNTransaction.PatientID.IsNull)
-                ddlPatientID.Text = entACC_GNTransaction.PatientID.Value.ToString();
-
-            if (!entACC_GNTransaction.TreatmentID.IsNull)
-                ddlTreatmentID.SelectedValue = entACC_GNTransaction.TreatmentID.Value.ToString();
-
-            if (!entACC_GNTransaction.Amount.IsNull)
-                txtAmount.Text = entACC_GNTransaction.Amount.Value.ToString();
-
-            if (!entACC_GNTransaction.ReferenceDoctor.IsNull)
-                txtReferenceDoctor.Text = entACC_GNTransaction.ReferenceDoctor.Value.ToString();
-
-            if (!entACC_GNTransaction.Count.IsNull)
-                txtCount.Text = entACC_GNTransaction.Count.Value.ToString();
-
-            if (!entACC_GNTransaction.Date.IsNull)
-                dtpDate.Text = entACC_GNTransaction.Date.Value.ToString(CV.DefaultDateFormat);
-
-            if (!entACC_GNTransaction.DateOfAdmission.IsNull)
-                dtpDateOfAdmission.Text = entACC_GNTransaction.DateOfAdmission.Value.ToString(CV.DefaultDateFormat);
-
-            if (!entACC_GNTransaction.DateOfDischarge.IsNull)
-                dtpDateOfDischarge.Text = entACC_GNTransaction.DateOfDischarge.Value.ToString(CV.DefaultDateFormat);
-
-            if (!entACC_GNTransaction.Deposite.IsNull)
-                txtDeposite.Text = entACC_GNTransaction.Deposite.Value.ToString();
-
-            if (!entACC_GNTransaction.NetAmount.IsNull)
-                txtNetAmount.Text = entACC_GNTransaction.NetAmount.Value.ToString();
-
-            //if (!entACC_GNTransaction.NoOfDays.IsNull)
-            //	txtNoOfDays.Text = entACC_GNTransaction.NoOfDays.Value.ToString();
-
-            if (!entACC_GNTransaction.Quantity.IsNull)
-                txtQuantity.Text = entACC_GNTransaction.Quantity.Value.ToString();
-
-            //if (!entACC_GNTransaction.Rate.IsNull)
-            //    txtRate.Text = entACC_GNTransaction.Rate.Value.ToString();
-
-            if (!entACC_GNTransaction.Remarks.IsNull)
-                txtRemarks.Text = entACC_GNTransaction.Remarks.Value.ToString();
-
-            if (!entACC_GNTransaction.HospitalID.IsNull)
-                ddlHospitalID.SelectedValue = entACC_GNTransaction.HospitalID.Value.ToString();
-
-            if (!entACC_GNTransaction.FinYearID.IsNull)
-                ddlFinYearID.SelectedValue = entACC_GNTransaction.FinYearID.Value.ToString();
-
-            if (!entACC_GNTransaction.ReceiptTypeID.IsNull)
-                ddlReceiptTypeID.SelectedValue = entACC_GNTransaction.ReceiptTypeID.Value.ToString();
-
+            ddlFinYearID.SelectedValue = CommonFunctions.DecryptBase64Int32(Request.QueryString["FinYearID"]).ToString();
         }
+
+        if (Request.QueryString["HospitalID"] != null)
+        {
+            ddlHospitalID.SelectedValue = CommonFunctions.DecryptBase64Int32(Request.QueryString["HospitalID"]).ToString();
+        }
+
+        if (Request.QueryString["PatientID"] != null)
+        {
+            ddlPatientID.SelectedValue = CommonFunctions.DecryptBase64Int32(Request.QueryString["PatientID"]).ToString();
+        }
+
+        CommonFillMethods.FillDropDownListTreatmentIDByHospitalID(ddlTreatmentID, CommonFunctions.DecryptBase64Int32(Request.QueryString["HospitalID"]));
     }
 
     #endregion 14.0 FillControls By PK 
@@ -206,8 +218,6 @@ public partial class AdminPanel_Account_ACC_GNTransaction_ACC_GNTransactionAddEd
                 #endregion 15.1 Validate Fields
 
                 #region 15.2 Gather Data 
-
-
 
                 if (ddlPatientID.SelectedIndex > 0)
                     entACC_GNTransaction.PatientID = Convert.ToInt32(ddlPatientID.SelectedValue);
@@ -275,9 +285,10 @@ public partial class AdminPanel_Account_ACC_GNTransaction_ACC_GNTransactionAddEd
                 if (Request.QueryString["TransactionID"] != null && Request.QueryString["Copy"] == null)
                 {
                     entACC_GNTransaction.TransactionID = CommonFunctions.DecryptBase64Int32(Request.QueryString["TransactionID"]);
-                    if (balACC_GNTransaction.Update(entACC_GNTransaction))
+                    if (balACC_GNTransaction.Insert(entACC_GNTransaction))
                     {
-                        Response.Redirect("ACC_GNTransactionList.aspx");
+                        ucMessage.ShowSuccess(CommonMessage.RecordSaved("Transaction"));
+                            ClearControls();
                     }
                     else
                     {
@@ -292,8 +303,6 @@ public partial class AdminPanel_Account_ACC_GNTransaction_ACC_GNTransactionAddEd
                         {
                             ucMessage.ShowSuccess(CommonMessage.RecordSaved("Transaction"));
                             ClearControls();
-                            //ClearPatientControls();
-
                         }
                     }
                 }
@@ -325,8 +334,6 @@ public partial class AdminPanel_Account_ACC_GNTransaction_ACC_GNTransactionAddEd
                 ACC_GNTransactionBAL balACC_GNTransaction = new ACC_GNTransactionBAL();
                 ACC_GNPatientENT entACC_Patient = new ACC_GNPatientENT();
                 MST_PatientBAL balMST_Patient = new MST_PatientBAL();
-
-
 
                 #region 15.1 Validate Fields 
 
@@ -496,10 +503,11 @@ public partial class AdminPanel_Account_ACC_GNTransaction_ACC_GNTransactionAddEd
 
     }
     #endregion 17.0 FillTreatmentCombobox
+
+    #region 18.0 Fill Patient Dropdown
     protected void FillPatientView(object sender, EventArgs e)
     {
         int PatientID = 0;
-
 
         if (int.TryParse(ddlPatientID.SelectedValue, out PatientID))
         {
@@ -509,4 +517,5 @@ public partial class AdminPanel_Account_ACC_GNTransaction_ACC_GNTransactionAddEd
             }
         }
     }
+    #endregion 18.0 Fill Patient Dropdown
 }

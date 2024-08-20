@@ -186,6 +186,10 @@ Default skin template. The following skins are provided as examples only.
 <i class="fa fa-file-o"></i>
 </asp:HyperLink>
 
+<asp:HyperLink SkinID="ViewPopUp" ToolTip="View Record" runat="server" CssClass="btn blue-soft btn-xs btn-circle modalButton">
+<i class="fa fa-edit"></i>
+</asp:HyperLink>
+
 <asp:HyperLink SkinID="Copy" ToolTip="Copy Record" runat="server" CssClass="btn btn-xs btn-circle green-meadow tooltips" data-html="true" data-toggle="tooltip" data-placement="bottom">
 <i class="fa fa-files-o"></i>
 </asp:HyperLink>

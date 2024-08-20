@@ -515,9 +515,15 @@
                                         <a href='<%=ResolveClientUrl("~/AdminPanel/Reports/RPT_ACC_Expense/RPT_ACC_Expense.aspx") %>' class="nav-link ">
                                             <span class="title">Hospital Wise Expense</span>
                                         </a>
-                                    </li> <li class="nav-item  ">
+                                    </li>
+                                    <li class="nav-item  ">
                                         <a href='<%=ResolveClientUrl("~/AdminPanel/Reports/RPT_ACC_Expense/RPT_HospitalWiseDateWiseExpenseList.aspx") %>' class="nav-link ">
                                             <span class="title">Date Wise Expense</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item  ">
+                                        <a href='<%=ResolveClientUrl("~/AdminPanel/Reports/RPT_ACC_GNTransaction/RPT_ACC_GNTransaction.aspx") %>' class="nav-link ">
+                                            <span class="title">GN Expense</span>
                                         </a>
                                     </li>
                                 </ul>
