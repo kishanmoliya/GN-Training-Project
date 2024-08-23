@@ -140,7 +140,8 @@
                             <div class="tools">
                                 <div>
                                     <asp:LinkButton SkinID="lbtnMultipleDelete" ID="lbtnMultipleDelete" NavigateUrl="~/AdminPanel/Account/ACC_Income/ACC_IncomeAddEdit.aspx" OnClick="btnDeleteSelected" runat="server"></asp:LinkButton>
-                                   <asp:HyperLink SkinID="hlAddMany" ID="hlAddMany" NavigateUrl="~/AdminPanel/Account/ACC_Income/ACC_IncomeAddEditMany.aspx" runat="server"></asp:HyperLink>
+                                    <asp:HyperLink SkinID="hlAddMany" ID="hlAddMany" NavigateUrl="~/AdminPanel/Account/ACC_Income/ACC_IncomeAddEditMany.aspx" runat="server"></asp:HyperLink>
+                                    <asp:HyperLink SkinID="hlAddMany" ID="hlAddManyDT" NavigateUrl="~/AdminPanel/Account/ACC_Income/ACC_IncomeAddEditManyDataTable.aspx" runat="server" Text="dt"></asp:HyperLink>
                                     <asp:HyperLink SkinID="hlAddNew" ID="hlAddNew" NavigateUrl="~/AdminPanel/Account/ACC_Income/ACC_IncomeAddEdit.aspx" runat="server"></asp:HyperLink>
                                     <div class="btn-group" runat="server" id="Div_ExportOption" visible="false">
                                         <button class="btn dropdown-toggle" data-toggle="dropdown">

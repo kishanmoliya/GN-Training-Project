@@ -167,8 +167,21 @@ namespace GNForm3C.BAL
 			return dalACC_Income.SelectComboBox();
 		}
 
-		#endregion ComboBox
+        #endregion ComboBox
 
-	}
+        public Boolean Upsert(DataTable dtIncomeTable)
+        {
+            ACC_IncomeDAL dalACC_Income = new ACC_IncomeDAL();
+            if (dalACC_Income.Upsert(dtIncomeTable))
+            {
+                return true;
+            }
+            else
+            {
+                this.Message = dalACC_Income.Message;
+                return false;
+            }
+        }
+    }
 
 }

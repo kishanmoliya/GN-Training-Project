@@ -472,12 +472,42 @@ namespace GNForm3C.DAL
 			}
 		}
 
-		#endregion ComboBox
+        #endregion ComboBox
 
-		#region AutoComplete
+        #region AutoComplete
 
 
-		#endregion AutoComplete
+        #endregion AutoComplete
 
-	}
+        public Boolean Upsert(DataTable dtIncomeTable)
+        {
+            try
+            {
+                SqlDatabase sqlDB = new SqlDatabase(myConnectionString);
+                DbCommand dbCMD = sqlDB.GetStoredProcCommand("PR_ACC_Income_Upsert");
+
+                sqlDB.AddInParameter(dbCMD, "@dtIncomeTable", SqlDbType.Structured, dtIncomeTable);
+
+
+                DataBaseHelper DBH = new DataBaseHelper();
+                DBH.ExecuteNonQuery(sqlDB, dbCMD);
+
+                return true;
+            }
+            catch (SqlException sqlex)
+            {
+                Message = SQLDataExceptionMessage(sqlex);
+                if (SQLDataExceptionHandler(sqlex))
+                    throw;
+                return false;
+            }
+            catch (Exception ex)
+            {
+                Message = ExceptionMessage(ex);
+                if (ExceptionHandler(ex))
+                    throw;
+                return false;
+            }
+        }
+    }
 }

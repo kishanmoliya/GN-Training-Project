@@ -94,7 +94,6 @@ namespace GNForm3C
 
         #endregion Current Value
 
-
         #region General
 
         public static string MaxAllowedFileSizeInMB = "1 MB";
@@ -119,7 +118,6 @@ namespace GNForm3C
         public static Int32 MaxPhotoSizeInKB = 150;
 
         #endregion General
-       
 
        #region Page Header in AddEdit cs Code
         public static string PageHeaderAdd = "Add";
@@ -169,9 +167,7 @@ namespace GNForm3C
 
         public static string DefaultRDLCLanguage = "en-IN";
 
-        #endregion Default Display Formats
-
-        
+        #endregion Default Display Formats        
 
         #region Control Configuration
         public static System.Web.UI.WebControls.ValidatorDisplay ValidationDisplay = System.Web.UI.WebControls.ValidatorDisplay.Dynamic;
@@ -186,7 +182,6 @@ namespace GNForm3C
         public static char ListPageSearchParamSeperator = '$';
 
         #endregion List Page
-
 
         #region Common URL
 
@@ -206,6 +201,7 @@ namespace GNForm3C
         public static string CommonImagePath = "~/Images/defaultIcon.jpg";
         public static string NoImagePath = "~/Images/noimage.png";
         public static string FacultyNoImagePath = "~/Images/Faculty_NoImg.jpeg";
+        public static string DefaultNoImagePath = "~/Default/Images/karan.png";
         #endregion Default Images
 
         #region Default Units

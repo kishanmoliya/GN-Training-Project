@@ -90,7 +90,6 @@ public partial class AdminPanel_Account_ACC_GNTransaction_ACC_GNTransactionAddEd
 
         ddlTreatmentID.Items.Clear();
         ddlTreatmentID.Items.Insert(0, new ListItem("Select Treatment", "-99"));
-
     }
 
     #endregion 13.0 Fill DropDownList

@@ -506,6 +506,11 @@
                                     <span class="arrow"></span>
                                 </a>
                                 <ul class="sub-menu" style="display: none;">
+                                     <li class="nav-item  ">
+                                        <a href='<%=ResolveClientUrl("~/AdminPanel/Reports/RPT_Patient_ICard/RPT_MST_Patient_ICard.aspx") %>' class="nav-link ">
+                                            <span class="title">Patienr ICard</span>
+                                        </a>
+                                    </li>
                                     <li class="nav-item  ">
                                         <a href='<%=ResolveClientUrl("~/AdminPanel/Reports/RPT_ACC_Income/RPT_ACC_Income.aspx") %>' class="nav-link ">
                                             <span class="title">Income</span>
@@ -522,8 +527,13 @@
                                         </a>
                                     </li>
                                     <li class="nav-item  ">
-                                        <a href='<%=ResolveClientUrl("~/AdminPanel/Reports/RPT_ACC_GNTransaction/RPT_ACC_GNTransaction.aspx") %>' class="nav-link ">
-                                            <span class="title">GN Expense</span>
+                                        <a href='<%=ResolveClientUrl("~/AdminPanel/Reports/RPT_ACC_Ledger/RPT_ACC_HospitalWise_FinYearWise_IncomeExpenseList.aspx") %>' class="nav-link ">
+                                            <span class="title">Income Expense</span>
+                                        </a>
+                                    </li>
+                                      <li class="nav-item  ">
+                                        <a href='<%=ResolveClientUrl("~/AdminPanel/Reports/RPT_ACC_Ledger/RPT_IncomeExpenseLedger.aspx") %>' class="nav-link ">
+                                            <span class="title">Income Expense Ledger</span>
                                         </a>
                                     </li>
                                 </ul>

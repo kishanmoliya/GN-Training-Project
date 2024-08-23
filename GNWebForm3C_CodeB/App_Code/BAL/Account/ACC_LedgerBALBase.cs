@@ -26,5 +26,19 @@ namespace GNForm3C.BAL
             ACC_LedgerDAL dalACC_Ledger = new ACC_LedgerDAL();
             return dalACC_Ledger.SelectPage(PageOffset, PageSize, out TotalRecords, FromDate, ToDate);
         }
+
+        #region Rerports
+        public DataTable RPT_HospitalWiseFinyearWiseIncomeExpense()
+        {
+            ACC_LedgerDALBase dalACC_IncExp = new ACC_LedgerDALBase();
+            return dalACC_IncExp.RPT_HospitalWiseFinyearWiseIncomeExpense();
+        }
+
+        public DataTable RPT_IncomeExpenseLedger(SqlInt32 FinYearID, SqlInt32 HospitalID)
+        {
+            ACC_LedgerDALBase dalACC_IncExp = new ACC_LedgerDALBase();
+            return dalACC_IncExp.RPT_IncomeExpenseLedger(FinYearID, HospitalID);
+        }
+        #endregion
     }
 }

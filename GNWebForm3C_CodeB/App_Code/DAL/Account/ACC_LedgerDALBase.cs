@@ -8,6 +8,7 @@ using System.Data.SqlTypes;
 using System.Data;
 using System.Linq;
 using System.Web;
+using iTextSharp.text;
 
 /// <summary>
 /// Summary description for ACC_LedgerDALBase
@@ -74,5 +75,69 @@ namespace GNForm3C.DAL
                 return null;
             }
         }
+
+        #region Reports
+        public DataTable RPT_HospitalWiseFinyearWiseIncomeExpense()
+        {
+            try
+            {
+                SqlDatabase sqlDB = new SqlDatabase(myConnectionString);
+                DbCommand dbCMD = sqlDB.GetStoredProcCommand("PP_HospitalWise_FinYearWise_IncomeExpenseList");
+
+                DataTable dtACC_IncExp = new DataTable("PP_HospitalWise_FinYearWise_IncomeExpenseList");
+
+                DataBaseHelper DBH = new DataBaseHelper();
+                DBH.LoadDataTable(sqlDB, dbCMD, dtACC_IncExp);
+
+                return dtACC_IncExp;
+            }
+            catch (SqlException sqlex)
+            {
+                Message = SQLDataExceptionMessage(sqlex);
+                if (SQLDataExceptionHandler(sqlex))
+                    throw;
+                return null;
+            }
+            catch (Exception ex)
+            {
+                Message = ExceptionMessage(ex);
+                if (ExceptionHandler(ex))
+                    throw;
+                return null;
+            }
+        }
+
+        public DataTable RPT_IncomeExpenseLedger(SqlInt32 FinYearID, SqlInt32 HospitalID)
+        {
+            try
+            {
+                SqlDatabase sqlDB = new SqlDatabase(myConnectionString);
+                DbCommand dbCMD = sqlDB.GetStoredProcCommand("PP_IncomeExpenseLedger");
+                sqlDB.AddInParameter(dbCMD, "@FinYearID", SqlDbType.Int, FinYearID);
+                sqlDB.AddInParameter(dbCMD, "@HospitalID", SqlDbType.Int, HospitalID);
+
+                DataTable dtACC_IncExp = new DataTable("PP_IncomeExpenseLedger");
+
+                DataBaseHelper DBH = new DataBaseHelper();
+                DBH.LoadDataTable(sqlDB, dbCMD, dtACC_IncExp);
+
+                return dtACC_IncExp;
+            }
+            catch (SqlException sqlex)
+            {
+                Message = SQLDataExceptionMessage(sqlex);
+                if (SQLDataExceptionHandler(sqlex))
+                    throw;
+                return null;
+            }
+            catch (Exception ex)
+            {
+                Message = ExceptionMessage(ex);
+                if (ExceptionHandler(ex))
+                    throw;
+                return null;
+            }
+        }
+        #endregion
     }
 }

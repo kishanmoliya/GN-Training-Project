@@ -68,16 +68,13 @@ public partial class AdminPanel_BranchIntake_BR_BranchIntake_BR_BranchIntakeList
 
         if (dt != null && dt.Rows.Count > 0)
         {
-
             rpAddmissionYearHead.DataSource = CommonFunctions.ColumnOfDataTable(dt);
             rpAddmissionYearHead.DataBind();
             rpIntakeData.DataSource = dt;
             rpIntakeData.DataBind();
-
         }
         else
         {
-
             ucMessage.ShowError(CommonMessage.NoRecordFound());
         }
     }
@@ -227,6 +224,5 @@ public partial class AdminPanel_BranchIntake_BR_BranchIntake_BR_BranchIntakeList
             }
         }
     }
-    #endregion  17.0 Clear Button
-    
+    #endregion  17.0 Clear Button 
 }

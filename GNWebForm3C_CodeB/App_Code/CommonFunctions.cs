@@ -19,6 +19,8 @@ using System.Configuration;
 using System.Data.OleDb;
 using System.Web.UI;
 using System.Security.Cryptography;
+using System.Drawing.Imaging;
+using ZXing;
 
 namespace GNForm3C
 {
@@ -1370,7 +1372,6 @@ namespace GNForm3C
             }
         }
 
-
         #endregion FillDropDownList
 
         #region Generate Password
@@ -1647,6 +1648,22 @@ namespace GNForm3C
         #endregion Security
 
         #region Common
+        public static byte[] ConvertImagePathToPngBytes(string relativePath)
+        {
+            // Step 1: Get the physical path from the relative path
+            string physicalPath = HttpContext.Current.Server.MapPath(relativePath);
+
+            // Step 2: Read the image and convert it to PNG format
+            using (MemoryStream outputStream = new MemoryStream())
+            {
+                using (System.Drawing.Image image = System.Drawing.Image.FromFile(physicalPath))
+                {
+                    image.Save(outputStream, ImageFormat.Png);
+                    return outputStream.ToArray();
+                }
+            }
+        }
+
         public static void ImageResize(double scaleFactor, Stream sourcePath, string targetPath)
         {
             using (var image = System.Drawing.Image.FromStream(sourcePath))
@@ -1738,10 +1755,28 @@ namespace GNForm3C
             return Convert.ToInt32(DateTime.Parse(HourFormat).Hour) * 60 + Convert.ToInt32(DateTime.Parse(HourFormat).Minute);
         }
 
+        public static byte[] GenerateBarcode(string data)
+        {
+            var barcodeWriter = new BarcodeWriter
+            {
+                Format = BarcodeFormat.CODE_128, // Specify the barcode format
+                Options = new ZXing.Common.EncodingOptions
+                {
+                    Height = 100,
+                    Width = 300
+                }
+            };
 
-
+            using (Bitmap bitmap = barcodeWriter.Write(data))
+            {
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    bitmap.Save(ms, ImageFormat.Png);
+                    return ms.ToArray(); // Return the barcode as a byte array
+                }
+            }
+        }
         #endregion Common
-
 
         #region Column of DataTable
         public static List<String> ColumnOfDataTable(DataTable dt)
@@ -1755,8 +1790,6 @@ namespace GNForm3C
             return columnNames;
         }
         #endregion Column of DataTable
-
-
 
         #region Get CSS Class
 
@@ -1811,9 +1844,6 @@ namespace GNForm3C
                 return CSSClass.FontRed;
         }
         #endregion Get CSS Class
-
-       
-
 
         #region Document
         public static Boolean UploadDocument(FileUpload fu, String DirectoryPath, String NewPath, String OldPath)
@@ -2139,10 +2169,5 @@ namespace GNForm3C
         }
 
         #endregion Conversion
-
-        
-
-      
-
     }
 }

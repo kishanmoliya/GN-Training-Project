@@ -3,7 +3,7 @@
 <asp:Content ID="cnthead" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
 <asp:Content ID="cntPageHeader" ContentPlaceHolderID="cphPageHeader" runat="Server">
-    <asp:Label ID="lblPageHeader_XXXXX" Text="Transaction " runat="server"></asp:Label><small><asp:Label ID="lblPageHeaderInfo_XXXXX" Text="Account" runat="server"></asp:Label></small>
+    <asp:Label ID="lblPageHeader_XXXXX" Text="Transaction" runat="server"></asp:Label><small><asp:Label ID="lblPageHeaderInfo_XXXXX" Text="Account" runat="server"></asp:Label></small>
     <span class="pull-right">
         <small>
             <asp:HyperLink ID="hlShowHelp" SkinID="hlShowHelp" runat="server"></asp:HyperLink>

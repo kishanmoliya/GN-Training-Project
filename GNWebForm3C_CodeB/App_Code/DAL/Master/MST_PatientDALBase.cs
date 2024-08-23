@@ -120,6 +120,36 @@ namespace GNForm3C.DAL
 
         #endregion
 
+        #region Reports
+        public DataTable RPT_Patient_ICard()
+        {
+            try
+            {
+                SqlDatabase sqlDB = new SqlDatabase(myConnectionString);
+                DbCommand dbCMD = sqlDB.GetStoredProcCommand("PP_MST_Patient_Select");
 
+                DataTable dtMST_Patient= new DataTable("PP_MST_Patient_Select");
+
+                DataBaseHelper DBH = new DataBaseHelper();
+                DBH.LoadDataTable(sqlDB, dbCMD, dtMST_Patient);
+
+                return dtMST_Patient;
+            }
+            catch (SqlException sqlex)
+            {
+                Message = SQLDataExceptionMessage(sqlex);
+                if (SQLDataExceptionHandler(sqlex))
+                    throw;
+                return null;
+            }
+            catch (Exception ex)
+            {
+                Message = ExceptionMessage(ex);
+                if (ExceptionHandler(ex))
+                    throw;
+                return null;
+            }
+        }
+        #endregion
     }
 }

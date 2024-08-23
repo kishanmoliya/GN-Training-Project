@@ -278,12 +278,11 @@ public partial class AdminPanel_Reports_RPT_ACC_Expense_RPT_HospitalWiseDateWise
 
     private void ClearControls()
     {
-        ddlHospitalID.Items.Clear();
+        ddlHospitalID.SelectedIndex = 0;
         dtpFromDate.Text = String.Empty;
         dtpToDate.Text = String.Empty;
         CommonFunctions.BindEmptyRepeater(rpData);
         Div_SearchResult.Visible = false;
-        //Div_ExportOption.Visible = false;
         lblRecordInfoTop.Text = CommonMessage.NoRecordFound();
     }
 
@@ -367,7 +366,7 @@ public partial class AdminPanel_Reports_RPT_ACC_Expense_RPT_HospitalWiseDateWise
     #region 21.4 SetReportParameter
     private void SetReportParameters()
     {
-        String ReportTitle = "Hospital wise Expense list";
+        String ReportTitle = "Hospital wise Date Wise Expense list";
         ReportParameter rptReportTitle = new ReportParameter("ReportTitle", ReportTitle);
         this.rvHospitalWiseExpenseList.LocalReport.SetParameters(new ReportParameter[] { rptReportTitle,});
     }

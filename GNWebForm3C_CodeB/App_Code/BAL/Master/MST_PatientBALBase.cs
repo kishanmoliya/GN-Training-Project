@@ -66,8 +66,12 @@ namespace GNForm3C.BAL
         }
         #endregion
 
-
+        #region Rerports
+        public DataTable RPT_Patient_ICard()
+        {
+            MST_PatientDAL dalMST_Patient = new MST_PatientDAL();
+            return dalMST_Patient.RPT_Patient_ICard();
+        }
+        #endregion
     }
-
-
 }
