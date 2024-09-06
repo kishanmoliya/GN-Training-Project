@@ -111,8 +111,8 @@
                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="dtpToDate" ErrorMessage="Enter To Date" Display="Dynamic" Type="Date"></asp:RequiredFieldValidator>
 
                                     </div>
-                                </div>
                             </div>
+                                </div>
                         </div>
                         <div class="form-actions">
                             <div class="row">
@@ -259,6 +259,7 @@
         <Triggers>
             <asp:AsyncPostBackTrigger ControlID="btnSearch" EventName="Click" />
             <asp:AsyncPostBackTrigger ControlID="btnClear" EventName="Click" />
+            <asp:AsyncPostBackTrigger ControlID="btnAdd" EventName="Click" />
             <asp:PostBackTrigger ControlID="lbtnExportExcel" />
             <asp:PostBackTrigger ControlID="lbtnExportPDF" />
         </Triggers>

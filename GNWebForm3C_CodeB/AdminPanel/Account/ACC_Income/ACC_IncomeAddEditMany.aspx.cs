@@ -186,7 +186,7 @@ public partial class AdminPanel_Account_ACC_Income_ACC_IncomeAddEditMany : Syste
             dtIncomeTable.Columns.Add("Amount", typeof(SqlDecimal));
             dtIncomeTable.Columns.Add("IncomeDate", typeof(SqlDateTime));
             dtIncomeTable.Columns.Add("Note", typeof(SqlString));
-            //  dtIncomeTable.Columns.Add("Remarks", typeof(SqlString));
+            //dtIncomeTable.Columns.Add("Remarks", typeof(SqlString));
             dtIncomeTable.Columns.Add("HospitalID", typeof(SqlInt32));
             dtIncomeTable.Columns.Add("FinYearID", typeof(SqlInt32));
             dtIncomeTable.Columns.Add("UserID", typeof(SqlInt32));
@@ -211,10 +211,32 @@ public partial class AdminPanel_Account_ACC_Income_ACC_IncomeAddEditMany : Syste
                     CheckBox chkIsSelected = (CheckBox)items.FindControl("chkIsSelected");
 
                     #endregion FindControl
-
                     #region 15.1.1 Gather Data
                     if (chkIsSelected.Checked)
                     {
+
+                        String ErrorMsg = String.Empty;
+                        if (ddlFinYearID.SelectedIndex == 0)
+                            ErrorMsg += " - " + CommonMessage.ErrorRequiredFieldDDL("FInYear");
+
+                        if (ddlIncomeTypeID.SelectedIndex == 0)
+                            ErrorMsg += " - " + CommonMessage.ErrorRequiredFieldDDL("IncomeType");
+
+                        if (dtpIncomeDate.Text.ToString().Trim() == String.Empty)
+                            ErrorMsg += " - " + CommonMessage.ErrorRequiredField("IncomeDate");
+
+                        if (txtAmount.Text.Trim() == String.Empty)
+                            ErrorMsg += " - " + CommonMessage.ErrorRequiredField("Amount");
+
+                        if (ErrorMsg != String.Empty)
+                        {
+                            ErrorMsg = CommonMessage.ErrorPleaseCorrectFollowing() + ErrorMsg;
+                            ucMessage.ShowError(ErrorMsg);
+                            ddlFinYearID.Focus();
+                            Div_ShowResult.Visible = true;
+                            return;
+                        }
+
                         entACC_Income.HospitalID = Convert.ToInt32(ddlHospitalID.SelectedValue);
                         entACC_Income.FinYearID = Convert.ToInt32(ddlFinYearID.SelectedValue);
                         entACC_Income.IncomeTypeID = Convert.ToInt32(ddlIncomeTypeID.SelectedValue);
@@ -369,43 +391,44 @@ public partial class AdminPanel_Account_ACC_Income_ACC_IncomeAddEditMany : Syste
         DataTable dt = new DataTable();
         dt.Columns.Add("IncomeDate");
         dt.Columns.Add("Amount");
+        dt.Columns.Add("Remarks");
         dt.Columns.Add("Note");
         dt.Columns.Add("IncomeID");
-        dt.Columns.Add("UserID");
+        dt.Columns.Add("IncomeTypeID");
+        dt.Columns.Add("FinYearID");
 
         foreach (RepeaterItem rp in rpData.Items)
         {
+            DropDownList FinYearID = (DropDownList)rp.FindControl("ddlFinYearID");
+            DropDownList IncomeTypeID = (DropDownList)rp.FindControl("ddlIncomeTypeID");
             TextBox dtpIncomeDate = (TextBox)rp.FindControl("dtpIncomeDate");
-            TextBox txtAmount = (TextBox)rp.FindControl("txtAmount");
             TextBox txtNote = (TextBox)rp.FindControl("txtNote");
+            TextBox txtAmount = (TextBox)rp.FindControl("txtAmount");
             HiddenField hdIncomeID = (HiddenField)rp.FindControl("hdIncomeID");
-            DropDownList ddlUser = (DropDownList)rp.FindControl("ddlUser");
 
             DataRow dr = dt.NewRow();
-            dr["IncomeDate"] = dtpIncomeDate.Text.Trim();
-            dr["Amount"] = txtAmount.Text.Trim();
+            dr["IncomeDate"] = dtpIncomeDate.Text.ToString().Trim() != String.Empty ? Convert.ToDateTime(dtpIncomeDate.Text.ToString().Trim()).ToString(CV.DefaultDateFormat) : null;
+            dr["Amount"] = txtAmount.Text.ToString().Trim();
             dr["Note"] = txtNote.Text.Trim();
             dr["IncomeID"] = hdIncomeID.Value.ToString();
-
-            if (ddlUser != null && ddlUser.SelectedIndex > 0) // Check if a valid user is selected
-            {
-                dr["UserID"] = ddlUser.SelectedValue;
-            }
-            else
-            {
-                dr["UserID"] = DBNull.Value; // Or handle no selection case appropriately
-            }
-
+            dr["FinYearID"] = FinYearID.SelectedValue;
+            dr["IncomeTypeID"] = IncomeTypeID.SelectedValue;
             dt.Rows.Add(dr);
         }
         int count = 0;
         foreach (DataRow dr in dt.Rows)
         {
-            if (dr["IncomeDate"].ToString() != "")
+            if (dr["Amount"].ToString().Trim() != string.Empty && dr["FinYearID"].ToString().Trim() != string.Empty && dr["IncomeTypeID"].ToString().Trim() != string.Empty)
                 count++;
         }
         if (count == dt.Rows.Count)
+        {
             dt.Rows.Add();
+        }
+        else
+        {
+            ucMessage.ShowError("Fill All Rows Data");
+        }
 
         rpData.DataSource = dt;
         rpData.DataBind();

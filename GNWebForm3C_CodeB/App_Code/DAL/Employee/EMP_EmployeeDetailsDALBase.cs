@@ -8,6 +8,9 @@ using System.Data;
 using System.Linq;
 using System.Web;
 using GNForm3C.ENT;
+using AjaxControlToolkit;
+using Microsoft.Practices.EnterpriseLibrary.Data;
+using Microsoft.ReportingServices.Diagnostics.Internal;
 
 /// <summary>
 /// Summary description for EMP_EmployeeDetailsDALBase
@@ -235,7 +238,51 @@ namespace GNForm3C.DAL
                 return null;
             }
         }
-        #endregion
+
+        #endregion Select Operation
+
+        #region AutoComplete
+        public List<string> GetEmployeeNames(SqlString prefixText, SqlInt32? employeeTypeID)
+        {
+            try
+            {
+                SqlDatabase sqlDB = new SqlDatabase(myConnectionString);
+                DbCommand dbCMD = sqlDB.GetStoredProcCommand("PR_EMP_GetEmployeeNames");
+
+                sqlDB.AddInParameter(dbCMD, "@PrefixText", SqlDbType.VarChar, prefixText);
+                sqlDB.AddInParameter(dbCMD, "@EmployeeTypeID", SqlDbType.Int, employeeTypeID);
+
+                DataTable dtEMP_EmployeeDetail = new DataTable("PR_EMP_GetEmployeeNames");
+
+                DataBaseHelper DBH = new DataBaseHelper();
+                DBH.LoadDataTable(sqlDB, dbCMD, dtEMP_EmployeeDetail);
+
+                List<string> employeeNames = new List<string>();
+
+                foreach (DataRow row in dtEMP_EmployeeDetail.Rows)
+                {
+                    employeeNames.Add(row["EmployeeName"].ToString());
+                }
+
+                return employeeNames;
+            }
+            catch (SqlException sqlex)
+            {
+                Message = SQLDataExceptionMessage(sqlex);
+                if (SQLDataExceptionHandler(sqlex))
+                    throw;
+                return null;
+            }
+            catch (Exception ex)
+            {
+                Message = ExceptionMessage(ex);
+                if (ExceptionHandler(ex))
+                    throw;
+                return null;
+            }
+
+        }
+        #endregion AutoComplete
 
         #region UpdateOperation
 

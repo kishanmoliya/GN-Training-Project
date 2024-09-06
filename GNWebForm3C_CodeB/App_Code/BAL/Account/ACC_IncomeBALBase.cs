@@ -94,6 +94,22 @@ namespace GNForm3C.BAL
             }
         }
 
+        #region UpsertOpration XML
+        public Boolean UpsertXML(string xmlData)
+        {
+            ACC_IncomeDAL dalACC_Income = new ACC_IncomeDAL();
+            if (dalACC_Income.UpsertXML(xmlData))
+            {
+                return true;
+            }
+            else
+            {
+                this.Message = dalACC_Income.Message;
+                return false;
+            }
+        }
+        #endregion UpsertOpration XML
+
         #endregion UpsertOperation
 
         #region DeleteOperation

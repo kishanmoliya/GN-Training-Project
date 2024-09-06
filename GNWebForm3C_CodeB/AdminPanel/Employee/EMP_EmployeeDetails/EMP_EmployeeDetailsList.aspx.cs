@@ -1,4 +1,5 @@
-﻿using GNForm3C;
+﻿using AjaxControlToolkit;
+using GNForm3C;
 using GNForm3C.BAL;
 using System;
 using System.Collections.Generic;
@@ -33,6 +34,8 @@ public partial class AdminPanel_Employee_EMP_EmployeeDetails_EMP_EmployeeDetails
 
         if (!Page.IsPostBack)
         {
+            autoCompleteExtender.ContextKey = ddlEmployeeTypeID.SelectedValue;
+
             #region 12.1 DropDown List Fill Section
 
             FillDropDownList();
@@ -53,7 +56,13 @@ public partial class AdminPanel_Employee_EMP_EmployeeDetails_EMP_EmployeeDetails
             #endregion 12.3 Set Help Text
         } 
     }
-#endregion 12.0 Page Load Event
+    #endregion 12.0 Page Load Event
+
+    protected void ddlEmployeeTypeID_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        autoCompleteExtender.ContextKey = ddlEmployeeTypeID.SelectedValue;
+    }
+
 
     #region 13.0 FillLabels
 

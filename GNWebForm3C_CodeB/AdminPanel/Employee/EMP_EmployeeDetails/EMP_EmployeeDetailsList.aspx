@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Default/MasterPage.master" AutoEventWireup="true" CodeFile="EMP_EmployeeDetailsList.aspx.cs" Inherits="AdminPanel_Employee_EMP_EmployeeDetails_EMP_EmployeeDetailsList" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="cphPageHeader" runat="Server">
     <asp:Label ID="lblPageHeader_XXXXX" runat="server" Text="Employee"></asp:Label>
@@ -28,7 +28,8 @@
     <!--Help Text End-->
     <asp:ScriptManager ID="sm" runat="server">
     </asp:ScriptManager>
-      <%-- Search --%>
+    <%--<ajaxToolkit:ToolkitScriptManager ID="sm" runat="server" />--%>
+    <%-- Search --%>
     <asp:UpdatePanel ID="upApplicationFeature" runat="server">
         <ContentTemplate>
             <div class="portlet light">
@@ -52,7 +53,25 @@
                                                 <i class="fa fa-search"></i>
                                             </span>
                                             <asp:TextBox ID="txtEmployeeName" CssClass="First form-control" runat="server" PlaceHolder="Enter Employee Name"></asp:TextBox>
-                                        </div>  
+                                            <ajaxToolkit:AutoCompleteExtender
+                                                ID="autoCompleteExtender"
+                                                runat="server"
+                                                TargetControlID="txtEmployeeName"
+                                                ServicePath="~/AdminPanel/EmployeeService.asmx"
+                                                ServiceMethod="GetEmployeeNames"
+                                                MinimumPrefixLength="1"
+                                                CompletionSetCount="10"
+                                                CompletionListCssClass="list-group fix-height"
+                                                CompletionListItemCssClass="list-group-item"
+                                                CompletionListHighlightedItemCssClass="list-group-item bg-grey hover-cursor"
+                                                EnableCaching="true"
+                                                CompletionInterval="100"
+                                                UseContextKey="true"
+                                                OnClientItemSelected="ClientItemSelectedEmployeeType">
+                                            </ajaxToolkit:AutoCompleteExtender>
+
+                                            <asp:HiddenField ID="hfEmployeeTypeID" runat="server"/>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -61,7 +80,7 @@
                                             <span class="input-group-addon">
                                                 <i class="fa fa-search"></i>
                                             </span>
-                                            <asp:DropDownList ID="ddlEmployeeTypeID" CssClass="form-control select2me" runat="server"></asp:DropDownList>
+                                            <asp:DropDownList ID="ddlEmployeeTypeID" CssClass="form-control select2me" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlEmployeeTypeID_SelectedIndexChanged"></asp:DropDownList>
                                         </div>
                                     </div>
                                 </div>
@@ -79,10 +98,13 @@
                 </div>
             </div>
         </ContentTemplate>
+        <Triggers>
+            <asp:AsyncPostBackTrigger ControlID="ddlEmployeeTypeID" EventName="SelectedIndexChanged" />
+        </Triggers>
     </asp:UpdatePanel>
     <%-- End Search --%>
 
-      <%-- List --%>
+    <%-- List --%>
     <asp:UpdatePanel ID="upList" runat="server" UpdateMode="Conditional">
         <ContentTemplate>
             <div class="row">
@@ -248,11 +270,17 @@
 
 <asp:Content ID="Content5" ContentPlaceHolderID="cphScripts" runat="Server">
     <script>
+
+        function ClientItemSelectedEmployeeType(sender, e) {
+            $(<%= hfEmployeeTypeID.ClientID %>).val(e.get_value().split(' - ')[0]);
+        }
+
         $(window).keydown(function (e) {
             GNWebKeyEvents(e.keyCode, '<%=hlAddNew.ClientID%>', '<%=btnSearch.ClientID%>');
         });
 
         SearchGridUI('<%=btnSearch.ClientID%>', 'sample_1', 1);
+
     </script>
 </asp:Content>
 

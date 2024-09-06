@@ -1,8 +1,12 @@
 ﻿using GNForm3C.DAL;
 using GNForm3C.ENT;
+using Microsoft.Practices.EnterpriseLibrary.Data.Sql;
+using Microsoft.Practices.EnterpriseLibrary.Data;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Common;
+using System.Data.SqlClient;
 using System.Data.SqlTypes;
 using System.Linq;
 using System.Web;
@@ -108,6 +112,14 @@ namespace GNForm3C.BAL
         }
 
         #endregion UpdateOperation
+
+        #region AutoComplete
+        public List<string> GetEmployeeNames(SqlString prefixText, SqlInt32? employeeTypeID)
+        {
+            EMP_EmployeeDetailsDAL EmpName = new EMP_EmployeeDetailsDAL();
+            return EmpName.GetEmployeeNames(prefixText, employeeTypeID);
+        }
+        #endregion AutoComplete
 
         #region InsertOperation
 
