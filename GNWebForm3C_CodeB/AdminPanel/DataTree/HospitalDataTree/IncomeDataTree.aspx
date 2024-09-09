@@ -100,26 +100,10 @@
                                 <asp:Label SkinID="lblSearchResultHeaderIcon" runat="server"></asp:Label>
                                 <asp:Label ID="lblSearchResultHeader" SkinID="lblSearchResultHeaderText" runat="server"></asp:Label>
                                 <label class="control-label">&nbsp;</label>
-                                <%--   <label class="control-label pull-right">
-                                    <asp:Label ID="lblRecordInfoTop" Text="No entries found" CssClass="pull-right" runat="server"></asp:Label>
-                                </label>--%>
                             </div>
                             <div class="tools">
                                 <div>
                                     <asp:HyperLink SkinID="hlAddNew" ID="hlAddNew" NavigateUrl="~/AdminPanel/Master/MST_Hospital/MST_HospitalAddEdit.aspx" runat="server"></asp:HyperLink>
-                                    <%-- <div class="btn-group" runat="server" id="Div_ExportOption" visible="false">
-                                        <button class="btn dropdown-toggle" data-toggle="dropdown">
-                                            Export <i class="fa fa-angle-down"></i>
-                                        </button>
-                                        <ul class="dropdown-menu pull-right">
-                                            <li>
-                                                <asp:LinkButton ID="lbtnExportPDF" runat="server" CommandArgument="PDF" OnClick="lbtnExport_Click">PDF</asp:LinkButton>
-                                            </li>
-                                            <li>
-                                                <asp:LinkButton ID="lbtnExportExcel" runat="server" CommandArgument="Excel" OnClick="lbtnExport_Click">Excel</asp:LinkButton>
-                                            </li>
-                                        </ul>
-                                    </div>--%>
                                 </div>
                             </div>
                         </div>
@@ -127,128 +111,114 @@
                             <div class="row" runat="server" id="Div_SearchResult" visible="false">
                                 <div class="col-md-12">
                                     <div id="TableContent">
-                                        <table class="table table-bordered table-advanced table-striped table-hover" id="sample_1">
-                                            <%-- Table Header --%>
-                                            <thead>
-                                                <tr class="TRDark">
-                                                    <th class="text-center">
-                                                        <asp:Label ID="lbhAdd" runat="server" Text="#"></asp:Label>
-                                                    </th>
-                                                    <th class="text-left">
-                                                        <asp:Label ID="lbhHospital" runat="server" Text="Hospital"></asp:Label>
-                                                    </th>
-                                                    <th class="text-left">
-                                                        <asp:Label ID="lbhPrintName" runat="server" Text="Print Name"></asp:Label>
-                                                    </th>
-                                                    <th class="text-left">
-                                                        <asp:Label ID="lbhPrintLine1" runat="server" Text="Print Line1"></asp:Label>
-                                                    </th>
-                                                    <th class="text-left">
-                                                        <asp:Label ID="lbhRemarks" runat="server" Text="Remarks"></asp:Label>
-                                                    </th>
-                                                    <%--    <th>
-                                                        <asp:Label ID="lbhReportHeaderName" runat="server" Text="Report Header Name"></asp:Label>
-                                                    </th>--%>
-                                                    <th class="nosortsearch text-nowrap text-center">
-                                                        <asp:Label ID="lbhAction" runat="server" Text="Action"></asp:Label>
-                                                    </th>
-                                                </tr>
-                                            </thead>
-                                            <%-- END Table Header --%>
+                                       <table class="table table-bordered table-advanced table-striped table-hover" id="sample_1">
+    <%-- Table Header --%>
+    <thead>
+        <tr class="TRDark">
+            <th></th>
+            <th>
+                <asp:Label ID="lbhHospital" runat="server" Text="Hospital"></asp:Label>
+            </th>
+            <th>
+                <asp:Label ID="lbhPrintName" runat="server" Text="Print Name"></asp:Label>
+            </th>
+            <th>
+                <asp:Label ID="lbhPrintLine1" runat="server" Text="Print Line1"></asp:Label>
+            </th>
+            <th>
+                <asp:Label ID="lbhRemarks" runat="server" Text="Remarks"></asp:Label>
+            </th>
 
-                                            <tbody>
-                                                <asp:Repeater ID="rpData" runat="server">
-                                                    <ItemTemplate>
-                                                        <%-- Table Rows --%>
-                                                        <tr class="odd gradeX text-center">
-                                                            <td class="text-center">
-                                                                <i
-                                                                    class="collapse-icon fa fa-plus-circle text-info"
-                                                                    data-toggle="collapse"
-                                                                    data-target="#subGroup<%# Container.ItemIndex %>"
-                                                                    aria-expanded="false"></i>
+        </tr>
+    </thead>
+    <%-- END Table Header --%>
 
-                                                            </td>
-                                                            <td class="text-left">
-                                                                <asp:HyperLink ID="hlViewHospitalID" NavigateUrl='<%# "~/AdminPanel/Master/MST_Hospital/MST_HospitalView.aspx?HospitalID=" + GNForm3C.CommonFunctions.EncryptBase64(Eval("HospitalID").ToString()) %>' data-target="#viewiFrameReg" CssClass="modalButton" data-toggle="modal" runat="server"><%#Eval("Hospital") %></asp:HyperLink>
-                                                            </td>
-                                                            <td class="text-left">
-                                                                <%#Eval("PrintName") %>
-                                                            </td>
-                                                            <td class="text-left">
-                                                                <%#Eval("PrintLine1") %>
-                                                            </td>
-                                                            <td class="text-left">
-                                                                <%#Eval("Remarks") %>
-                                                            </td>
-                                                            <%-- <td>
-                                                                <%#Eval("ReportHeaderName") %>
-                                                            </td>--%>
-                                                            <%-- <td class="text-center">
-                                                                <asp:HyperLink ID="hlExpCount" SkinID="hlGreen_Grid" NavigateUrl='<%# "~/AdminPanel/Master/MST_ExpenseType/MST_ExpenseTypeList.aspx?HospitalID=" + GNForm3C.CommonFunctions.EncryptBase64(Eval("HospitalID").ToString()) %>' Text='<%#Eval("ExpenseTypeCount") %>' runat="server"></asp:HyperLink>
-                                                                <asp:HyperLink ID="hlExpCountEdit" SkinID="Edit" NavigateUrl='<%# "~/AdminPanel/Master/MST_ExpenseType/MST_ExpenseTypeAddEditMany.aspx?HospitalID=" + GNForm3C.CommonFunctions.EncryptBase64(Eval("HospitalID").ToString()) %>' runat="server"></asp:HyperLink>
-                                                            </td>--%>
-                                                            <td class="text-nowrap text-center">
-                                                                <asp:HyperLink ID="hlView" SkinID="View" NavigateUrl='<%# "~/AdminPanel/Master/MST_Hospital/MST_HospitalView.aspx?HospitalID=" + GNForm3C.CommonFunctions.EncryptBase64(Eval("HospitalID").ToString()) %>' data-target="#viewiFrameReg" data-toggle="modal" runat="server"></asp:HyperLink>
-                                                                <asp:HyperLink ID="hlEdit" SkinID="Edit" NavigateUrl='<%# "~/AdminPanel/Master/MST_Hospital/MST_HospitalAddEdit.aspx?HospitalID=" + GNForm3C.CommonFunctions.EncryptBase64(Eval("HospitalID").ToString()) %>' runat="server"></asp:HyperLink>
-                                                                <asp:LinkButton ID="lbtnDelete" runat="server"
-                                                                    SkinID="Delete"
-                                                                    OnClientClick="javascript:return confirm('Are you sure you want to delete record ? ');"
-                                                                    CommandName="DeleteRecord"
-                                                                    CommandArgument='<%#Eval("HospitalID") %>'>
-                                                                </asp:LinkButton>
-                                                            </td>
-                                                        </tr>
-                                                        <%-- END Table Rows --%>
-                                                    </ItemTemplate>
-                                                </asp:Repeater>
-                                            </tbody>
-                                        </table>
+    <tbody>
+        <asp:Repeater ID="rpData" runat="server" OnItemCommand="rpData_ItemCommand">
+            <ItemTemplate>
+                <%-- Table Rows --%>
+                <tr class="odd gradeX">
+                    <td class="text-center">
+                        <i
+                            class="collapse-icon fa fa-plus-circle text-info"
+                            data-toggle="collapse"
+                            data-target="#subGroup<%# Container.ItemIndex %>"
+                            aria-expanded="false"></i>
+                    </td>
+                    <td>
+                        <asp:HyperLink ID="hlViewHospitalID" NavigateUrl='<%# "~/AdminPanel/Master/MST_Hospital/MST_HospitalView.aspx?HospitalID=" + GNForm3C.CommonFunctions.EncryptBase64(Eval("HospitalID").ToString()) %>' data-target="#viewiFrameReg" CssClass="modalButton" data-toggle="modal" runat="server"><%#Eval("Hospital") %></asp:HyperLink>
+                    </td>
+                    <td>
+                        <%# Eval("PrintName") %>
+                    </td>
+                    <td>
+                        <%# Eval("PrintLine1") %>
+                    </td>
+                    <td>
+                        <%# Eval("Remarks") %>
+                    </td>
+
+                </tr>
+
+                <tr id="subGroup<%# Container.ItemIndex %>" class="panel-collapse collapse" data-parent="#HospitalDetail">
+                    <th></th>
+                    <th colspan="5">
+                        <div id="subAccountGroupAccordion<%# Container.ItemIndex %>">
+                            <table class="table table-bordered table-advanced table-striped table-hover" id="sample_1">
+                                <tr class="TRDark">
+                                    <th>1</th>
+                                    <th>2</th>
+                                    <th>3</th>
+
+                                </tr>
+                                <tr>
+                                    <th>1</th>
+                                    <th>2</th>
+                                    <th>3</th>
+
+                                </tr>
+                                <tr>
+                                    <th>1</th>
+                                    <th>2</th>
+                                    <th>3</th>
+
+                                </tr>
+                                <tr>
+                                    <th>1</th>
+                                    <th>2</th>
+                                    <th>3</th>
+
+                                </tr>
+                                <tr>
+                                    <th>1</th>
+                                    <th>2</th>
+                                    <th>3</th>
+
+                                </tr>
+                                <tr>
+                                    <th>1</th>
+                                    <th>2</th>
+                                    <th>3</th>
+
+                                </tr>
+                                <tr>
+                                    <th>1</th>
+                                    <th>2</th>
+                                    <th>3</th>
+
+                                </tr>
+
+                            </table>
+                        </div>
+
+                    </th>
+                </tr>
+                <%-- END Table Rows --%>
+            </ItemTemplate>
+        </asp:Repeater>
+    </tbody>
+</table>
                                     </div>
-
-                                    <%-- Pagination --%>
-                                    <%-- <div class="row">
-                                        <div class="col-md-4">
-                                            <label class="control-label">
-                                                <asp:Label ID="lblRecordInfoBottom" Text="No entries found" runat="server"></asp:Label></label>
-                                        </div>
-                                        <div class="col-md-5">
-                                            <div class="dataTables_paginate paging_simple_numbers" runat="server" id="Div_Pagination">
-                                                <ul class="pagination">
-                                                    <li class="paginate_button previous disabled" id="liFirstPage" runat="server">
-                                                        <asp:LinkButton ID="lbtnFirstPage" Enabled="false" OnClick="PageChange_Click" CommandName="FirstPage" CommandArgument="1" runat="server"><i class="fa fa-angle-double-left"></i></asp:LinkButton></li>
-                                                    <li class="paginate_button previous disabled" id="liPrevious" runat="server">
-                                                        <asp:LinkButton ID="lbtnPrevious" Enabled="false" OnClick="PageChange_Click" CommandArgument="1" CommandName="PreviousPage" runat="server"><i class="fa fa-angle-left"></i></asp:LinkButton></li>
-                                                    <asp:Repeater ID="rpPagination" runat="server" OnItemDataBound="rpPagination_ItemDataBound">
-                                                        <ItemTemplate>
-                                                            <li>
-                                                                <li class="paginate_button" id="liPageNo" runat="server">
-                                                                    <asp:LinkButton ID="lbtnPageNo" runat="server" OnClick="PageChange_Click" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "PageNo")%>' CommandName="PageNo"><%# DataBinder.Eval(Container.DataItem, "PageNo")%></asp:LinkButton></li>
-                                                            </li>
-                                                        </ItemTemplate>
-                                                    </asp:Repeater>
-                                                    <li class="paginate_button next disabled" id="liNext" runat="server">
-                                                        <asp:LinkButton ID="lbtnNext" Enabled="false" OnClick="PageChange_Click" CommandArgument="1" CommandName="NextPage" runat="server"><i class="fa fa-angle-right"></i></asp:LinkButton></li>
-                                                    <li class="paginate_button previous disabled" id="liLastPage" runat="server">
-                                                        <asp:LinkButton ID="lbtnLastPage" Enabled="false" OnClick="PageChange_Click" CommandName="LastPage" CommandArgument="-99" runat="server"><i class="fa fa-angle-double-right"></i></asp:LinkButton></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3 pull-right">
-                                            <div class="btn-group" runat="server" id="Div_GoToPageNo">
-                                                <asp:TextBox ID="txtPageNo" placeholder="Page No" onkeypress="return IsNumeric(event)" runat="server" CssClass="pagination-panel-input form-control input-xsmall input-inline col-md-4" MaxLength="9"></asp:TextBox>
-                                                <asp:LinkButton ID="lbtnGoToPageNo" runat="server" CssClass="btn btn-default input-inline col-md-4" CommandName="GoPageNo" CommandArgument="0" OnClick="PageChange_Click">Go</asp:LinkButton>
-                                            </div>
-                                            <div class="btn-group pull-right" runat="server" id="Div_PageSize">
-                                                <label class="control-label">Page Size</label>
-                                                <asp:DropDownList ID="ddlPageSizeBottom" AutoPostBack="true" CssClass="form-control input-xsmall" runat="server" OnSelectedIndexChanged="ddlPageSizeBottom_SelectedIndexChanged">
-                                                </asp:DropDownList>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                    </div>--%>
-                                    <%-- END Pagination --%>
                                 </div>
                             </div>
                         </div>
@@ -277,4 +247,6 @@
 </asp:Content>
 <asp:Content ID="Content5" ContentPlaceHolderID="cphScripts" runat="Server">
 </asp:Content>
+
+
 
