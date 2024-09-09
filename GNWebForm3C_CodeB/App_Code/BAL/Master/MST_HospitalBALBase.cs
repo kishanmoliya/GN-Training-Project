@@ -130,7 +130,5 @@ namespace GNForm3C.BAL
 		}
 
 		#endregion ComboBox
-
 	}
-
 }

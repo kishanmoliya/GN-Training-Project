@@ -78,5 +78,13 @@ namespace GNForm3C.BAL
 
         #endregion Select
 
+        #region Chart
+        public DataTable IncomeExpenseSumHospitalWise(SqlInt32 FinYearID)
+        {
+            MST_DSB2DAL dalMST_DSB2DAL = new MST_DSB2DAL();
+            return dalMST_DSB2DAL.IncomeExpenseSumHospitalWise(FinYearID);
+        }
+
+        #endregion Chart
     }
 }

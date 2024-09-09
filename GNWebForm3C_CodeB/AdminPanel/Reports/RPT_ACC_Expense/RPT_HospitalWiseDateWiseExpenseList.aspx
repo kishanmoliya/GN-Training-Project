@@ -258,8 +258,7 @@
         </ContentTemplate>
         <Triggers>
             <asp:AsyncPostBackTrigger ControlID="btnSearch" EventName="Click" />
-            <asp:AsyncPostBackTrigger ControlID="btnClear" EventName="Click" />
-            <asp:AsyncPostBackTrigger ControlID="btnAdd" EventName="Click" />
+            <asp:AsyncPostBackTrigger ControlID="btnClear" EventName="Click" /> 
             <asp:PostBackTrigger ControlID="lbtnExportExcel" />
             <asp:PostBackTrigger ControlID="lbtnExportPDF" />
         </Triggers>

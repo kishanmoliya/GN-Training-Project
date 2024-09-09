@@ -144,7 +144,7 @@
                                                     <th>
                                                         <asp:Label ID="lbhHospitalID" runat="server" Text="Hospital"></asp:Label>
                                                     </th>
-                                                    <th>
+                                                    <th  class="text-center">
                                                         <asp:Label ID="lbhFinYearID" runat="server" Text="Fin Year"></asp:Label>
                                                     </th>
                                                     <th>
@@ -171,7 +171,7 @@
                                                             <td>
                                                                 <%#Eval("Hospital") %>
                                                             </td>
-                                                            <td>
+                                                            <td  class="text-center">
                                                                 <%#Eval("FinYearName") %>
                                                             </td>
                                                             <td>
