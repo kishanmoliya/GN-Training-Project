@@ -111,113 +111,72 @@
                             <div class="row" runat="server" id="Div_SearchResult" visible="false">
                                 <div class="col-md-12">
                                     <div id="TableContent">
-                                       <table class="table table-bordered table-advanced table-striped table-hover" id="sample_1">
-    <%-- Table Header --%>
-    <thead>
-        <tr class="TRDark">
-            <th></th>
-            <th>
-                <asp:Label ID="lbhHospital" runat="server" Text="Hospital"></asp:Label>
-            </th>
-            <th>
-                <asp:Label ID="lbhPrintName" runat="server" Text="Print Name"></asp:Label>
-            </th>
-            <th>
-                <asp:Label ID="lbhPrintLine1" runat="server" Text="Print Line1"></asp:Label>
-            </th>
-            <th>
-                <asp:Label ID="lbhRemarks" runat="server" Text="Remarks"></asp:Label>
-            </th>
+                                        <table class="table table-bordered table-advanced table-striped table-hover" id="sample_1">
+                                            <%-- Table Header --%>
+                                            <thead>
+                                                <tr class="TRDark">
+                                                    <th class="text-center">
+                                                        <asp:Label ID="lbhAdd" runat="server" Text="#"></asp:Label>
+                                                    </th>
+                                                    <th class="text-left">
+                                                        <asp:Label ID="lbhHospital" runat="server" Text="Hospital"></asp:Label>
+                                                    </th>
+                                                    <th class="text-left">
+                                                        <asp:Label ID="lbhPrintName" runat="server" Text="Print Name"></asp:Label>
+                                                    </th>
+                                                    <th class="text-left">
+                                                        <asp:Label ID="lbhPrintLine1" runat="server" Text="Print Line1"></asp:Label>
+                                                    </th>
+                                                    <th class="text-left">
+                                                        <asp:Label ID="lbhRemarks" runat="server" Text="Remarks"></asp:Label>
+                                                    </th>
+                                                    <th class="nosortsearch text-nowrap text-center">
+                                                        <asp:Label ID="lbhAction" runat="server" Text="Action"></asp:Label>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <%-- END Table Header --%>
 
-        </tr>
-    </thead>
-    <%-- END Table Header --%>
+                                            <tbody>
+                                                <asp:Repeater ID="rpData" runat="server">
+                                                    <ItemTemplate>
+                                                        <%-- Table Rows --%>
+                                                        <tr class="odd gradeX text-center">
+                                                            <td class="text-center">
+                                                                <i
+                                                                    class="collapse-icon fa fa-plus-circle text-info"
+                                                                    data-toggle="collapse"
+                                                                    data-target="#subGroup<%# Container.ItemIndex %>"
+                                                                    aria-expanded="false"></i>
 
-    <tbody>
-        <asp:Repeater ID="rpData" runat="server" OnItemCommand="rpData_ItemCommand">
-            <ItemTemplate>
-                <%-- Table Rows --%>
-                <tr class="odd gradeX">
-                    <td class="text-center">
-                        <i
-                            class="collapse-icon fa fa-plus-circle text-info"
-                            data-toggle="collapse"
-                            data-target="#subGroup<%# Container.ItemIndex %>"
-                            aria-expanded="false"></i>
-                    </td>
-                    <td>
-                        <asp:HyperLink ID="hlViewHospitalID" NavigateUrl='<%# "~/AdminPanel/Master/MST_Hospital/MST_HospitalView.aspx?HospitalID=" + GNForm3C.CommonFunctions.EncryptBase64(Eval("HospitalID").ToString()) %>' data-target="#viewiFrameReg" CssClass="modalButton" data-toggle="modal" runat="server"><%#Eval("Hospital") %></asp:HyperLink>
-                    </td>
-                    <td>
-                        <%# Eval("PrintName") %>
-                    </td>
-                    <td>
-                        <%# Eval("PrintLine1") %>
-                    </td>
-                    <td>
-                        <%# Eval("Remarks") %>
-                    </td>
-
-                </tr>
-
-                <tr id="subGroup<%# Container.ItemIndex %>" class="panel-collapse collapse" data-parent="#HospitalDetail">
-                    <th></th>
-                    <th colspan="5">
-                        <div id="subAccountGroupAccordion<%# Container.ItemIndex %>">
-                            <table class="table table-bordered table-advanced table-striped table-hover" id="sample_1">
-                                <tr class="TRDark">
-                                    <th>1</th>
-                                    <th>2</th>
-                                    <th>3</th>
-
-                                </tr>
-                                <tr>
-                                    <th>1</th>
-                                    <th>2</th>
-                                    <th>3</th>
-
-                                </tr>
-                                <tr>
-                                    <th>1</th>
-                                    <th>2</th>
-                                    <th>3</th>
-
-                                </tr>
-                                <tr>
-                                    <th>1</th>
-                                    <th>2</th>
-                                    <th>3</th>
-
-                                </tr>
-                                <tr>
-                                    <th>1</th>
-                                    <th>2</th>
-                                    <th>3</th>
-
-                                </tr>
-                                <tr>
-                                    <th>1</th>
-                                    <th>2</th>
-                                    <th>3</th>
-
-                                </tr>
-                                <tr>
-                                    <th>1</th>
-                                    <th>2</th>
-                                    <th>3</th>
-
-                                </tr>
-
-                            </table>
-                        </div>
-
-                    </th>
-                </tr>
-                <%-- END Table Rows --%>
-            </ItemTemplate>
-        </asp:Repeater>
-    </tbody>
-</table>
+                                                            </td>
+                                                            <td class="text-left">
+                                                                <asp:HyperLink ID="hlViewHospitalID" NavigateUrl='<%# "~/AdminPanel/Master/MST_Hospital/MST_HospitalView.aspx?HospitalID=" + GNForm3C.CommonFunctions.EncryptBase64(Eval("HospitalID").ToString()) %>' data-target="#viewiFrameReg" CssClass="modalButton" data-toggle="modal" runat="server"><%#Eval("Hospital") %></asp:HyperLink>
+                                                            </td>
+                                                            <td class="text-left">
+                                                                <%#Eval("PrintName") %>
+                                                            </td>
+                                                            <td class="text-left">
+                                                                <%#Eval("PrintLine1") %>
+                                                            </td>
+                                                            <td class="text-left">
+                                                                <%#Eval("Remarks") %>
+                                                            </td>text-nowrap text-center">
+                                                                <asp:HyperLink ID="hlView" SkinID="View" NavigateUrl='<%# "~/AdminPanel/Master/MST_Hospital/MST_HospitalView.aspx?HospitalID=" + GNForm3C.CommonFunctions.EncryptBase64(Eval("HospitalID").ToString()) %>' data-target="#viewiFrameReg" data-toggle="modal" runat="server"></asp:HyperLink>
+                                                                <asp:HyperLink ID="hlEdit" SkinID="Edit" NavigateUrl='<%# "~/AdminPanel/Master/MST_Hospital/MST_HospitalAddEdit.aspx?HospitalID=" + GNForm3C.CommonFunctions.EncryptBase64(Eval("HospitalID").ToString()) %>' runat="server"></asp:HyperLink>
+                                                                <asp:LinkButton ID="lbtnDelete" runat="server"
+                                                                    SkinID="Delete"
+                                                                    OnClientClick="javascript:return confirm('Are you sure you want to delete record ? ');"
+                                                                    CommandName="DeleteRecord"
+                                                                    CommandArgument='<%#Eval("HospitalID") %>'>
+                                                                </asp:LinkButton>
+                                                            </td>
+                                                        </tr>
+                                                        <%-- END Table Rows --%>
+                                                    </ItemTemplate>
+                                                </asp:Repeater>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
