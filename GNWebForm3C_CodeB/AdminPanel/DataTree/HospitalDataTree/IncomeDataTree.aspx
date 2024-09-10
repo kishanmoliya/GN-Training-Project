@@ -3,9 +3,9 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="cphPageHeader" runat="Server">
-    <asp:Label ID="lblPageHeader_XXXXX" runat="server" Text="Hospital Tree"></asp:Label>
+    <asp:Label ID="lblPageHeader_XXXXX" runat="server" Text="Income List"></asp:Label>
     <small>
-        <asp:Label ID="lblPageHeaderInfo_XXXXX" runat="server" Text="Master"></asp:Label></small>
+        <asp:Label ID="lblPageHeaderInfo_XXXXX" runat="server" Text="Account"></asp:Label></small>
     <span class="pull-right">
         <small>
             <asp:HyperLink ID="hlShowHelp" SkinID="hlShowHelp" runat="server"></asp:HyperLink>
@@ -19,7 +19,7 @@
         <i class="fa fa-angle-right"></i>
     </li>
     <li class="active">
-        <asp:Label ID="lblBreadCrumbLast" runat="server" Text="Hospital Tree"></asp:Label>
+        <asp:Label ID="lblBreadCrumbLast" runat="server" Text="Income List"></asp:Label>
     </li>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="cphPageContent" runat="Server">
@@ -28,60 +28,6 @@
     <!--Help Text End-->
     <asp:ScriptManager ID="sm" runat="server">
     </asp:ScriptManager>
-
-    <%-- Search --%>
-    <asp:UpdatePanel ID="upApplicationFeature" runat="server">
-        <ContentTemplate>
-            <div class="portlet light">
-                <div class="portlet-title">
-                    <div class="caption">
-                        <asp:Label SkinID="lblSearchHeaderIcon" runat="server"></asp:Label>
-                        <asp:Label ID="lblSearchHeader" SkinID="lblSearchHeaderText" runat="server"></asp:Label>
-                    </div>
-                    <div class="tools">
-                        <a href="javascript:;" class="collapse pull-right"></a>
-                    </div>
-                </div>
-                <div class="portlet-body form">
-                    <div role="form">
-                        <div class="form-body">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="fa fa-search"></i>
-                                            </span>
-                                            <asp:TextBox ID="txtHospital" CssClass="First form-control" runat="server" PlaceHolder="Enter Hospital"></asp:TextBox>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="fa fa-search"></i>
-                                            </span>
-                                            <asp:TextBox ID="txtPrintName" CssClass="form-control" runat="server" PlaceHolder="Enter Print Name"></asp:TextBox>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-actions">
-                            <div class="row">
-                                <div class="col-md-9">
-                                    <asp:Button ID="btnSearch" SkinID="btnSearch" runat="server" Text="Search" OnClick="btnSearch_Click" />
-                                    <asp:Button ID="btnClear" runat="server" SkinID="btnClear" Text="Clear" OnClick="btnClear_Click" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </ContentTemplate>
-    </asp:UpdatePanel>
-    <%-- End Search --%>
 
     <%-- List --%>
     <asp:UpdatePanel ID="upList" runat="server" UpdateMode="Conditional">
@@ -101,83 +47,128 @@
                                 <asp:Label ID="lblSearchResultHeader" SkinID="lblSearchResultHeaderText" runat="server"></asp:Label>
                                 <label class="control-label">&nbsp;</label>
                             </div>
-                            <div class="tools">
-                                <div>
-                                    <asp:HyperLink SkinID="hlAddNew" ID="hlAddNew" NavigateUrl="~/AdminPanel/Master/MST_Hospital/MST_HospitalAddEdit.aspx" runat="server"></asp:HyperLink>
-                                </div>
-                            </div>
                         </div>
                         <div class="portlet-body">
-                            <div class="row" runat="server" id="Div_SearchResult" visible="false">
+                            <div class="row" runat="server" id="Div_SearchResult">
                                 <div class="col-md-12">
-                                    <div id="TableContent">
-                                        <table class="table table-bordered table-advanced table-striped table-hover" id="sample_1">
-                                            <%-- Table Header --%>
-                                            <thead>
-                                                <tr class="TRDark">
-                                                    <th class="text-center">
-                                                        <asp:Label ID="lbhAdd" runat="server" Text="#"></asp:Label>
-                                                    </th>
-                                                    <th class="text-left">
-                                                        <asp:Label ID="lbhHospital" runat="server" Text="Hospital"></asp:Label>
-                                                    </th>
-                                                    <th class="text-left">
-                                                        <asp:Label ID="lbhPrintName" runat="server" Text="Print Name"></asp:Label>
-                                                    </th>
-                                                    <th class="text-left">
-                                                        <asp:Label ID="lbhPrintLine1" runat="server" Text="Print Line1"></asp:Label>
-                                                    </th>
-                                                    <th class="text-left">
-                                                        <asp:Label ID="lbhRemarks" runat="server" Text="Remarks"></asp:Label>
-                                                    </th>
-                                                    <th class="nosortsearch text-nowrap text-center">
-                                                        <asp:Label ID="lbhAction" runat="server" Text="Action"></asp:Label>
-                                                    </th>
+                                    <!-- Nested Repeater for Hospitals, Financial Years, and Incomes -->
+                                    <asp:Repeater ID="rptHospitals" runat="server" OnItemCommand="rptHospitals_ItemCommand">
+                                        <HeaderTemplate>
+                                            <table class="table table-bordered table-advanced table-striped table-hover">
+                                                <thead>
+                                                    <tr class="TRDark">
+                                                        <th style="width: 5%;">Action</th>
+                                                        <th>Hospital</th>
+                                                        <th>PrintName</th>
+                                                        <th>PrintLine1</th>
+                                                        <th>Remarks</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                        </HeaderTemplate>
+
+                                        <ItemTemplate>
+                                            <tr>
+                                                <td>
+                                                    <asp:Button ID="btnShowFinYears" runat="server" CssClass="btn btn-transparent rounded btn-xs btn-outline green-jungle active tooltips rounded-button" ClientIDMode="Static" Text="+" CommandName="LoadFinYears" CommandArgument='<%# Eval("HospitalID") %>' Style="font-size: 18px;" />
+                                                </td>
+                                                <td><%# Eval("Hospital") %></td>
+                                                <td><%# Eval("PrintName") %></td>
+                                                <td><%# Eval("PrintLine1") %></td>
+                                                <td><%# Eval("Remarks") %></td>
+                                                <asp:HiddenField ID="hdnHospitalID" runat="server" Value='<%# Eval("HospitalID") %>' />
+                                            </tr>
+                                            <asp:Panel ID="pnlFinYears" runat="server" Visible="false">
+                                                <!-- Financial Year Repeater -->
+                                                <tr id="" display="none">
+                                                    <td></td>
+                                                    <td colspan="4">
+                                                        <div>
+                                                            <asp:Repeater ID="rptFinYears" runat="server" OnItemCommand="rptFinYears_ItemCommand">
+                                                                <HeaderTemplate>
+                                                                    <table class="table table-bordered table-striped">
+                                                                        <thead>
+                                                                            <tr class="TRDark">
+                                                                                <th style="width: 5%;">Action</th>
+
+                                                                                <th>Financial Year</th>
+                                                                                <th>FromDate</th>
+                                                                                <th>ToDate</th>
+                                                                                <th>Remarks</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                </HeaderTemplate>
+
+                                                                <ItemTemplate>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <asp:Button ID="btnShowIncomes" runat="server" Text="+" CommandName="LoadIncomes" CommandArgument='<%# Eval("FinYearID") %>' />
+                                                                        </td>
+                                                                        <td><%# Eval("FinYearName") %></td>
+                                                                        <td><%# Eval("FromDate") %></td>
+                                                                        <td><%# Eval("ToDate") %></td>
+                                                                        <td><%# Eval("Remarks") %></td>
+
+                                                                    </tr>
+
+                                                                    <asp:Panel ID="pnlIncomes" runat="server" Visible="false">
+                                                                        <!-- Income Repeater -->
+                                                                        <tr>
+                                                                            <td></td>
+                                                                            <td colspan="4">
+                                                                                <asp:Repeater ID="rptIncomes" runat="server">
+                                                                                    <HeaderTemplate>
+                                                                                        <table class="table table-bordered">
+                                                                                            <thead>
+                                                                                                <tr>
+                                                                                                    <th>Income Type</th>
+                                                                                                    <th>Amount</th>
+                                                                                                    <th>Date</th>
+                                                                                                    <th>Note</th>
+                                                                                                </tr>
+                                                                                            </thead>
+                                                                                            <tbody>
+                                                                                    </HeaderTemplate>
+
+                                                                                    <ItemTemplate>
+                                                                                        <tr>
+                                                                                            <td><%# Eval("IncomeType") %></td>
+                                                                                            <td><%# Eval("Amount") %></td>
+                                                                                            <td><%# Eval("IncomeDate") %></td>
+                                                                                            <td><%# Eval("Note") %></td>
+                                                                                        </tr>
+                                                                                    </ItemTemplate>
+
+                                                                                    <FooterTemplate>
+                                                                                        </tbody>
+                                                                                </table>
+                                                                                   
+                                                                                    </FooterTemplate>
+                                                                                </asp:Repeater>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </asp:Panel>
+                                                                </ItemTemplate>
+
+                                                                <FooterTemplate>
+                                                                    </tbody>
+                                                                </table>
+                                                               
+                                                                </FooterTemplate>
+                                                            </asp:Repeater>
+                                                        </div>
+                                                    </td>
                                                 </tr>
-                                            </thead>
-                                            <%-- END Table Header --%>
+                                            </asp:Panel>
+                                        </ItemTemplate>
 
-                                            <tbody>
-                                                <asp:Repeater ID="rpData" runat="server">
-                                                    <ItemTemplate>
-                                                        <%-- Table Rows --%>
-                                                        <tr class="odd gradeX text-center">
-                                                            <td class="text-center">
-                                                                <i
-                                                                    class="collapse-icon fa fa-plus-circle text-info"
-                                                                    data-toggle="collapse"
-                                                                    data-target="#subGroup<%# Container.ItemIndex %>"
-                                                                    aria-expanded="false"></i>
-
-                                                            </td>
-                                                            <td class="text-left">
-                                                                <asp:HyperLink ID="hlViewHospitalID" NavigateUrl='<%# "~/AdminPanel/Master/MST_Hospital/MST_HospitalView.aspx?HospitalID=" + GNForm3C.CommonFunctions.EncryptBase64(Eval("HospitalID").ToString()) %>' data-target="#viewiFrameReg" CssClass="modalButton" data-toggle="modal" runat="server"><%#Eval("Hospital") %></asp:HyperLink>
-                                                            </td>
-                                                            <td class="text-left">
-                                                                <%#Eval("PrintName") %>
-                                                            </td>
-                                                            <td class="text-left">
-                                                                <%#Eval("PrintLine1") %>
-                                                            </td>
-                                                            <td class="text-left">
-                                                                <%#Eval("Remarks") %>
-                                                            </td>text-nowrap text-center">
-                                                                <asp:HyperLink ID="hlView" SkinID="View" NavigateUrl='<%# "~/AdminPanel/Master/MST_Hospital/MST_HospitalView.aspx?HospitalID=" + GNForm3C.CommonFunctions.EncryptBase64(Eval("HospitalID").ToString()) %>' data-target="#viewiFrameReg" data-toggle="modal" runat="server"></asp:HyperLink>
-                                                                <asp:HyperLink ID="hlEdit" SkinID="Edit" NavigateUrl='<%# "~/AdminPanel/Master/MST_Hospital/MST_HospitalAddEdit.aspx?HospitalID=" + GNForm3C.CommonFunctions.EncryptBase64(Eval("HospitalID").ToString()) %>' runat="server"></asp:HyperLink>
-                                                                <asp:LinkButton ID="lbtnDelete" runat="server"
-                                                                    SkinID="Delete"
-                                                                    OnClientClick="javascript:return confirm('Are you sure you want to delete record ? ');"
-                                                                    CommandName="DeleteRecord"
-                                                                    CommandArgument='<%#Eval("HospitalID") %>'>
-                                                                </asp:LinkButton>
-                                                            </td>
-                                                        </tr>
-                                                        <%-- END Table Rows --%>
-                                                    </ItemTemplate>
-                                                </asp:Repeater>
+                                        <FooterTemplate>
                                             </tbody>
-                                        </table>
-                                    </div>
+                                            </table>
+                                       
+                                        </FooterTemplate>
+                                    </asp:Repeater>
                                 </div>
                             </div>
                         </div>
@@ -187,25 +178,14 @@
             </div>
         </ContentTemplate>
         <Triggers>
-            <asp:AsyncPostBackTrigger ControlID="btnSearch" EventName="Click" />
-            <asp:AsyncPostBackTrigger ControlID="btnClear" EventName="Click" />
         </Triggers>
     </asp:UpdatePanel>
     <%-- END List --%>
-
-    <%-- Loading  --%>
-    <asp:UpdateProgress ID="upr" runat="server">
-        <ProgressTemplate>
-            <div class="divWaiting">
-                <asp:Label ID="lblWait" runat="server" Text=" Please wait... " />
-                <asp:Image ID="imgWait" runat="server" SkinID="UpdatePanelLoding" />
-            </div>
-        </ProgressTemplate>
-    </asp:UpdateProgress>
-    <%-- END Loading  --%>
 </asp:Content>
+
 <asp:Content ID="Content5" ContentPlaceHolderID="cphScripts" runat="Server">
+    <script type="text/javascript">
+
+
+</script>
 </asp:Content>
-
-
-
